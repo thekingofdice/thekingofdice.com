@@ -1,0 +1,566 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <meta name="color-scheme" content="light dark" />
+    <link rel="icon" href="data:," />
+    <title>Past Shows and Winners — King of Dice</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700;800&family=Barlow:wght@500;600;700;800&display=swap" rel="stylesheet" />
+    <style>
+      :root {
+        --bg: #ffffff;
+        --bg-soft: #f2f4f8;
+        --card: #ffffff;
+        --ink: #101828;
+        --ink-soft: #344054;
+        --line: #d0d5dd;
+        --gold: #8a6d00;
+        --gold-bg: #fdf3d0;
+        --gold-solid: #f5c542;
+        --teal: #0f766e;
+        --teal-bg: #d9f5f0;
+        --navy: #0b1026;
+        --winner-bg: #fdf3d0;
+        --shadow: 0 10px 30px rgba(16, 24, 40, 0.12);
+      }
+      @media (prefers-color-scheme: dark) {
+        :root {
+          --bg: #0b1026;
+          --bg-soft: #121838;
+          --card: #151b3d;
+          --ink: #ffffff;
+          --ink-soft: #d6dcff;
+          --line: #39406e;
+          --gold: #f5c542;
+          --gold-bg: #2a2410;
+          --teal: #2dd4bf;
+          --teal-bg: #0d2f2b;
+          --winner-bg: #2a2410;
+          --shadow: 0 10px 30px rgba(0, 0, 0, 0.45);
+        }
+      }
+      * { box-sizing: border-box; }
+      html { -webkit-text-size-adjust: 100%; }
+      body {
+        margin: 0;
+        background: var(--bg);
+        color: var(--ink);
+        font-family: "Barlow", system-ui, -apple-system, "Segoe UI", sans-serif;
+        font-size: 20px;
+        line-height: 1.5;
+      }
+      .wrap {
+        max-width: 1020px;
+        margin: 0 auto;
+        padding: 28px 20px 64px;
+      }
+      /* ---------- Header ---------- */
+      header.top {
+        text-align: center;
+        padding: 18px 0 8px;
+      }
+      .brand {
+        font-family: "Barlow Condensed", sans-serif;
+        font-weight: 700;
+        letter-spacing: 0.14em;
+        font-size: 20px;
+        color: var(--teal);
+        text-transform: uppercase;
+        margin: 0 0 6px;
+      }
+      h1 {
+        font-family: "Barlow Condensed", sans-serif;
+        font-weight: 800;
+        font-size: clamp(44px, 9vw, 72px);
+        line-height: 1.02;
+        margin: 0 0 12px;
+        text-transform: uppercase;
+      }
+      h1 .gold { color: var(--gold); }
+      .lede {
+        font-size: 22px;
+        font-weight: 600;
+        color: var(--ink-soft);
+        max-width: 640px;
+        margin: 0 auto;
+      }
+      /* ---------- Section headings ---------- */
+      h2.section {
+        font-family: "Barlow Condensed", sans-serif;
+        font-weight: 800;
+        font-size: clamp(32px, 6vw, 44px);
+        text-transform: uppercase;
+        letter-spacing: 0.02em;
+        margin: 48px 0 18px;
+        display: flex;
+        align-items: center;
+        gap: 14px;
+      }
+      h2.section::after {
+        content: "";
+        flex: 1;
+        height: 4px;
+        background: var(--gold-solid);
+        border-radius: 2px;
+      }
+      /* ---------- Upcoming card ---------- */
+      .upcoming {
+        background: var(--teal-bg);
+        border: 3px solid var(--teal);
+        border-radius: 18px;
+        padding: 26px 28px;
+      }
+      .upcoming .date {
+        font-family: "Barlow Condensed", sans-serif;
+        font-weight: 800;
+        font-size: 34px;
+        text-transform: uppercase;
+        margin: 0 0 2px;
+      }
+      .upcoming .show {
+        font-weight: 800;
+        font-size: 24px;
+        color: var(--teal);
+        text-transform: uppercase;
+        letter-spacing: 0.04em;
+        margin: 0 0 14px;
+      }
+      .upcoming p { margin: 0 0 10px; font-size: 21px; }
+      .names {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+        margin-top: 8px;
+      }
+      .name-chip {
+        background: var(--card);
+        border: 2px solid var(--teal);
+        color: var(--ink);
+        font-weight: 700;
+        font-size: 21px;
+        padding: 10px 18px;
+        border-radius: 999px;
+      }
+      .pending {
+        display: inline-block;
+        margin-top: 16px;
+        font-weight: 800;
+        font-size: 20px;
+        text-transform: uppercase;
+        letter-spacing: 0.05em;
+        color: var(--teal);
+      }
+      /* ---------- Show cards ---------- */
+      .show-card {
+        background: var(--card);
+        border: 2px solid var(--line);
+        border-radius: 20px;
+        box-shadow: var(--shadow);
+        padding: 28px;
+        margin-bottom: 30px;
+        overflow: hidden;
+      }
+      .show-head { margin-bottom: 20px; }
+      .show-date {
+        font-family: "Barlow Condensed", sans-serif;
+        font-weight: 800;
+        font-size: clamp(32px, 6vw, 42px);
+        line-height: 1.1;
+        text-transform: uppercase;
+        margin: 0;
+      }
+      .show-name {
+        font-size: 23px;
+        font-weight: 800;
+        color: var(--teal);
+        text-transform: uppercase;
+        letter-spacing: 0.05em;
+        margin: 4px 0 0;
+      }
+      .show-body {
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 26px;
+      }
+      @media (min-width: 760px) {
+        .show-body.with-flyer { grid-template-columns: 380px 1fr; }
+      }
+      /* Flyer */
+      figure.flyer { margin: 0; }
+      .flyer button {
+        display: block;
+        width: 100%;
+        padding: 0;
+        border: 3px solid var(--gold-solid);
+        border-radius: 14px;
+        overflow: hidden;
+        background: none;
+        cursor: pointer;
+        min-height: 44px;
+      }
+      .flyer button:focus-visible {
+        outline: 4px solid var(--teal);
+        outline-offset: 3px;
+      }
+      .flyer img {
+        display: block;
+        width: 100%;
+        height: auto;
+      }
+      .flyer figcaption {
+        margin-top: 10px;
+        font-size: 19px;
+        font-weight: 600;
+        color: var(--ink-soft);
+        text-align: center;
+      }
+      /* Standings */
+      .standings { list-style: none; margin: 0; padding: 0; }
+      .standings li {
+        display: flex;
+        align-items: center;
+        gap: 16px;
+        padding: 16px 18px;
+        border: 2px solid var(--line);
+        border-radius: 14px;
+        margin-bottom: 12px;
+        background: var(--bg-soft);
+      }
+      .standings li.first {
+        background: var(--winner-bg);
+        border-color: var(--gold-solid);
+        border-width: 3px;
+      }
+      .place {
+        font-family: "Barlow Condensed", sans-serif;
+        font-weight: 800;
+        font-size: 30px;
+        min-width: 58px;
+        text-align: center;
+        flex-shrink: 0;
+      }
+      li.first .place { color: var(--gold); }
+      .who { flex: 1; min-width: 0; }
+      .who .person {
+        font-size: 25px;
+        font-weight: 800;
+        line-height: 1.2;
+        display: block;
+      }
+      .who .detail {
+        font-size: 19px;
+        font-weight: 600;
+        color: var(--ink-soft);
+        display: block;
+        margin-top: 2px;
+      }
+      .pts {
+        font-family: "Barlow Condensed", sans-serif;
+        font-weight: 800;
+        font-size: 30px;
+        text-align: right;
+        flex-shrink: 0;
+        line-height: 1.1;
+      }
+      .pts small {
+        display: block;
+        font-family: "Barlow", sans-serif;
+        font-size: 15px;
+        font-weight: 700;
+        letter-spacing: 0.06em;
+        text-transform: uppercase;
+        color: var(--ink-soft);
+      }
+      .winner-badge {
+        display: inline-block;
+        background: var(--gold-solid);
+        color: #101828;
+        font-weight: 800;
+        font-size: 17px;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+        padding: 5px 12px;
+        border-radius: 999px;
+        margin-bottom: 6px;
+      }
+      .contestants-line {
+        margin: 18px 0 0;
+        font-size: 20px;
+        color: var(--ink-soft);
+      }
+      .contestants-line strong { color: var(--ink); }
+      /* ---------- Footer ---------- */
+      footer {
+        text-align: center;
+        margin-top: 56px;
+        padding-top: 26px;
+        border-top: 2px solid var(--line);
+        color: var(--ink-soft);
+        font-size: 19px;
+        font-weight: 600;
+      }
+      footer .big {
+        font-family: "Barlow Condensed", sans-serif;
+        font-size: 26px;
+        font-weight: 800;
+        color: var(--ink);
+        text-transform: uppercase;
+        margin: 0 0 6px;
+      }
+      /* ---------- Lightbox ---------- */
+      dialog#lightbox {
+        border: none;
+        padding: 0;
+        background: transparent;
+        max-width: 94vw;
+        max-height: 94vh;
+      }
+      dialog#lightbox::backdrop { background: rgba(5, 8, 24, 0.88); }
+      dialog#lightbox img {
+        display: block;
+        max-width: 94vw;
+        max-height: 86vh;
+        width: auto;
+        height: auto;
+        border-radius: 12px;
+        border: 3px solid var(--gold-solid);
+      }
+      dialog#lightbox .close-row { text-align: center; margin-top: 14px; }
+      dialog#lightbox button {
+        background: var(--gold-solid);
+        color: #101828;
+        border: none;
+        font-family: "Barlow", sans-serif;
+        font-weight: 800;
+        font-size: 20px;
+        padding: 12px 30px;
+        border-radius: 999px;
+        cursor: pointer;
+        min-height: 48px;
+      }
+      @media (prefers-reduced-motion: no-preference) {
+        .flyer button { transition: transform 0.15s ease; }
+        .flyer button:hover { transform: scale(1.015); }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="wrap">
+      <header class="top">
+        <p class="brand">King of Dice &bull; Chuck</p>
+        <h1>Past Shows<br />&amp; <span class="gold">Winners</span></h1>
+        <p class="lede">Every featured show, who played, and who took the crown — newest first.</p>
+        <p style="margin:18px 0 0;"><a href="index.html" style="color:#f5cd5c; font-weight:700; font-size:19px;">&#8592; Back to the King of Dice home page — play the games</a></p>
+      </header>
+
+      <h2 class="section">Winners &amp; Results</h2>
+
+      <!-- November 24 -->
+      <article class="show-card" aria-label="Tuesday November 24 2026, Test Your Luck">
+        <div class="show-head">
+          <h3 class="show-date">Tuesday, November 24, 2026</h3>
+          <p class="show-name">Test Your Luck</p>
+        </div>
+        <div class="show-body with-flyer">
+          <figure class="flyer">
+            <button type="button" data-full="assets/winner-nov24-702-jay.png" data-alt="Winner flyer for 702 Jay, winner on November 24" aria-label="View the November 24 winner flyer full size">
+              <img src="assets/winner-nov24-702-jay.png" alt="Winner flyer for 702 Jay, winner of Test Your Luck on Tuesday, November 24, 2026" loading="lazy" />
+            </button>
+            <figcaption>702 Jay&rsquo;s winning flyer — tap to see it full size</figcaption>
+          </figure>
+          <div>
+            <ol class="standings">
+              <li class="first">
+                <span class="place">1st</span>
+                <span class="who">
+                  <span class="winner-badge">Winner</span>
+                  <span class="person">702 Jay</span>
+                </span>
+                <span class="pts">11<small>points</small></span>
+              </li>
+              <li>
+                <span class="place">2nd</span>
+                <span class="who">
+                  <span class="person">Pearls</span>
+                </span>
+                <span class="pts">9<small>points</small></span>
+              </li>
+              <li>
+                <span class="place">3rd</span>
+                <span class="who">
+                  <span class="person">Brandy</span>
+                </span>
+                <span class="pts">7<small>points</small></span>
+              </li>
+            </ol>
+            <p class="contestants-line"><strong>Contestants:</strong> 702 Jay, Pearls, and Brandy.</p>
+          </div>
+        </div>
+      </article>
+
+      <!-- November 17 -->
+      <article class="show-card" aria-label="Tuesday November 17 2026, Test Your Luck">
+        <div class="show-head">
+          <h3 class="show-date">Tuesday, November 17, 2026</h3>
+          <p class="show-name">Test Your Luck</p>
+        </div>
+        <div class="show-body with-flyer">
+          <figure class="flyer">
+            <button type="button" data-full="assets/winner-nov17-mrs-emoji-jay.webp" data-alt="Winner flyer for Mrs Emoji Jay, winner on November 17" aria-label="View the November 17 winner flyer full size">
+              <img src="assets/winner-nov17-mrs-emoji-jay.webp" alt="Winner flyer for Mrs Emoji Jay, winner of Test Your Luck on Tuesday, November 17, 2026" loading="lazy" />
+            </button>
+            <figcaption>Mrs Emoji Jay&rsquo;s winning flyer — tap to see it full size</figcaption>
+          </figure>
+          <div>
+            <ol class="standings">
+              <li class="first">
+                <span class="place">1st</span>
+                <span class="who">
+                  <span class="winner-badge">Winner</span>
+                  <span class="person">Mrs Emoji Jay</span>
+                  <span class="detail">Rounds: 5 &ndash; 5 &ndash; 3</span>
+                </span>
+                <span class="pts">13<small>points</small></span>
+              </li>
+              <li>
+                <span class="place">2nd</span>
+                <span class="who">
+                  <span class="person">Topbadge Emoji Jay</span>
+                  <span class="detail">Rounds: 3 &ndash; 3 &ndash; 5</span>
+                </span>
+                <span class="pts">11<small>points</small></span>
+              </li>
+              <li>
+                <span class="place">3rd</span>
+                <span class="who">
+                  <span class="person">Britt</span>
+                  <span class="detail">Rounds: 1 &ndash; 1 &ndash; 1</span>
+                </span>
+                <span class="pts">3<small>points</small></span>
+              </li>
+            </ol>
+            <p class="contestants-line"><strong>Contestants:</strong> Mrs Emoji Jay, Topbadge Emoji Jay, and Britt.</p>
+          </div>
+        </div>
+      </article>
+
+      <!-- November 10 -->
+      <article class="show-card" aria-label="Tuesday November 10 2026, Test Your Luck">
+        <div class="show-head">
+          <h3 class="show-date">Tuesday, November 10, 2026</h3>
+          <p class="show-name">Test Your Luck</p>
+        </div>
+        <div class="show-body with-flyer">
+          <figure class="flyer">
+            <button type="button" data-full="assets/winner-nov10-britt.webp" data-alt="Winner flyer for Britt, winner on November 10" aria-label="View the November 10 winner flyer full size">
+              <img src="assets/winner-nov10-britt.webp" alt="Winner flyer for Britt, winner of Test Your Luck on Tuesday, November 10, 2026" loading="lazy" />
+            </button>
+            <figcaption>Britt&rsquo;s winning flyer — tap to see it full size</figcaption>
+          </figure>
+          <div>
+            <ol class="standings">
+              <li class="first">
+                <span class="place">1st</span>
+                <span class="who">
+                  <span class="winner-badge">Winner</span>
+                  <span class="person">Britt</span>
+                </span>
+                <span class="pts">11<small>points</small></span>
+              </li>
+              <li>
+                <span class="place">2nd</span>
+                <span class="who">
+                  <span class="person">Wolfie</span>
+                </span>
+                <span class="pts">9<small>points</small></span>
+              </li>
+              <li>
+                <span class="place">3rd</span>
+                <span class="who">
+                  <span class="person">Wil</span>
+                </span>
+                <span class="pts">7<small>points</small></span>
+              </li>
+            </ol>
+            <p class="contestants-line"><strong>Contestants:</strong> Britt, Wolfie, and Wil.</p>
+          </div>
+        </div>
+      </article>
+
+      <!-- November 3 -->
+      <article class="show-card" aria-label="Tuesday November 3 2026, Chuck-Tac-Toe tournament">
+        <div class="show-head">
+          <h3 class="show-date">Tuesday, November 3, 2026</h3>
+          <p class="show-name">Chuck-Tac-Toe Tournament</p>
+        </div>
+        <div class="show-body">
+          <div>
+            <ol class="standings">
+              <li class="first">
+                <span class="place">1st</span>
+                <span class="who">
+                  <span class="winner-badge">Winner</span>
+                  <span class="person">Lisa</span>
+                  <span class="detail">&ldquo;The Maker&rsquo;s Legend&rdquo;</span>
+                </span>
+                <span class="pts">11<small>points</small></span>
+              </li>
+              <li>
+                <span class="place">2nd</span>
+                <span class="who">
+                  <span class="person">Sunday</span>
+                </span>
+                <span class="pts">9<small>points</small></span>
+              </li>
+              <li>
+                <span class="place">3rd</span>
+                <span class="who">
+                  <span class="person">Empress</span>
+                </span>
+                <span class="pts">7<small>points</small></span>
+              </li>
+            </ol>
+            <p class="contestants-line"><strong>Contestants:</strong> Lisa, Sunday, and Empress.</p>
+          </div>
+        </div>
+      </article>
+
+      <footer>
+        <p class="big">Test Your Luck with Chuck</p>
+        <p>Every Tuesday &bull; 7PM EST &bull; 6PM CST &bull; Tagged Live</p>
+      </footer>
+    </div>
+
+    <dialog id="lightbox" aria-label="Winner flyer, full size">
+      <img id="lightbox-img" alt="" />
+      <div class="close-row">
+        <button type="button" id="lightbox-close">Close</button>
+      </div>
+    </dialog>
+
+    <script>
+      (function () {
+        var dialog = document.getElementById('lightbox');
+        var img = document.getElementById('lightbox-img');
+        var closeBtn = document.getElementById('lightbox-close');
+        document.querySelectorAll('.flyer button').forEach(function (btn) {
+          btn.addEventListener('click', function () {
+            img.src = btn.getAttribute('data-full');
+            img.alt = btn.getAttribute('data-alt');
+            if (typeof dialog.showModal === 'function') {
+              dialog.showModal();
+            }
+          });
+        });
+        closeBtn.addEventListener('click', function () { dialog.close(); });
+        dialog.addEventListener('click', function (e) {
+          if (e.target === dialog) dialog.close();
+        });
+      })();
+    </script>
+      <p style="text-align:center; margin:34px 0 10px;"><a href="index.html" style="color:#f5cd5c; font-weight:700; font-size:19px;">&#8592; Back to the King of Dice home page</a></p>
+  </body>
+</html>

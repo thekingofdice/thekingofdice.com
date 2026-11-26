@@ -1,0 +1,2832 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+<meta name="color-scheme" content="dark" />
+<link rel="icon" href="data:," />
+<title>King of Dice — Shows, Sponsors &amp; Tournaments</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@700;800;900&family=Public+Sans:wght@400;600;700;800&display=swap" rel="stylesheet" />
+<style>
+  :root{
+    --bg:#05070f;
+    --bg-2:#0a0f22;
+    --surface:#101830;
+    --surface-2:#1a2447;
+    --ink:#f6f2e7;
+    --ink-soft:#bcc6de;
+    --royal:#1b2a5e;
+    --royal-deep:#0b1230;
+    --gold:#c9962e;
+    --gold-bright:#f0b93e;
+    --gold-soft:#f5cd5c;
+    --gold-ink:#f2c14e;
+    --red:#e5484d;
+    --line:#2b3760;
+    --neon:#0899b8;
+    --neon-bright:#22d3ee;
+    --cosmos:#131a3a;
+    --cosmos-deep:#070b24;
+  }
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  @media (prefers-reduced-motion: reduce){ html{scroll-behavior:auto} }
+  body{
+    margin:0; color:var(--ink);
+    background:
+      radial-gradient(ellipse 60% 34% at 12% 0%, rgba(124,58,237,.20), transparent 65%),
+      radial-gradient(ellipse 55% 30% at 88% 4%, rgba(34,211,238,.13), transparent 65%),
+      radial-gradient(ellipse 70% 40% at 50% 112%, rgba(201,150,46,.10), transparent 65%),
+      linear-gradient(180deg, var(--bg-2) 0%, var(--bg) 340px, var(--bg) 100%);
+    font-family:"Public Sans", system-ui, sans-serif;
+    font-size:19px; line-height:1.55;
+  }
+  button,[role="button"],a.btn,summary{min-height:44px}
+  :focus-visible{outline:3px solid var(--gold-bright); outline-offset:2px; border-radius:4px}
+  .wrap{max-width:1060px; margin:0 auto; padding:0 20px}
+
+  /* ---------- Hero ---------- */
+  .hero{
+    background:
+      radial-gradient(ellipse 55% 42% at 18% 30%, rgba(168,85,247,.30), transparent 65%),
+      radial-gradient(ellipse 55% 42% at 84% 26%, rgba(34,211,238,.28), transparent 65%),
+      radial-gradient(ellipse 70% 45% at 50% 108%, rgba(224,168,28,.20), transparent 65%),
+      linear-gradient(180deg, var(--cosmos) 0%, var(--cosmos-deep) 100%);
+    color:#f7f3e6; text-align:center;
+    padding:48px 20px 44px;
+    border-bottom:6px solid var(--gold-bright);
+  }
+  .hero .logo-main{
+    display:block; width:min(360px, 82vw); height:auto; margin:0 auto;
+    border-radius:50%;
+    box-shadow:0 0 0 3px rgba(245,205,92,.55), 0 0 64px rgba(34,211,238,.38), 0 24px 60px rgba(0,0,0,.55);
+  }
+  .hero .hero-art{
+    display:block; width:min(540px, 92vw); height:auto; margin:34px auto 0;
+    border-radius:18px;
+    box-shadow:0 0 0 3px rgba(245,205,92,.65), 0 0 64px rgba(224,168,28,.35), 0 24px 60px rgba(0,0,0,.6);
+  }
+  .hero h1{
+    font-family:"Cinzel", Georgia, serif;
+    font-size:clamp(44px, 9.5vw, 84px); line-height:1.02; margin:28px 0 4px;
+    letter-spacing:2px; font-weight:800; color:#fff;
+  }
+  .hero h1 .gold{color:var(--gold-bright)}
+  .hero .tagline{font-size:clamp(19px,3.4vw,24px); font-weight:600; margin:6px auto 0; max-width:640px; color:#e9e2c8}
+  .hero .host{margin-top:14px; font-size:17px; letter-spacing:2px; text-transform:uppercase; color:#c9d4f2}
+  .hero .cta-row{display:flex; gap:12px; justify-content:center; flex-wrap:wrap; margin-top:26px}
+  .btn{
+    display:inline-flex; align-items:center; justify-content:center;
+    padding:12px 26px; border-radius:10px; font-weight:800; font-size:18px;
+    text-decoration:none; border:2px solid transparent; cursor:pointer;
+  }
+  .btn-gold{background:linear-gradient(180deg, var(--gold-soft), var(--gold-bright)); color:#241a00; box-shadow:0 6px 18px rgba(240,185,62,.25)}
+  .btn-gold:hover{background:var(--gold-soft)}
+  .btn-ghost{background:transparent; color:#fff; border-color:#ffffff88}
+  .btn-ghost:hover{border-color:#fff}
+  /* Top tabs — each tab its own distinct color, bright on dark navy */
+  .tab-whats-next{background:linear-gradient(180deg, #f5cd5c, #f0b93e); color:#241a00; box-shadow:0 6px 18px rgba(240,185,62,.30)}
+  .tab-whats-next:hover{background:#f5cd5c}
+  .tab-take-it{background:linear-gradient(180deg, #67e8f9, #22d3ee); color:#083344; box-shadow:0 6px 18px rgba(34,211,238,.30)}
+  .tab-take-it:hover{background:#a5f3fc}
+  .tab-chuck-tac-toe{background:linear-gradient(180deg, #fdba74, #fb923c); color:#431407; box-shadow:0 6px 18px rgba(251,146,60,.30)}
+  .tab-chuck-tac-toe:hover{background:#fed7aa}
+  .tab-sponsor{background:linear-gradient(180deg, #6ee7b7, #34d399); color:#052e22; box-shadow:0 6px 18px rgba(52,211,153,.30)}
+  .tab-sponsor:hover{background:#a7f3d0}
+  .tab-tournament{background:linear-gradient(180deg, #f9a8d4, #f472b6); color:#500724; box-shadow:0 6px 18px rgba(244,114,182,.30)}
+  .tab-tournament:hover{background:#fbcfe8}
+  .tab-past-shows{background:linear-gradient(180deg, #c4b5fd, #a78bfa); color:#2e1065; box-shadow:0 6px 18px rgba(167,139,250,.32)}
+  .tab-past-shows:hover{background:#ddd6fe}
+  .tab-hit-4{background:linear-gradient(180deg, #f87171, #dc2626); color:#450a0a; box-shadow:0 6px 18px rgba(220,38,38,.35)}
+  .tab-hit-4:hover{background:#fca5a5}
+
+  /* ---------- Sections ---------- */
+  section{padding:56px 0 10px}
+  h2{
+    font-family:"Cinzel",Georgia,serif; font-weight:800;
+    font-size:clamp(32px,6.4vw,48px); letter-spacing:1px; line-height:1.08; margin:0 0 6px;
+  }
+  h2 .accent{color:var(--gold-ink)}
+  .section-sub{color:var(--ink-soft); font-size:19px; margin:0 0 24px; max-width:700px}
+  .rule{height:4px; width:72px; background:linear-gradient(90deg, var(--gold-bright), var(--gold)); border-radius:2px; margin:14px 0 18px}
+
+  /* ---------- Sponsor ---------- */
+  .sponsor-card{
+    background:linear-gradient(160deg, var(--surface-2) 0%, var(--surface) 55%);
+    border:2px solid var(--gold); border-radius:16px;
+    padding:28px; box-shadow:0 18px 44px rgba(0,0,0,.45), inset 0 1px 0 rgba(245,205,92,.25);
+  }
+  .sponsor-grid{display:grid; grid-template-columns:1.2fr .8fr; gap:28px; align-items:start}
+  @media (max-width:760px){ .sponsor-grid{grid-template-columns:1fr} }
+  .goal-box{
+    background:var(--royal); color:#f7f3e6; border-radius:12px; padding:24px; text-align:center;
+  }
+  .goal-box .big{
+    font-family:"Cinzel",sans-serif; font-size:64px; line-height:1; color:var(--gold-bright); letter-spacing:2px;
+  }
+  .goal-box .lbl{font-size:17px; font-weight:700; letter-spacing:1px; text-transform:uppercase; margin-top:4px}
+  .goal-meter{height:22px; background:#ffffff26; border-radius:999px; margin:18px 0 8px; overflow:hidden}
+  .goal-meter span{display:block; height:100%; width:0%; background:var(--gold-bright)}
+  .goal-note{font-size:16px; color:#cdd7ee}
+  .ways{list-style:none; margin:18px 0 0; padding:0; display:grid; gap:12px}
+  .ways li{
+    display:flex; gap:14px; align-items:flex-start; background:var(--surface-2);
+    border-radius:10px; padding:14px 16px; font-size:18px;
+  }
+  .ways .n{
+    flex:0 0 auto; width:38px; height:38px; border-radius:50%;
+    background:var(--gold-bright); color:#241a00; font-weight:800;
+    display:flex; align-items:center; justify-content:center; font-size:19px;
+  }
+  .perks{margin:18px 0 0; padding-left:22px}
+  .perks li{margin-bottom:8px}
+
+  /* ---------- Pay / support directly (under Sponsors) ---------- */
+  .support-direct{
+    margin-top:22px;
+    background:linear-gradient(160deg, var(--surface-2) 0%, var(--surface) 55%);
+    border:2px solid #34d399; border-radius:16px;
+    padding:28px; box-shadow:0 18px 44px rgba(0,0,0,.45), inset 0 1px 0 rgba(110,231,183,.25);
+  }
+  .support-direct h3{font-size:30px; margin:0 0 8px; line-height:1.15}
+  .support-direct h3 .accent{color:#6ee7b7}
+  .support-direct .support-lede{margin:0 0 22px; color:var(--ink-soft); font-size:19px; max-width:680px}
+  .support-grid{display:grid; grid-template-columns:1.15fr .85fr; gap:28px; align-items:start}
+  @media (max-width:760px){ .support-grid{grid-template-columns:1fr} }
+  .support-label{
+    margin:0 0 6px; font-size:16px; font-weight:800; letter-spacing:2px;
+    text-transform:uppercase; color:#6ee7b7;
+  }
+  .support-email{
+    margin:0; font-size:clamp(26px,5vw,36px); font-weight:800; line-height:1.2;
+    color:#fff; overflow-wrap:anywhere;
+  }
+  .support-email a{color:var(--gold-ink); text-decoration:none}
+  .support-email a:hover{text-decoration:underline}
+  .support-copy-row{display:flex; gap:12px; flex-wrap:wrap; align-items:center; margin-top:16px}
+  .btn-support{background:linear-gradient(180deg, #6ee7b7, #34d399); color:#052e22; box-shadow:0 6px 18px rgba(52,211,153,.30)}
+  .btn-support:hover{background:#a7f3d0}
+  .support-copy-status{margin:0; font-size:17px; font-weight:700; color:#6ee7b7; min-height:1.4em}
+  .support-steps{list-style:none; margin:22px 0 0; padding:0; display:grid; gap:12px}
+  .support-steps li{
+    display:flex; gap:14px; align-items:flex-start; background:var(--surface-2);
+    border-radius:10px; padding:14px 16px; font-size:18px;
+  }
+  .support-steps .n{
+    flex:0 0 auto; width:38px; height:38px; border-radius:50%;
+    background:#34d399; color:#052e22; font-weight:800;
+    display:flex; align-items:center; justify-content:center; font-size:19px;
+  }
+  .qr-slot{
+    border:3px dashed rgba(110,231,183,.65); border-radius:14px;
+    background:rgba(255,255,255,.04);
+    aspect-ratio:1/1; width:100%; max-width:300px; margin:0 auto;
+    display:flex; flex-direction:column; align-items:center; justify-content:center;
+    text-align:center; padding:24px;
+  }
+  .qr-slot .qr-title{
+    font-family:"Cinzel",serif; font-size:26px; letter-spacing:1px; line-height:1.1;
+    margin:0 0 10px; color:#fff;
+  }
+  .qr-slot p{margin:0; color:var(--ink-soft); font-size:17px}
+  .qr-img{display:block; width:100%; max-width:300px; height:auto; margin:0 auto; border-radius:14px; background:#fff; padding:10px}
+  .qr-caption{margin:12px 0 0; text-align:center; color:var(--ink-soft); font-size:16px}
+  .support-kicker{
+    margin:0 0 6px; font-size:16px; font-weight:800; letter-spacing:2px;
+    text-transform:uppercase; color:#6ee7b7;
+  }
+  .support-welcome{
+    margin:0 0 22px; background:rgba(52,211,153,.12);
+    border:1px solid rgba(110,231,183,.55); border-radius:12px;
+    padding:18px 20px; font-size:20px; line-height:1.5; color:#fff; max-width:760px;
+  }
+  .support-welcome strong{color:#6ee7b7}
+  .more-ways{margin-top:26px; border-top:1px solid var(--line); padding-top:24px}
+  .more-ways h4{font-size:24px; margin:0 0 6px; line-height:1.2}
+  .more-ways .more-ways-sub{margin:0 0 16px; color:var(--ink-soft); font-size:18px; max-width:680px}
+  .more-ways-grid{display:grid; grid-template-columns:1fr 1fr; gap:14px}
+  @media (max-width:760px){ .more-ways-grid{grid-template-columns:1fr} }
+  .pay-soon{
+    border:3px dashed rgba(110,231,183,.55); border-radius:12px;
+    background:rgba(255,255,255,.04); padding:22px 20px; text-align:center;
+  }
+  .pay-soon .pay-name{font-family:"Cinzel",serif; font-size:28px; letter-spacing:1px; line-height:1.1; margin:0 0 10px; color:#fff}
+  .pay-soon .soon-badge{
+    display:inline-block; background:linear-gradient(180deg, #6ee7b7, #34d399); color:#052e22;
+    font-size:15px; font-weight:800; letter-spacing:2px; text-transform:uppercase;
+    padding:6px 14px; border-radius:999px; margin:0 0 12px;
+  }
+  .pay-soon p{margin:0; color:var(--ink-soft); font-size:17px; line-height:1.5}
+  .pay-soon p strong{color:#fff}
+
+  /* ---------- Schedule ---------- */
+  .shows{display:grid; grid-template-columns:repeat(3,1fr); gap:18px}
+  @media (max-width:900px){ .shows{grid-template-columns:1fr} }
+  .show{
+    background:var(--surface); border:1px solid var(--line); border-top:6px solid #3b4a7a;
+    border-radius:12px; padding:22px; box-shadow:0 10px 26px rgba(0,0,0,.35);
+  }
+  .show.hot{border-top-color:var(--gold-bright)}
+  .show .when{
+    display:inline-block; background:var(--royal); color:#fff; font-weight:800; font-size:15px;
+    letter-spacing:1px; text-transform:uppercase; padding:6px 12px; border-radius:999px; margin-bottom:12px;
+  }
+  .show h3{font-size:24px; margin:0 0 4px; line-height:1.2}
+  .show .time{font-weight:800; font-size:20px; color:var(--gold-ink); margin:0 0 10px}
+  .show p{margin:0 0 10px; color:var(--ink-soft); font-size:17px}
+  .cast{list-style:none; margin:12px 0 0; padding:12px 0 0; border-top:1px solid var(--line); display:grid; gap:8px}
+  .cast li{font-size:18px; display:flex; justify-content:space-between; gap:10px}
+  .cast .role{color:var(--ink-soft); font-size:15px; font-weight:700; text-transform:uppercase; letter-spacing:.5px; text-align:right}
+  .weekly{
+    margin-top:18px; background:var(--surface-2); border-radius:12px; padding:20px 22px;
+    display:flex; gap:18px; align-items:center; flex-wrap:wrap;
+  }
+  .weekly .wk-title{font-family:"Cinzel",sans-serif; font-size:34px; letter-spacing:1px; line-height:1}
+  .weekly p{margin:0; font-size:18px}
+  .weekly strong{color:var(--gold-ink)}
+
+  /* ---------- Game night prize ---------- */
+  .gamenight{
+    border-radius:16px; padding:28px; color:#f7f3e6;
+    background:
+      radial-gradient(ellipse 60% 100% at 100% 0%, rgba(224,168,28,.22), transparent 60%),
+      radial-gradient(ellipse 55% 90% at 0% 110%, rgba(124,58,237,.28), transparent 62%),
+      linear-gradient(135deg, var(--royal) 0%, var(--royal-deep) 100%);
+    border:2px solid var(--gold-bright);
+    box-shadow:0 12px 32px rgba(0,0,0,.18);
+  }
+  .gamenight .gn-kicker{
+    font-weight:800; letter-spacing:2px; text-transform:uppercase; font-size:15px;
+    color:var(--gold-bright); margin:0 0 6px;
+  }
+  .gamenight h3{
+    font-family:"Cinzel",sans-serif; font-weight:400; letter-spacing:1.5px;
+    font-size:clamp(34px,6vw,48px); line-height:1.02; margin:0 0 12px; color:#fff;
+  }
+  .gamenight p{margin:0 0 12px; font-size:19px; max-width:720px}
+  .gamenight p strong{color:var(--gold-bright)}
+  .gn-steps{list-style:none; margin:18px 0 0; padding:0; display:grid; grid-template-columns:repeat(3,1fr); gap:14px}
+  @media (max-width:760px){ .gn-steps{grid-template-columns:1fr} }
+  .gn-steps li{
+    background:rgba(255,255,255,.08); border:1px solid rgba(245,205,92,.45);
+    border-radius:12px; padding:16px; font-size:17px;
+  }
+  .gn-steps .gn-n{
+    display:flex; align-items:center; justify-content:center; width:36px; height:36px;
+    border-radius:50%; background:var(--gold-bright); color:#241a00; font-weight:800;
+    font-size:18px; margin-bottom:10px;
+  }
+  .gn-steps strong{display:block; font-size:18px; margin-bottom:2px; color:#fff}
+
+  /* ---------- Game explainer ---------- */
+  .game-flex{display:grid; grid-template-columns:1fr 1fr; gap:28px; align-items:center}
+  @media (max-width:760px){ .game-flex{grid-template-columns:1fr} }
+  .cases{display:grid; grid-template-columns:repeat(6,1fr); gap:8px}
+  .case{
+    aspect-ratio:1/1.15; border-radius:8px; background:var(--royal); color:var(--gold-bright);
+    display:flex; align-items:center; justify-content:center;
+    font-family:"Cinzel",sans-serif; font-size:clamp(22px,4vw,32px);
+    border:2px solid var(--gold); padding:0; cursor:pointer; width:100%;
+  }
+  .case:hover{border-color:var(--gold-soft)}
+  .case-note{grid-column:1/-1; text-align:center; color:var(--ink-soft); font-size:16px; margin:4px 0 0}
+  .case{transition:background .25s ease, color .25s ease, box-shadow .25s ease, transform .25s ease}
+  .case.open{
+    background:var(--surface-2); color:var(--ink); border-color:var(--line);
+    cursor:default;
+  }
+  .case.found{
+    background:linear-gradient(180deg, var(--gold-soft), var(--gold-bright));
+    color:#241a00; border-color:#fff2c4;
+    box-shadow:0 0 0 3px rgba(245,205,92,.5), 0 0 26px rgba(240,185,62,.65);
+    transform:scale(1.08); cursor:default;
+  }
+
+  /* ---------- Dice roller ---------- */
+  .dice-panel{
+    background:var(--surface); border:2px solid var(--gold); border-radius:16px;
+    padding:20px; margin-bottom:20px; text-align:center;
+  }
+  .dice-row{display:flex; gap:26px; justify-content:center}
+  .die-wrap{display:flex; flex-direction:column; align-items:center; gap:8px}
+  .die{
+    width:88px; height:88px; border-radius:16px; padding:13px;
+    background:linear-gradient(145deg, #ffffff, #e9e2cf);
+    box-shadow:0 8px 20px rgba(0,0,0,.45), inset 0 0 0 2px rgba(27,36,64,.15);
+    display:grid; grid-template-columns:repeat(3,1fr); grid-template-rows:repeat(3,1fr);
+  }
+  .pip{width:15px; height:15px; border-radius:50%; background:#16204a; place-self:center; opacity:0}
+  .pip.on{opacity:1}
+  .die-cap{margin:0; font-size:15px; font-weight:700; letter-spacing:.5px; text-transform:uppercase; color:var(--ink-soft)}
+  .die.rolling{animation:die-shake .09s ease-in-out infinite alternate}
+  @keyframes die-shake{from{transform:rotate(-5deg) translateY(0)}to{transform:rotate(5deg) translateY(-4px)}}
+  @media (prefers-reduced-motion: reduce){ .die.rolling{animation:none} }
+  .roll-btn{margin-top:14px}
+  .roll-btn[disabled]{opacity:.55; cursor:wait}
+  .roll-msg{margin:14px 0 0; font-size:21px; font-weight:800; color:var(--gold-ink); min-height:1.5em}
+  .entry-panel{
+    margin-top:28px; background:var(--surface); border:2px solid var(--gold); border-radius:16px; padding:24px 24px 20px;
+  }
+  .entry-panel h3{font-size:26px; margin:0 0 6px; line-height:1.2}
+  .entry-panel p{margin:0 0 16px; color:var(--ink-soft)}
+  .entry-facts{display:grid; grid-template-columns:repeat(3,1fr); gap:14px}
+  @media (max-width:760px){ .entry-facts{grid-template-columns:1fr} }
+  .entry-fact{background:var(--surface-2); border-radius:12px; padding:18px; text-align:center}
+  .entry-fact .num{font-family:"Cinzel",sans-serif; font-size:44px; line-height:1; color:var(--gold-ink); letter-spacing:1px}
+  .entry-fact .cap{font-size:16px; font-weight:700; text-transform:uppercase; letter-spacing:.5px; color:var(--ink-soft); margin-top:4px}
+
+  /* ---------- Tournament ---------- */
+  .tourney-facts{display:grid; grid-template-columns:repeat(4,1fr); gap:14px; margin-bottom:26px}
+  @media (max-width:900px){ .tourney-facts{grid-template-columns:repeat(2,1fr)} }
+  @media (max-width:460px){ .tourney-facts{grid-template-columns:1fr} }
+  .fact{background:var(--surface); border:1px solid var(--line); border-radius:12px; padding:18px; text-align:center}
+  .fact .num{font-family:"Cinzel",sans-serif; font-size:44px; line-height:1; color:var(--gold-ink); letter-spacing:1px}
+  .fact .cap{font-size:16px; font-weight:700; text-transform:uppercase; letter-spacing:.5px; color:var(--ink-soft); margin-top:4px}
+  .bracket-main{
+    background:var(--surface); border:2px solid var(--gold); border-radius:16px; padding:14px;
+  }
+  .bracket-main img, .region img{width:100%; height:auto; display:block; border-radius:8px}
+  .view-btn{
+    margin-top:12px; width:100%; background:linear-gradient(180deg, var(--gold-soft), var(--gold-bright)); color:#241a00; border:none; border-radius:10px;
+    font-size:18px; font-weight:800; padding:12px; cursor:pointer; font-family:inherit;
+  }
+  .view-btn:hover{background:var(--gold-soft)}
+  .regions{display:grid; grid-template-columns:repeat(2,1fr); gap:18px; margin-top:18px}
+  @media (max-width:760px){ .regions{grid-template-columns:1fr} }
+  .region{background:var(--surface); border:1px solid var(--line); border-radius:12px; padding:14px}
+  .region h3{margin:0 0 10px; font-size:21px}
+  .region h3 span{color:var(--gold-ink)}
+  .how-it-runs{list-style:none; counter-reset:step; margin:22px 0 0; padding:0; display:grid; gap:10px}
+  .how-it-runs li{
+    background:var(--surface); border:1px solid var(--line); border-radius:10px; padding:14px 16px; font-size:18px;
+  }
+  .how-it-runs strong{color:var(--gold-ink)}
+
+  /* ---------- Contact ---------- */
+  .contact-grid{display:grid; grid-template-columns:1fr 1fr; gap:18px}
+  @media (max-width:760px){ .contact-grid{grid-template-columns:1fr} }
+  .contact-card{
+    background:var(--surface); border:2px solid var(--gold); border-radius:16px;
+    padding:28px 24px; text-align:center; box-shadow:0 14px 34px rgba(0,0,0,.4);
+  }
+  .contact-card .contact-label{
+    margin:0 0 6px; font-size:16px; font-weight:800; letter-spacing:2px; text-transform:uppercase; color:var(--ink-soft);
+  }
+  .contact-card .contact-value{
+    margin:0 0 8px; font-size:clamp(22px,4.5vw,30px); font-weight:800; line-height:1.25; color:#fff; overflow-wrap:anywhere;
+  }
+  .contact-card .contact-value a{color:var(--gold-ink); text-decoration:none}
+  .contact-card .contact-value a:hover{text-decoration:underline}
+  .contact-card p{margin:0 0 18px; color:var(--ink-soft); font-size:18px}
+  .contact-card .btn{width:100%}
+
+  /* ---------- Footer ---------- */
+  footer{
+    margin-top:56px; color:#e9e2c8; text-align:center; padding:38px 20px 44px;
+    background:
+      radial-gradient(ellipse 60% 90% at 50% -20%, rgba(34,211,238,.16), transparent 65%),
+      linear-gradient(180deg, var(--cosmos) 0%, var(--cosmos-deep) 100%);
+    border-top:6px solid var(--gold-bright);
+  }
+  footer .f-title{font-family:"Cinzel",sans-serif; font-size:40px; letter-spacing:2px; color:#fff; margin:0 0 6px}
+  footer p{margin:4px 0; font-size:17px}
+
+  /* ---------- Brand band (neon logo) ---------- */
+  .brand-band{
+    margin-top:40px;
+    background:
+      radial-gradient(ellipse 60% 90% at 12% 50%, rgba(34,211,238,.20), transparent 65%),
+      radial-gradient(ellipse 50% 90% at 92% 40%, rgba(168,85,247,.18), transparent 65%),
+      linear-gradient(120deg, var(--cosmos) 0%, var(--cosmos-deep) 100%);
+    border:2px solid var(--neon); border-radius:18px;
+    box-shadow:0 0 34px rgba(34,211,238,.22), inset 0 0 44px rgba(0,0,0,.35);
+    color:#f2f5ff; padding:26px 28px;
+    display:flex; gap:26px; align-items:center;
+  }
+  @media (max-width:640px){ .brand-band{flex-direction:column; text-align:center} }
+  .brand-band img{
+    width:168px; height:168px; border-radius:50%; object-fit:cover; flex:0 0 auto;
+    box-shadow:0 0 0 3px var(--neon-bright), 0 0 38px rgba(34,211,238,.55);
+  }
+  .brand-band .bb-title{
+    font-family:"Cinzel",sans-serif; font-size:clamp(34px,6vw,46px);
+    letter-spacing:2px; line-height:1; margin:0 0 8px; color:#fff;
+  }
+  .brand-band .bb-title .gold{color:var(--gold-bright)}
+  .brand-band p{margin:0; font-size:19px; color:#dbe6ff; max-width:560px}
+
+  /* ---------- Tournament arena ---------- */
+  .arena-banner{
+    border-radius:16px; padding:26px 22px; margin:0 0 26px; text-align:center; color:#fff;
+    background:
+      radial-gradient(ellipse 65% 90% at 50% -20%, rgba(249,115,22,.38), transparent 62%),
+      radial-gradient(ellipse 55% 80% at 8% 110%, rgba(249,115,22,.22), transparent 60%),
+      radial-gradient(ellipse 55% 80% at 94% 110%, rgba(34,211,238,.28), transparent 60%),
+      linear-gradient(180deg, #1b1030 0%, #070b24 100%);
+    border:2px solid var(--gold);
+    box-shadow:0 0 30px rgba(224,168,28,.22), inset 0 0 50px rgba(0,0,0,.45);
+  }
+  .arena-banner .ab-kicker{
+    font-weight:800; letter-spacing:3px; text-transform:uppercase; font-size:16px; color:var(--neon-bright); margin:0 0 6px;
+  }
+  .arena-banner .ab-title{
+    font-family:"Cinzel",sans-serif; font-size:clamp(44px,8.5vw,72px); line-height:.98; letter-spacing:2px; margin:0;
+  }
+  .arena-banner .ab-title .fire{
+    color:#ffb03a; text-shadow:0 0 22px rgba(249,115,22,.75), 0 0 46px rgba(220,38,38,.45);
+  }
+  .arena-banner .ab-title .ice{
+    color:#a5f3fc; text-shadow:0 0 22px rgba(34,211,238,.8), 0 0 46px rgba(59,130,246,.5);
+  }
+  .ttt{display:flex; justify-content:center; margin:20px 0 16px}
+  .ttt-grid{
+    display:grid; grid-template-columns:repeat(3,54px); grid-template-rows:repeat(3,54px);
+    border:3px solid var(--neon-bright); border-radius:10px; overflow:hidden;
+    box-shadow:0 0 26px rgba(34,211,238,.5);
+    background:rgba(5,10,30,.65);
+  }
+  .ttt-grid span{
+    display:flex; align-items:center; justify-content:center;
+    font-family:"Cinzel",sans-serif; font-size:34px; line-height:1;
+    border:1.5px solid rgba(103,232,249,.55);
+  }
+  .ttt-grid .x{color:#ff8fa3; text-shadow:0 0 12px rgba(244,63,94,.85)}
+  .ttt-grid .o{color:#ffb03a; text-shadow:0 0 12px rgba(249,115,22,.85)}
+  .arena-banner .ab-sub{margin:0; font-size:19px; color:#e6ecff}
+  .dragon-duel{
+    display:grid; grid-template-columns:1.35fr minmax(170px,.55fr) 1fr; gap:18px;
+    align-items:stretch; margin:22px 0 18px;
+  }
+  @media (max-width:760px){ .dragon-duel{grid-template-columns:1fr} }
+  .dragon-card{
+    position:relative; margin:0; border-radius:12px; overflow:hidden; aspect-ratio:3/2;
+    border:2px solid rgba(255,176,58,.7);
+    box-shadow:0 0 28px rgba(249,115,22,.38), inset 0 0 40px rgba(0,0,0,.35);
+  }
+  @media (max-width:760px){ .dragon-card{aspect-ratio:16/10} }
+  .dragon-card img{
+    position:absolute; inset:0; width:100%; height:100%; object-fit:cover; display:block;
+  }
+  .dragon-card .d-tag{
+    position:absolute; left:0; right:0; bottom:0; margin:0; padding:30px 14px 12px;
+    font-family:"Cinzel",sans-serif; font-size:30px; letter-spacing:3px; text-align:center;
+    background:linear-gradient(180deg, transparent, rgba(3,6,20,.85));
+  }
+  .dragon-card.fire .d-tag{color:#ffb03a; text-shadow:0 0 14px rgba(249,115,22,.85)}
+  .dragon-card.ice{
+    aspect-ratio:auto; border-color:rgba(103,232,249,.75);
+    box-shadow:0 0 28px rgba(34,211,238,.4), inset 0 0 40px rgba(0,0,0,.35);
+  }
+  .dragon-card.ice img{object-position:50% 12%}
+  .dragon-card.ice .d-tag{color:#a5f3fc; text-shadow:0 0 14px rgba(34,211,238,.9)}
+  @media (max-width:760px){ .dragon-card.ice{aspect-ratio:3/4} }
+  .duel-center{
+    display:flex; flex-direction:column; align-items:center; justify-content:center;
+    text-align:center; padding:6px 2px;
+  }
+  .duel-center .ttt{margin:0}
+  #tournament .bracket-main{border-color:var(--neon); box-shadow:0 0 26px rgba(34,211,238,.20)}
+  footer .logo-neon{
+    display:block; width:132px; height:132px; border-radius:50%; object-fit:cover; margin:0 auto 16px;
+    box-shadow:0 0 0 3px var(--neon-bright), 0 0 34px rgba(34,211,238,.5);
+  }
+
+  /* ---------- Chuck-Tac-Toe ---------- */
+  .ctt-layout{display:grid; grid-template-columns:1.15fr .85fr; gap:24px; align-items:start; margin-bottom:26px}
+  @media (max-width:760px){ .ctt-layout{grid-template-columns:1fr} }
+  .ctt-rules h3{font-size:26px; margin:0 0 14px}
+  .rules-list{list-style:none; counter-reset:rule; margin:0; padding:0; display:grid; gap:12px}
+  .rules-list li{
+    display:flex; gap:14px; align-items:flex-start; background:var(--surface);
+    border:1px solid var(--line); border-radius:10px; padding:14px 16px; font-size:18px;
+  }
+  .rules-list li::before{
+    counter-increment:rule; content:counter(rule);
+    flex:0 0 auto; width:38px; height:38px; border-radius:50%;
+    background:var(--gold-bright); color:#241a00; font-weight:800;
+    display:flex; align-items:center; justify-content:center; font-size:19px;
+  }
+  .rules-list strong{color:var(--gold-ink)}
+  .wilds{
+    background:linear-gradient(160deg, var(--royal) 0%, var(--royal-deep) 100%);
+    border:2px solid var(--gold-bright); border-radius:16px; padding:24px;
+    box-shadow:0 14px 34px rgba(0,0,0,.4), inset 0 1px 0 rgba(245,205,92,.25);
+  }
+  .wilds h3{font-family:"Cinzel",serif; font-size:32px; letter-spacing:2px; color:#fff; margin:0 0 4px}
+  .wilds-sub{margin:0 0 6px; color:#cdd7ee; font-size:17px}
+  .wild-row{display:flex; align-items:center; gap:18px; padding:14px 0; border-top:1px solid rgba(245,205,92,.35)}
+  .wild-num{font-family:"Cinzel",serif; font-size:58px; line-height:1; color:var(--gold-bright); min-width:88px; text-align:center}
+  .wild-what strong{display:block; font-size:23px; letter-spacing:.5px; color:#fff}
+  .wild-what span{color:#cdd7ee; font-size:16px}
+  .ctt-game{background:var(--surface); border:2px solid var(--gold); border-radius:16px; padding:24px}
+  .ctt-game h3{font-size:28px; margin:0 0 6px}
+  .ctt-intro{margin:0 0 20px; color:var(--ink-soft)}
+  .ctt-play{display:grid; grid-template-columns:minmax(260px,400px) 1fr; gap:28px; align-items:start}
+  @media (max-width:760px){ .ctt-play{grid-template-columns:1fr} }
+  .ctt-board{display:grid; grid-template-columns:repeat(3,1fr); gap:10px}
+  .ctt-cell{
+    position:relative; width:100%; aspect-ratio:1/1; padding:0;
+    background:var(--surface-2); border:2px solid var(--line); border-radius:12px;
+    color:var(--ink); font-family:inherit; cursor:default;
+    display:flex; align-items:center; justify-content:center;
+  }
+  .ctt-cell .ctt-num{position:absolute; top:8px; left:12px; font-size:16px; font-weight:800; color:var(--ink-soft)}
+  .ctt-cell .ctt-mark{font-family:"Cinzel",serif; font-size:clamp(46px,10vw,68px); line-height:1}
+  .ctt-cell.filled-x .ctt-mark{color:var(--gold-soft)}
+  .ctt-cell.filled-o .ctt-mark{color:var(--neon-bright)}
+  .ctt-cell.pickable{
+    border-color:var(--gold-bright); cursor:pointer;
+    box-shadow:0 0 0 3px rgba(245,205,92,.35), 0 0 20px rgba(240,185,62,.5);
+  }
+  .ctt-cell.win{
+    border-color:#fff2c4;
+    box-shadow:0 0 0 3px rgba(245,205,92,.55), 0 0 26px rgba(240,185,62,.65);
+    background:linear-gradient(180deg, rgba(245,205,92,.22), rgba(245,205,92,.05));
+  }
+  .ctt-side{text-align:center}
+  .ctt-turn{font-size:22px; font-weight:800; margin:0 0 18px}
+  .ctt-actions{display:flex; gap:12px; flex-wrap:wrap; justify-content:center; align-items:center; margin-top:16px; min-height:52px}
+  .ctt-score{color:var(--ink-soft); font-size:17px; margin:12px 0 0}
+  .ctt-restart{margin-top:16px}
+  .die.idle{opacity:.35}
+
+  /* ---------- What's Next ---------- */
+  .wn-game{position:relative; background:var(--surface); border:2px solid var(--gold); border-radius:16px; padding:24px}
+  .wn-game h3{font-size:28px; margin:0 0 6px}
+  .wn-intro{margin:0; color:var(--ink-soft)}
+  .wn-intro strong{color:var(--ink)}
+  .wn-turn{
+    margin:20px 0 0; text-align:center; font-size:24px; font-weight:800; color:#fff;
+  }
+  .wn-turn .wn-q{display:block; font-size:20px; color:var(--gold-ink); margin-top:2px}
+  .wn-grid{max-width:660px; margin:18px auto 0}
+  .wn-tier{margin-top:14px}
+  .wn-tier:first-child{margin-top:0}
+  .wn-tier-label{
+    margin:0 0 8px; font-size:15px; font-weight:800; letter-spacing:1px;
+    text-transform:uppercase; color:var(--ink-soft); text-align:center;
+  }
+  .wn-tier-label.top{color:var(--gold-ink)}
+  .wn-row{display:grid; grid-template-columns:repeat(3,1fr); gap:10px}
+  .wn-cell{
+    position:relative; aspect-ratio:5/7; border-radius:10px; padding:0; width:100%;
+    display:flex; align-items:center; justify-content:center;
+    font-family:inherit;
+  }
+  .wn-cell.down{
+    background:
+      radial-gradient(circle at 50% 42%, rgba(245,205,92,.28), transparent 55%),
+      linear-gradient(160deg, var(--royal) 0%, var(--royal-deep) 100%);
+    border:2px solid var(--gold); color:var(--gold-bright); cursor:default;
+  }
+  .wn-cell.down .wn-back-q{font-family:"Cinzel",serif; font-size:clamp(30px,7vw,44px); line-height:1}
+  .wn-cell.up{
+    background:linear-gradient(150deg, #ffffff, #ece5d2); color:#16204a;
+    border:2px solid rgba(27,36,64,.25); cursor:default;
+    box-shadow:0 8px 20px rgba(0,0,0,.4);
+  }
+  .wn-cell.up.red{color:#c0272d}
+  .wn-cell.up.joker{
+    background:linear-gradient(160deg, #3b1470, #170a38); color:var(--gold-soft);
+    border-color:var(--gold-bright);
+  }
+  .wn-cell .wn-face{font-family:"Cinzel",serif; font-weight:800; font-size:clamp(24px,5.6vw,36px); line-height:1.05; text-align:center}
+  .wn-cell .wn-face small{display:block; font-size:.62em; margin-top:2px}
+  .wn-cell.current{
+    border-color:#fff2c4;
+    box-shadow:0 0 0 3px rgba(245,205,92,.6), 0 0 26px rgba(240,185,62,.7);
+  }
+  .wn-cell.next{
+    border-color:var(--neon-bright);
+    box-shadow:0 0 0 3px rgba(34,211,238,.45), 0 0 22px rgba(34,211,238,.5);
+  }
+  .wn-cell.joker-target{cursor:pointer; border-color:var(--gold-soft)}
+  .wn-cell.joker-target:hover{box-shadow:0 0 0 3px rgba(245,205,92,.5), 0 0 22px rgba(240,185,62,.55)}
+  .wn-cell.reveal{animation:wn-flip .45s ease}
+  @keyframes wn-flip{from{transform:rotateY(90deg)}to{transform:rotateY(0deg)}}
+  @media (prefers-reduced-motion: reduce){ .wn-cell.reveal{animation:none} }
+  .wn-cell.swap{animation:wn-swap .5s ease}
+  @keyframes wn-swap{0%{transform:scale(1)}40%{transform:scale(.88)}100%{transform:scale(1)}}
+  @media (prefers-reduced-motion: reduce){ .wn-cell.swap{animation:none} }
+  .wn-final-wrap{margin:20px auto 0; text-align:center}
+  .wn-final-wrap .wn-cap{margin:0 0 10px; font-size:15px; font-weight:700; letter-spacing:.5px; text-transform:uppercase; color:var(--gold-ink)}
+  .wn-card{
+    position:relative; width:150px; height:210px; border-radius:12px; margin:0 auto;
+    background:linear-gradient(150deg, #ffffff, #ece5d2);
+    box-shadow:0 12px 28px rgba(0,0,0,.5), inset 0 0 0 2px rgba(27,36,64,.12);
+    color:#16204a; display:flex; align-items:center; justify-content:center;
+  }
+  .wn-card.red{color:#c0272d}
+  .wn-card.joker{background:linear-gradient(160deg, #3b1470, #170a38); color:var(--gold-soft); box-shadow:0 12px 28px rgba(0,0,0,.5), inset 0 0 0 3px var(--gold-bright)}
+  .wn-card .wn-face{font-family:"Cinzel",serif; font-weight:800; font-size:44px; line-height:1.05; text-align:center}
+  .wn-card .wn-face small{display:block; font-size:.55em; margin-top:4px}
+  .wn-card.reveal{animation:wn-flip .45s ease}
+  @media (prefers-reduced-motion: reduce){ .wn-card.reveal{animation:none} }
+  .wn-msg{margin:18px 0 0; font-size:21px; font-weight:800; color:var(--gold-ink); min-height:1.5em; text-align:center}
+  .wn-actions{display:flex; gap:14px; justify-content:center; flex-wrap:wrap; margin-top:16px; min-height:52px}
+  .wn-actions .btn[disabled]{opacity:.55; cursor:default}
+  .wn-jokers{display:flex; gap:12px; justify-content:center; flex-wrap:wrap; margin-top:14px}
+  .wn-jokers:empty{margin-top:0}
+  .wn-joker-note{flex-basis:100%; text-align:center; margin:0; color:var(--ink-soft); font-size:17px}
+  .wn-score{text-align:center; color:var(--ink-soft); font-size:18px; margin:14px 0 0}
+  .wn-score strong{color:var(--gold-ink)}
+  .wn-newrun{display:block; margin:16px auto 0}
+  .wn-sound-row{display:flex; justify-content:flex-end; margin-top:14px}
+  .wn-sound-btn{display:inline-flex; align-items:center; gap:9px}
+  .wn-back{position:absolute; inset:0; display:block; border-radius:8px; overflow:hidden}
+  .wn-back svg{display:block; width:100%; height:100%}
+  .wn-cell.undealt{opacity:0; background:transparent; border:2px solid transparent}
+  .wn-cell.deal-in{animation:wn-deal .38s ease}
+  @keyframes wn-deal{0%{transform:translateY(-18px) rotateY(80deg); opacity:0}100%{transform:translateY(0) rotateY(0deg); opacity:1}}
+  @media (prefers-reduced-motion: reduce){ .wn-cell.deal-in{animation:none} }
+  .wn-fx{position:fixed; inset:0; z-index:70; display:flex; align-items:center; justify-content:center; pointer-events:none; opacity:0}
+  .wn-fx.show{opacity:1}
+  .wn-fx-mark{
+    width:min(210px,56vw); height:min(210px,56vw); border-radius:50%;
+    display:flex; align-items:center; justify-content:center;
+    font-size:min(142px,38vw); font-weight:800; line-height:1; color:#fff;
+    border:7px solid #ffffff;
+  }
+  .wn-fx-mark.good{background:#00c853; box-shadow:0 0 0 8px rgba(0,200,83,.4), 0 0 60px rgba(0,200,83,.85)}
+  .wn-fx-mark.bad{background:#ee2015; box-shadow:0 0 0 8px rgba(238,32,21,.4), 0 0 60px rgba(238,32,21,.85)}
+  .wn-fx.show .wn-fx-mark{animation:wn-fx-pop .45s ease}
+  @keyframes wn-fx-pop{0%{transform:scale(.35)}60%{transform:scale(1.12)}100%{transform:scale(1)}}
+  @media (prefers-reduced-motion: reduce){ .wn-fx.show .wn-fx-mark{animation:none} }
+  .wn-result{
+    display:none; align-items:center; justify-content:center; gap:14px;
+    margin:14px auto 0; max-width:660px; padding:12px 20px; border-radius:12px;
+    font-size:30px; font-weight:800; letter-spacing:2px; color:#fff; text-align:center;
+  }
+  .wn-result.show{display:flex}
+  .wn-result.good{background:#00a344; border:3px solid #7dffb0; box-shadow:0 0 26px rgba(0,200,83,.55)}
+  .wn-result.bad{background:#d21f14; border:3px solid #ffb3ab; box-shadow:0 0 26px rgba(238,32,21,.55)}
+  .wn-result-mark{font-size:46px; line-height:1}
+  #wn-celebration{position:fixed; inset:0; pointer-events:none; z-index:80; display:none; overflow:hidden}
+  #wn-celebration.show{display:block}
+  .wn-confetti-piece{position:absolute; top:-30px; border-radius:2px; animation-name:wn-confetti-fall; animation-timing-function:linear; animation-fill-mode:forwards}
+  @keyframes wn-confetti-fall{to{transform:translateY(108vh) rotate(680deg)}}
+  .wn-spark{position:absolute; width:11px; height:11px; border-radius:50%; transform:translate(-50%,-50%); animation:wn-spark-fly 1.15s ease-out forwards}
+  @keyframes wn-spark-fly{0%{transform:translate(-50%,-50%) scale(1); opacity:1}100%{transform:translate(calc(-50% + var(--dx)), calc(-50% + var(--dy))) scale(.6); opacity:1}}
+  .wn-sponsor-note{max-width:680px; margin:20px auto 4px; text-align:center; color:var(--ink-soft); font-size:17px}
+  .wn-sponsor-note strong{color:var(--gold-ink)}
+
+  /* ---------- Hit 4 ---------- */
+  h2 .accent-red{color:#ff6b6f}
+  .h4-game{background:var(--surface); border:2px solid var(--gold); border-radius:16px; padding:24px}
+  .h4-game h3{font-size:28px; margin:0 0 6px}
+  .h4-intro{margin:0; color:var(--ink-soft)}
+  .h4-intro strong{color:var(--ink)}
+  .h4-intro .h4-you{color:var(--gold-ink); font-weight:800}
+  .h4-intro .h4-cpu{color:#ff6b6f; font-weight:800}
+  .h4-turn{margin:20px 0 0; text-align:center; font-size:24px; font-weight:800; color:#fff}
+  .h4-drops{
+    display:grid; grid-template-columns:repeat(7,1fr); gap:8px;
+    max-width:560px; margin:16px auto 0;
+  }
+  .h4-drop{
+    min-height:48px; padding:6px 0; border-radius:8px; cursor:pointer;
+    background:linear-gradient(180deg, #f87171, #dc2626); color:#fff;
+    border:2px solid #7f1d1d; font-family:inherit; font-size:22px; line-height:1;
+    box-shadow:0 4px 12px rgba(220,38,38,.30);
+  }
+  .h4-drop:hover:not([disabled]){background:#ef4444}
+  .h4-drop[disabled]{opacity:.35; cursor:default; box-shadow:none}
+  .h4-board{
+    display:grid; grid-template-columns:repeat(7,1fr); gap:8px;
+    max-width:560px; margin:10px auto 0; padding:12px;
+    background:linear-gradient(180deg, var(--royal) 0%, var(--royal-deep) 100%);
+    border:2px solid #dc2626; border-radius:14px;
+    box-shadow:0 14px 34px rgba(0,0,0,.4), inset 0 0 34px rgba(0,0,0,.35);
+  }
+  .h4-cell{
+    aspect-ratio:1/1; border-radius:6px; padding:7%;
+    background:rgba(5,8,20,.55); border:2px solid var(--line);
+    display:flex; align-items:center; justify-content:center;
+  }
+  .h4-piece{display:block; width:100%; height:100%; border-radius:4px; opacity:0}
+  .h4-cell.p1 .h4-piece{
+    opacity:1; background:linear-gradient(150deg, var(--gold-soft), var(--gold-bright));
+    box-shadow:inset 0 0 0 2px rgba(36,26,0,.35), 0 3px 8px rgba(0,0,0,.4);
+  }
+  .h4-cell.p2 .h4-piece{
+    opacity:1; background:linear-gradient(150deg, #f87171, #b91c1c);
+    box-shadow:inset 0 0 0 2px rgba(69,10,10,.45), 0 3px 8px rgba(0,0,0,.4);
+  }
+  .h4-piece.fall{animation:h4-fall .38s ease-in}
+  @keyframes h4-fall{from{transform:translateY(var(--fall, -300%))}to{transform:translateY(0)}}
+  @media (prefers-reduced-motion: reduce){ .h4-piece.fall{animation:none} }
+  .h4-cell.win{border-color:#fff2c4; box-shadow:0 0 0 3px rgba(245,205,92,.6), 0 0 22px rgba(240,185,62,.7)}
+  .h4-result{
+    display:none; align-items:center; justify-content:center;
+    margin:18px auto 0; max-width:560px; padding:14px 20px; border-radius:12px;
+    font-size:clamp(24px,5vw,32px); font-weight:800; letter-spacing:1px; color:#fff; text-align:center;
+  }
+  .h4-result.show{display:flex}
+  .h4-result.good{background:#00a344; border:3px solid #7dffb0; box-shadow:0 0 26px rgba(0,200,83,.55)}
+  .h4-result.bad{background:#d21f14; border:3px solid #ffb3ab; box-shadow:0 0 26px rgba(238,32,21,.55)}
+  .h4-result.draw{background:var(--royal); border:3px solid var(--gold-bright); box-shadow:0 0 26px rgba(240,185,62,.45)}
+  .h4-msg{margin:16px 0 0; font-size:21px; font-weight:800; color:var(--gold-ink); min-height:1.5em; text-align:center}
+  .h4-new{display:block; margin:16px auto 0}
+  .h4-score{text-align:center; color:var(--ink-soft); font-size:18px; margin:14px 0 0}
+  .h4-score strong{color:var(--gold-ink)}
+
+  /* ---------- Hit 4 roll-off ---------- */
+  .h4-rolloff{
+    margin-top:20px; padding:22px 18px; text-align:center;
+    background:linear-gradient(180deg, var(--surface-2) 0%, var(--royal-deep) 100%);
+    border:2px solid var(--gold-bright); border-radius:14px;
+    box-shadow:inset 0 0 34px rgba(0,0,0,.35);
+  }
+  .h4-rolloff-title{
+    font-family:"Cinzel",serif; font-size:clamp(26px,5.4vw,36px); letter-spacing:1px;
+    line-height:1.1; margin:0; color:#fff;
+  }
+  .h4-rolloff-sub{margin:8px auto 0; color:var(--ink-soft); font-size:18px; max-width:560px}
+  .h4-vs{
+    display:grid; grid-template-columns:1fr auto 1fr; gap:14px; align-items:stretch;
+    max-width:620px; margin:18px auto 0;
+  }
+  @media (max-width:640px){ .h4-vs{grid-template-columns:1fr} }
+  .h4-side{
+    background:rgba(5,8,20,.45); border-radius:12px; padding:16px 12px 14px;
+  }
+  .h4-side-you{border:2px solid var(--gold-bright)}
+  .h4-side-cpu{border:2px solid #dc2626}
+  .h4-side-name{
+    margin:0 0 12px; font-size:22px; font-weight:800; letter-spacing:1px; text-transform:uppercase;
+  }
+  .h4-side-you .h4-side-name{color:var(--gold-ink)}
+  .h4-side-cpu .h4-side-name{color:#ff6b6f}
+  .h4-dice-row{display:flex; gap:14px; justify-content:center}
+  .die.h4-die{width:84px; height:84px; border-radius:14px; padding:12px}
+  @media (max-width:400px){ .die.h4-die{width:72px; height:72px} }
+  .die.h4-die .pip{width:16px; height:16px}
+  .h4-total{
+    margin:14px 0 0; font-size:clamp(20px,4.6vw,25px); font-weight:800; line-height:1.3; color:#fff;
+    min-height:2.6em; display:flex; align-items:center; justify-content:center;
+  }
+  .h4-vs-mid{
+    display:flex; align-items:center; justify-content:center;
+    font-family:"Cinzel",serif; font-size:30px; font-weight:800; color:var(--ink-soft);
+  }
+  .h4-roll-result{
+    margin:20px auto 0; max-width:620px;
+    font-size:clamp(26px,5.6vw,36px); font-weight:800; line-height:1.25; color:#fff;
+    min-height:1.3em;
+  }
+  .h4-roll-result.good{color:var(--gold-soft)}
+  .h4-roll-result.bad{color:#ff6b6f}
+  .h4-roll-btn{margin-top:16px; font-size:21px; padding:14px 34px}
+  .h4-roll-btn[disabled]{opacity:.55; cursor:wait}
+
+  /* ---------- Lightbox ---------- */
+  dialog#viewer{
+    border:none; padding:0; background:transparent; max-width:96vw; width:1100px;
+  }
+  dialog#viewer::backdrop{background:rgba(0,0,0,.88)}
+  dialog#viewer img{width:100%; height:auto; max-height:82vh; object-fit:contain; display:block; border-radius:8px; background:#fff}
+  dialog#viewer .bar{display:flex; justify-content:space-between; align-items:center; gap:12px; padding:12px 2px 0}
+  dialog#viewer .cap{color:#fff; font-weight:700; font-size:18px}
+  dialog#viewer button{
+    background:var(--gold-bright); color:#241a00; border:none; border-radius:10px;
+    font-size:18px; font-weight:800; padding:10px 22px; cursor:pointer; font-family:inherit;
+  }
+</style>
+</head>
+<body>
+
+<header class="hero">
+  <img class="logo-main" src="assets/logo-main.jpg" alt="Chuck's favorite King of Dice logo — a gold crown with red jewels over a red die and a white die, reading The King of Dice" />
+  <h1>KING OF <span class="gold">DICE</span></h1>
+  <p class="tagline">Live game shows on Tagged — hosted by Chuck. Big games, real contestants, and a new champion crowned on the regular.</p>
+  <p class="host">Hosted by Chuck · Tagged Live</p>
+  <div class="cta-row">
+    <a class="btn tab-sponsor" href="#sponsors">Sponsors &amp; Donations</a>
+    <a class="btn tab-tournament" href="#tournament">The 64-Player Tournament</a>
+    <a class="btn tab-past-shows" href="past-shows.html">Past Shows and Winners</a>
+    <a class="btn tab-take-it" href="#game">Play Take It or Leave It</a>
+    <a class="btn tab-chuck-tac-toe" href="#chuck-tac-toe">Play Chuck-Tac-Toe</a>
+    <a class="btn tab-whats-next" href="#whats-next">Play What's Next</a>
+    <a class="btn tab-hit-4" href="#hit-4">Play Hit 4</a>
+    <a class="btn btn-ghost" href="#contact">Contact Chuck</a>
+  </div>
+
+  <img class="hero-art" src="assets/hero-throne.jpg" alt="Chuck, the King of Dice — Chuck in a black suit and gold crown, sitting on a throne made of dice and holding a scepter topped with a die" />
+</header>
+
+<main class="wrap">
+
+  <!-- BRAND BAND -->
+  <div class="brand-band">
+    <img src="assets/logo-neon.jpg" alt="Chuck — The King of Dice neon circle logo: a gold crown over red, blue and green dice inside a glowing blue ring" />
+    <div>
+      <p class="bb-title">CHUCK — THE KING OF <span class="gold">DICE</span></p>
+      <p>Home of Test Your Luck, What's Next, Take It or Leave It, and Chuck-Tac-Toe — live game shows on Tagged, hosted by Chuck.</p>
+    </div>
+  </div>
+
+  <!-- SPONSORS -->
+  <section id="sponsors" aria-labelledby="sponsors-h">
+    <h2 id="sponsors-h">Sponsors <span class="accent">Wanted</span></h2>
+    <div class="rule"></div>
+    <p class="section-sub">Chuck is looking for sponsors for his brand-new game show. Be the name behind the biggest show on the board.</p>
+
+    <div class="sponsor-card">
+      <div class="sponsor-grid">
+        <div>
+          <h3 style="font-size:28px; margin:0 0 8px;">Take It or Leave It</h3>
+          <p style="margin:0;">Chuck's own game show, in the style of <em>Deal or No Deal</em> — a contestant picks a case, then decides round by round whether to take the deal on the table or leave it and play on for the top prize. Every show needs <strong>20,000 diamonds</strong> behind it to make the prizes real.</p>
+          <ul class="perks">
+            <li>Your name announced live on the show as the sponsor</li>
+            <li>Your name listed right here on this page as an official sponsor</li>
+            <li>Your name in front of Chuck's live audience every show</li>
+          </ul>
+        </div>
+        <div class="goal-box">
+          <div class="big">20K</div>
+          <div class="lbl">Diamonds per show</div>
+          <div class="goal-meter" role="img" aria-label="Sponsor goal: 20,000 diamonds. No sponsors signed up yet — the board is open."><span></span></div>
+          <p class="goal-note">No sponsors yet — the board is wide open. First one in gets the headline spot.</p>
+        </div>
+      </div>
+
+      <ul class="ways">
+        <li><span class="n">1</span><span><strong>Full show sponsor — 20,000 diamonds.</strong> One sponsor covers a whole show and takes top billing.</span></li>
+        <li><span class="n">2</span><span><strong>Group sponsorship.</strong> Several sponsors chip in together and add up to the 20,000 — every name goes on the board.</span></li>
+        <li><span class="n">3</span><span><strong>Interested?</strong> Find Chuck live on Tagged and let him know you want in on Take It or Leave It.</span></li>
+      </ul>
+    </div>
+
+    <!-- PAY / SUPPORT DIRECTLY — sits underneath the sponsor board, inside Sponsors -->
+    <div class="support-direct" id="support" aria-labelledby="support-direct-h">
+      <p class="support-kicker">Donations &amp; Direct Support</p>
+      <h3 id="support-direct-h">Pay or Support <span class="accent">Directly</span></h3>
+      <p class="support-lede">Want to back the shows with cash instead of diamonds? You can pay or send a donation straight through PayPal using the email below — quick, direct, and every bit goes to keeping the games running.</p>
+      <p class="support-welcome"><strong>Every bit helps — even $2.</strong> Small gifts add up fast and are just as welcome as big ones. Give what feels right, only if you can — and thank you for supporting the King of Dice either way, even just by watching and sharing.</p>
+
+      <div class="support-grid">
+        <div>
+          <p class="support-label">PayPal — send to this email</p>
+          <p class="support-email"><a href="mailto:clgtrill@gmail.com">clgtrill@gmail.com</a></p>
+          <div class="support-copy-row">
+            <button type="button" class="btn btn-support" id="copy-paypal-email">Copy the PayPal email</button>
+            <p class="support-copy-status" id="copy-paypal-status" aria-live="polite"></p>
+          </div>
+          <ul class="support-steps">
+            <li><span class="n">1</span><span><strong>Open PayPal</strong> on your phone or at paypal.com and tap <strong>Send</strong>.</span></li>
+            <li><span class="n">2</span><span><strong>Enter this email:</strong> clgtrill@gmail.com</span></li>
+            <li><span class="n">3</span><span><strong>Add your amount</strong> and, if you like, a note saying what it's for — a sponsorship, show support, or just backing the King of Dice.</span></li>
+          </ul>
+        </div>
+
+        <div>
+          <!-- PayPal QR code slot: a scannable code will be added here when available. -->
+          <div class="qr-slot" role="img" aria-label="PayPal QR code coming soon — a scannable code for paying directly will appear here">
+            <p class="qr-title">PayPal QR Code</p>
+            <p>Coming soon — a scannable PayPal code will live right here, so you can pay in seconds just by pointing your phone camera at it.</p>
+          </div>
+          <p class="qr-caption">Until the code is up, use the PayPal email on the left — it works right now.</p>
+        </div>
+      </div>
+
+      <div class="more-ways">
+        <h4>More ways to give — coming soon</h4>
+        <p class="more-ways-sub">Two more ways to send support are on the way. These spots are saved for them — for now, please use PayPal above, it works right now.</p>
+        <div class="more-ways-grid">
+          
+          <div class="pay-soon" role="img" aria-label="Cash App — coming soon. The Cash App handle will appear here when it is ready.">
+            <p class="pay-name">Cash App</p>
+            <p><span class="soon-badge">Coming Soon</span></p>
+            <p><strong>Cash App handle coming soon.</strong> This spot is saved — the $cashtag will appear right here as soon as it is ready.</p>
+          </div>
+          
+          <div class="pay-soon" role="img" aria-label="Venmo — coming soon. The Venmo handle will appear here when it is ready.">
+            <p class="pay-name">Venmo</p>
+            <p><span class="soon-badge">Coming Soon</span></p>
+            <p><strong>Venmo handle coming soon.</strong> This spot is saved — the Venmo handle will appear right here as soon as it is ready.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <script>
+      (function(){
+        var btn = document.getElementById('copy-paypal-email');
+        var status = document.getElementById('copy-paypal-status');
+        if (!btn || !status) return;
+        btn.addEventListener('click', function(){
+          var email = 'clgtrill@gmail.com';
+          function done(){ status.textContent = 'Copied — now paste it into PayPal.'; }
+          function fallback(){ status.textContent = 'Copy this email: clgtrill@gmail.com'; }
+          if (navigator.clipboard && navigator.clipboard.writeText) {
+            navigator.clipboard.writeText(email).then(done, fallback);
+          } else {
+            fallback();
+          }
+        });
+      })();
+    </script>
+  </section>
+
+  <!-- SCHEDULE -->
+  <section id="schedule" aria-labelledby="schedule-h">
+    <h2 id="schedule-h">Show <span class="accent">Schedule</span></h2>
+    <div class="rule"></div>
+    <p class="section-sub">What's coming up on King of Dice. All shows live on Tagged.</p>
+
+    <div class="shows">
+      <article class="show">
+        <span class="when">Monday · Nov 23</span>
+        <h3>Finale Brainspin</h3>
+        <p class="time">8:00 PM EST</p>
+        <p>Trivia finale night with a full prize board — spin, answer, and climb toward the 1 MILLY box.</p>
+        <ul class="cast">
+          <li>Wolfie <span class="role">Host</span></li>
+          <li>2 Legit <span class="role">Appearing</span></li>
+          <li>Chuck <span class="role">Appearing</span></li>
+          <li>Rob G <span class="role">Appearing</span></li>
+        </ul>
+      </article>
+
+      <article class="show hot">
+        <span class="when">Tuesday · Nov 24</span>
+        <h3>Test Your Luck with Chuck</h3>
+        <p class="time">7:00 PM EST · 6:00 PM CST</p>
+        <p>The featured show. Three contestants box up and play Chuck's games head to head — top score takes the night.</p>
+        <ul class="cast">
+          <li>Chuck <span class="role">Host</span></li>
+          <li>702 Jay <span class="role">Contestant</span></li>
+          <li>Topbadge Beautiful Boss Jae <span class="role">Contestant</span></li>
+          <li>Pearls <span class="role">Contestant</span></li>
+        </ul>
+      </article>
+
+      <article class="show">
+        <span class="when">Every Tuesday</span>
+        <h3>Test Your Luck — Weekly</h3>
+        <p class="time">7:00 PM EST · 6:00 PM CST</p>
+        <p>The featured show runs every Tuesday night, with three contestants picked from the comments to box up and play.</p>
+        <ul class="cast">
+          <li>Chuck <span class="role">Host</span></li>
+          <li>3 contestants <span class="role">From the comments</span></li>
+        </ul>
+      </article>
+    </div>
+
+    <div class="weekly">
+      <div class="wk-title">WHAT'S NEXT</div>
+      <p><strong>Monday thru Friday · 8:00 PM EST.</strong> Chuck's card-by-card Higher / Lower game — free to play, and a new champion is crowned every single day.</p>
+    </div>
+  </section>
+
+  <!-- GAME NIGHT PRIZE -->
+  <section id="game-night" aria-labelledby="game-night-h">
+    <h2 id="game-night-h">Win a Game Night <span class="accent">with Chuck</span></h2>
+    <div class="rule"></div>
+    <p class="section-sub">First place on the featured show takes home more than the win — it takes home the King himself.</p>
+
+    <div class="gamenight">
+      <p class="gn-kicker">Featured Show Prize</p>
+      <h3>First Place Wins a Free Game Night</h3>
+      <p>Win <strong>Test Your Luck with Chuck</strong> on a Tuesday night and you also win a <strong>free game night</strong> on your own stream. Chuck comes to <strong>your</strong> stream, jumps in your box, and plays the games <strong>of your choice</strong> — your stream, your games, your night with the King of Dice in the box.</p>
+      <ul class="gn-steps">
+        <li><span class="gn-n">1</span><strong>Box up &amp; play</strong>Get picked as a contestant on Test Your Luck, Tuesdays at 7:00 PM EST.</li>
+        <li><span class="gn-n">2</span><strong>Take first place</strong>Top score on the night wins the show — and the game night comes with it.</li>
+        <li><span class="gn-n">3</span><strong>Chuck comes to you</strong>He shows up on your stream, jumps in your box, and plays the games you pick.</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- TAKE IT OR LEAVE IT -->
+  <section id="game" aria-labelledby="game-h">
+    <h2 id="game-h">Take It <span class="accent">or Leave It</span></h2>
+    <div class="rule"></div>
+    <div class="game-flex">
+      <div>
+        <p style="margin-top:0;">The new show Chuck built himself. The board holds <strong>36 cases</strong> — one for every two-digit number the dice can roll. The first die is the <strong>tens spot</strong> and the second die is the <strong>ones spot</strong>, so a 2 and a 1 is <strong>21</strong>, and a 6 and a 5 is <strong>65</strong>. The cases hold all 36 combinations — 11 through 16, 21 through 26, all the way to 61 through 66 — face down and scrambled into random spots, so nobody knows where a number is hiding. Roll the two dice and they set the number to find: roll a 2 and a 1, and you're hunting for <strong>the number 21</strong>. Then flip the boxes over one by one until you find it. Try it yourself with the dice right here on the page.</p>
+        <p>Round by round, cases come off the board and offers land on the table — take the sure thing and walk, or leave it and chase what's still in the cases. The longer they play, the bigger the offers get — and the bigger the risk. It all comes down to one question: <strong>take it, or leave it?</strong></p>
+        <p>Sponsorship is what puts the diamonds behind the cases. See the sponsor board above if you want your name on this show.</p>
+      </div>
+      <div>
+        <div class="dice-panel">
+          <div class="dice-row">
+            <div class="die-wrap">
+              <div class="die" id="die-1" aria-hidden="true">
+                <span class="pip on"></span><span class="pip"></span><span class="pip"></span>
+                <span class="pip"></span><span class="pip on"></span><span class="pip"></span>
+                <span class="pip"></span><span class="pip"></span><span class="pip on"></span>
+              </div>
+              <p class="die-cap">Die 1 — Tens</p>
+            </div>
+            <div class="die-wrap">
+              <div class="die" id="die-2" aria-hidden="true">
+                <span class="pip on"></span><span class="pip"></span><span class="pip on"></span>
+                <span class="pip"></span><span class="pip"></span><span class="pip"></span>
+                <span class="pip on"></span><span class="pip"></span><span class="pip on"></span>
+              </div>
+              <p class="die-cap">Die 2 — Ones</p>
+            </div>
+          </div>
+          <button type="button" class="btn btn-gold roll-btn" id="roll-btn">Roll the Dice</button>
+          <p class="roll-msg" id="roll-msg" aria-live="polite">Roll the dice to set your target — then tap the face-down boxes to find it.</p>
+        </div>
+        <div class="cases" role="group" aria-label="The 36 Take It or Leave It boxes, face down and scrambled — tap a box to flip it over">
+          <button type="button" class="case" aria-label="Face-down box — tap to flip it over">?</button><button type="button" class="case" aria-label="Face-down box — tap to flip it over">?</button><button type="button" class="case" aria-label="Face-down box — tap to flip it over">?</button><button type="button" class="case" aria-label="Face-down box — tap to flip it over">?</button><button type="button" class="case" aria-label="Face-down box — tap to flip it over">?</button><button type="button" class="case" aria-label="Face-down box — tap to flip it over">?</button>
+          <button type="button" class="case" aria-label="Face-down box — tap to flip it over">?</button><button type="button" class="case" aria-label="Face-down box — tap to flip it over">?</button><button type="button" class="case" aria-label="Face-down box — tap to flip it over">?</button><button type="button" class="case" aria-label="Face-down box — tap to flip it over">?</button><button type="button" class="case" aria-label="Face-down box — tap to flip it over">?</button><button type="button" class="case" aria-label="Face-down box — tap to flip it over">?</button>
+          <button type="button" class="case" aria-label="Face-down box — tap to flip it over">?</button><button type="button" class="case" aria-label="Face-down box — tap to flip it over">?</button><button type="button" class="case" aria-label="Face-down box — tap to flip it over">?</button><button type="button" class="case" aria-label="Face-down box — tap to flip it over">?</button><button type="button" class="case" aria-label="Face-down box — tap to flip it over">?</button><button type="button" class="case" aria-label="Face-down box — tap to flip it over">?</button>
+          <button type="button" class="case" aria-label="Face-down box — tap to flip it over">?</button><button type="button" class="case" aria-label="Face-down box — tap to flip it over">?</button><button type="button" class="case" aria-label="Face-down box — tap to flip it over">?</button><button type="button" class="case" aria-label="Face-down box — tap to flip it over">?</button><button type="button" class="case" aria-label="Face-down box — tap to flip it over">?</button><button type="button" class="case" aria-label="Face-down box — tap to flip it over">?</button>
+          <button type="button" class="case" aria-label="Face-down box — tap to flip it over">?</button><button type="button" class="case" aria-label="Face-down box — tap to flip it over">?</button><button type="button" class="case" aria-label="Face-down box — tap to flip it over">?</button><button type="button" class="case" aria-label="Face-down box — tap to flip it over">?</button><button type="button" class="case" aria-label="Face-down box — tap to flip it over">?</button><button type="button" class="case" aria-label="Face-down box — tap to flip it over">?</button>
+          <button type="button" class="case" aria-label="Face-down box — tap to flip it over">?</button><button type="button" class="case" aria-label="Face-down box — tap to flip it over">?</button><button type="button" class="case" aria-label="Face-down box — tap to flip it over">?</button><button type="button" class="case" aria-label="Face-down box — tap to flip it over">?</button><button type="button" class="case" aria-label="Face-down box — tap to flip it over">?</button><button type="button" class="case" aria-label="Face-down box — tap to flip it over">?</button>
+          <p class="case-note">Thirty-six boxes, face down with the 36 two-digit dice combinations — 11 to 16, 21 to 26, all the way to 61 to 66 — scrambled into random spots. Roll the dice to set the number to find, then tap boxes to flip them over and find it. Roll again and the boxes scramble into new spots.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="entry-panel">
+      <h3>Want to be a contestant?</h3>
+      <p>Entry costs <strong>2,500 diamonds</strong> and secures your spot on the show. There are <strong>4 contestants each show</strong> — once those spots are filled, the show is set. Find Chuck live on Tagged to enter and secure your spot.</p>
+      <div class="entry-facts">
+        <div class="entry-fact"><div class="num">2,500</div><div class="cap">Diamonds to enter — secures your spot</div></div>
+        <div class="entry-fact"><div class="num">4</div><div class="cap">Contestants per show</div></div>
+        <div class="entry-fact"><div class="num">TBA</div><div class="cap">Show time — to be announced</div></div>
+      </div>
+      <p style="margin:16px 0 0;">The game will be at a designated time — Chuck is making the schedule now and will announce it soon. Check back here for the show time once it's set.</p>
+    </div>
+  </section>
+
+  <!-- CHUCK-TAC-TOE -->
+  <section id="chuck-tac-toe" aria-labelledby="ctt-h">
+    <h2 id="ctt-h">Chuck-Tac-Toe — <span class="accent">The Signature Game</span></h2>
+    <div class="rule"></div>
+    <p class="section-sub">Chuck's signature game — tic-tac-toe played with dice, and the game the March Madness tournament below is built on. Here are the full rules with the wilds posted right beside them — and you can play a full game right here on the page.</p>
+
+    <div class="ctt-layout">
+      <div class="ctt-rules">
+        <h3>How to Play</h3>
+        <ol class="rules-list">
+          <li><span><strong>Roll off to start.</strong> Highest roll goes first and picks X or O.</span></li>
+          <li><span><strong>The board is 3 by 3,</strong> with the spaces numbered 1 to 9.</span></li>
+          <li><span><strong>On your turn, roll the dice up to 2 times.</strong> Roll once, then decide: keep it, or roll again and add them together.</span></li>
+          <li><span><strong>Your total is your space.</strong> 2 to 9 lands on that number — and 10, 11 and 12 are the wilds, posted right beside these rules.</span></li>
+          <li><span><strong>Win two ways:</strong> get 3 in a row, or be the first to 5 pieces on the board. No cat game — somebody always wins.</span></li>
+          <li><span><strong>Taken is taken.</strong> If the number you rolled is already taken, your turn ends with no placement.</span></li>
+        </ol>
+      </div>
+
+      <aside class="wilds" aria-label="The wilds — what rolling 10, 11 or 12 means">
+        <h3>The Wilds</h3>
+        <p class="wilds-sub">Roll one of these totals and the board opens up — you pick the space:</p>
+        <div class="wild-row">
+          <div class="wild-num">10</div>
+          <div class="wild-what"><strong>Any open EVEN</strong><span>Spaces 2 · 4 · 6 · 8</span></div>
+        </div>
+        <div class="wild-row">
+          <div class="wild-num">11</div>
+          <div class="wild-what"><strong>Any open ODD</strong><span>Spaces 1 · 3 · 5 · 7 · 9</span></div>
+        </div>
+        <div class="wild-row">
+          <div class="wild-num">12</div>
+          <div class="wild-what"><strong>Any open SPACE</strong><span>Your pick of the whole board</span></div>
+        </div>
+      </aside>
+    </div>
+
+    <div class="ctt-game">
+      <h3>Play Chuck-Tac-Toe Right Here</h3>
+      <p class="ctt-intro">Play against the computer, right here. It rolls the dice, decides whether to keep its roll or roll again and add, and places its own pieces — a real game, start to finish. Roll off to see who goes first, the winner picks X or O, then take turns until somebody gets 3 in a row or 5 pieces on the board.</p>
+      <div class="ctt-play">
+        <div class="ctt-board" role="group" aria-label="Chuck-Tac-Toe board — a 3 by 3 grid with spaces numbered 1 to 9">
+          <button type="button" class="ctt-cell" aria-label="Space 1 — open"><span class="ctt-num">1</span><span class="ctt-mark"></span></button>
+          <button type="button" class="ctt-cell" aria-label="Space 2 — open"><span class="ctt-num">2</span><span class="ctt-mark"></span></button>
+          <button type="button" class="ctt-cell" aria-label="Space 3 — open"><span class="ctt-num">3</span><span class="ctt-mark"></span></button>
+          <button type="button" class="ctt-cell" aria-label="Space 4 — open"><span class="ctt-num">4</span><span class="ctt-mark"></span></button>
+          <button type="button" class="ctt-cell" aria-label="Space 5 — open"><span class="ctt-num">5</span><span class="ctt-mark"></span></button>
+          <button type="button" class="ctt-cell" aria-label="Space 6 — open"><span class="ctt-num">6</span><span class="ctt-mark"></span></button>
+          <button type="button" class="ctt-cell" aria-label="Space 7 — open"><span class="ctt-num">7</span><span class="ctt-mark"></span></button>
+          <button type="button" class="ctt-cell" aria-label="Space 8 — open"><span class="ctt-num">8</span><span class="ctt-mark"></span></button>
+          <button type="button" class="ctt-cell" aria-label="Space 9 — open"><span class="ctt-num">9</span><span class="ctt-mark"></span></button>
+        </div>
+        <div class="ctt-side">
+          <p class="ctt-turn" id="ctt-turn">Step 1 — the roll-off. Highest roll goes first and picks X or O.</p>
+          <div class="dice-row">
+            <div class="die-wrap">
+              <div class="die" id="ctt-die-1" aria-hidden="true">
+                <span class="pip on"></span><span class="pip"></span><span class="pip on"></span>
+                <span class="pip"></span><span class="pip on"></span><span class="pip"></span>
+                <span class="pip on"></span><span class="pip"></span><span class="pip on"></span>
+              </div>
+              <p class="die-cap">Die 1</p>
+            </div>
+            <div class="die-wrap">
+              <div class="die" id="ctt-die-2" aria-hidden="true">
+                <span class="pip on"></span><span class="pip"></span><span class="pip"></span>
+                <span class="pip"></span><span class="pip"></span><span class="pip"></span>
+                <span class="pip"></span><span class="pip"></span><span class="pip on"></span>
+              </div>
+              <p class="die-cap">Die 2</p>
+            </div>
+          </div>
+          <div class="ctt-actions" id="ctt-actions"></div>
+          <p class="roll-msg" id="ctt-msg" aria-live="polite">You against the computer! Roll off first — highest roll goes first and picks X or O. Tap the button to roll your dice.</p>
+          <p class="ctt-score" id="ctt-score">First to 5 pieces, or 3 in a row, wins. No cat game — somebody always wins.</p>
+          <button type="button" class="btn btn-ghost ctt-restart" id="ctt-restart">Restart game</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- WHAT'S NEXT -->
+  <section id="whats-next" aria-labelledby="wn-h">
+    <h2 id="wn-h">What's <span class="accent">Next</span></h2>
+    <div class="rule"></div>
+    <p class="section-sub">Chuck's card-by-card Higher or Lower game — live <strong>Monday through Friday, 8:00 PM EST / 7:00 PM CT</strong> on Tagged. Free to play, and a new champion is crowned every single day. See the game for yourself — and play it right here.</p>
+
+    <div class="wn-game">
+      <h3>Play What's Next Right Here</h3>
+      <p class="wn-intro">The computer shuffles <strong>one full deck — 52 cards plus 2 jokers</strong> — and lays out <strong>12 cards face-down, 3 across by 4 rows</strong>. You play against the computer, and <strong>you always go first</strong>. Play runs <strong>bottom row first, left to right, then up</strong> through the tiers to the top row. Each turn, Chuck asks: <strong>&ldquo;What's next? Is the next card higher or is it lower?&rdquo;</strong> Guess right and you keep going. Guess wrong and your turn ends and play passes to the other player. Turn up the <strong>same rank</strong> and you lose your turn too — it is not higher or lower. <strong>Aces go both ways:</strong> call lower and an Ace counts as a 1, call higher and it counts as an Ace — so an Ace is always a correct guess. <strong>Only the last card decides the winner:</strong> turn it over with a correct call and you win — miss it, and another card is pulled from the deck to settle it. The replacement lands in a <strong>sudden-death row</strong> above the top row, and new deciding cards keep coming until somebody turns one over with a correct call — <strong>the game never ends on a wrong guess</strong>. Pull a <strong>joker</strong> and you bank it. Jokers can <strong>only be used in the top row</strong> — spend one to swap a card in the top row for the next card off the deck, which is random and could even be the same rank. And that card can be <strong>yours or your opponent's</strong>. Use a joker on <strong>your own card</strong> to get rid of a difficult card like a 7, 8 or 9. Or use it on <strong>your opponent's card</strong>: if your opponent has an easy card coming up in the top row, spend a joker to swap it for the next card off the deck and make it harder for them. It cuts both ways — if the <strong>computer</strong> has a joker, it can change <strong>your</strong> card in the top row the same way.</p>
+      <div class="wn-sound-row">
+        <button type="button" class="btn btn-ghost wn-sound-btn" id="wn-sound" aria-pressed="false" aria-label="Game sound is on — tap to mute the sound"><svg width="22" height="22" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M3 9.5v5h3.5L12 19V5L6.5 9.5H3z" fill="currentColor"/><path d="M15 9.2a4 4 0 0 1 0 5.6M17.4 6.8a7.4 7.4 0 0 1 0 10.4" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg><span>Sound: On</span></button>
+      </div>
+      <p class="wn-turn" id="wn-turn">Setting up the board&hellip;</p>
+      <div class="wn-grid" id="wn-grid" role="group" aria-label="The What's Next board — 12 cards face-down in 4 rows of 3. Play starts at the bottom row and works up to the top row. If the last card is guessed wrong, a sudden-death row appears above the top row and deciding cards keep coming until somebody guesses one right."></div>
+      <p class="wn-msg" id="wn-msg" aria-live="polite">Shuffling the deck&hellip;</p>
+      <div class="wn-result" id="wn-result" aria-live="polite"></div>
+      <div class="wn-actions" id="wn-actions">
+        <button type="button" class="btn btn-gold" id="wn-higher">&#8593; Higher</button>
+        <button type="button" class="btn btn-ghost" id="wn-lower">&#8595; Lower</button>
+      </div>
+      <div class="wn-jokers" id="wn-joker-actions"></div>
+      <p class="wn-score" id="wn-score"></p>
+      <button type="button" class="btn btn-ghost wn-newrun" id="wn-newrun">Shuffle &amp; deal a new game</button>
+      <div class="wn-fx" id="wn-fx" aria-hidden="true"></div>
+      <div id="wn-celebration" aria-hidden="true"></div>
+    </div>
+    <p class="wn-sponsor-note">Look at the back of every card on that board — <strong>crown, dice and the King of Dice name in gold</strong>. That card-back space is exactly where a <strong>card sponsor&rsquo;s logo</strong> would go — on the back of every card, in every game of What&rsquo;s Next.</p>
+  </section>
+
+  <!-- HIT 4 -->
+  <section id="hit-4" aria-labelledby="hit4-h">
+    <h2 id="hit4-h">Hit <span class="accent-red">4</span></h2>
+    <div class="rule"></div>
+    <p class="section-sub"><strong>How to play:</strong> the board is <strong>7 columns wide and 6 rows high</strong>. Take turns dropping a square into a column — it falls to the lowest open spot. The first player to line up <strong>4 of their squares in a row</strong> — across, up and down, or diagonal — wins. Fill the whole board with no line of 4 and it's a draw. Same rules as Connect Four — but here, everything is <strong>squares</strong>.</p>
+
+    <div class="h4-game">
+      <h3>Play Hit 4 Right Here</h3>
+      <p class="h4-intro">You against the computer — and <strong>dice decide who goes first</strong>. Before every game there's a roll-off: you and the computer each roll two dice, and the higher total drops first. Tie? You roll again. You play the <span class="h4-you">gold squares</span> and the computer plays the <span class="h4-cpu">red squares</span>. Tap a red <strong>Drop</strong> button above a column to drop your square in — then the computer takes its turn. Watch out: it takes a win when it sees one, and it will block you when you're one square away from four.</p>
+
+      <div class="h4-rolloff" id="h4-rolloff">
+        <p class="h4-rolloff-title">Roll-Off — Who Goes First?</p>
+        <p class="h4-rolloff-sub">The King of Dice way: you and the computer each roll two dice. Highest total goes first.</p>
+        <div class="h4-vs">
+          <div class="h4-side h4-side-you">
+            <p class="h4-side-name">You</p>
+            <div class="h4-dice-row">
+              <div class="die h4-die idle" id="h4-die-y1" aria-hidden="true"></div>
+              <div class="die h4-die idle" id="h4-die-y2" aria-hidden="true"></div>
+            </div>
+            <p class="h4-total" id="h4-total-you">Your two dice are ready.</p>
+          </div>
+          <div class="h4-vs-mid" aria-hidden="true">VS</div>
+          <div class="h4-side h4-side-cpu">
+            <p class="h4-side-name">Computer</p>
+            <div class="h4-dice-row">
+              <div class="die h4-die idle" id="h4-die-c1" aria-hidden="true"></div>
+              <div class="die h4-die idle" id="h4-die-c2" aria-hidden="true"></div>
+            </div>
+            <p class="h4-total" id="h4-total-cpu">The computer's two dice are ready.</p>
+          </div>
+        </div>
+        <p class="h4-roll-result" id="h4-roll-result" aria-live="polite">Highest roll goes first — tap Roll the Dice!</p>
+        <button type="button" class="btn btn-gold h4-roll-btn" id="h4-roll-btn">Roll the Dice</button>
+      </div>
+
+      <p class="h4-turn" id="h4-turn">Roll-off first — tap Roll the Dice to see who goes first.</p>
+      <div class="h4-drops" id="h4-drops" role="group" aria-label="Drop buttons — one above each of the 7 columns. Tap one to drop your gold square into that column."></div>
+      <div class="h4-board" id="h4-board" role="group" aria-label="The Hit 4 board — 7 columns wide and 6 rows high. Gold squares are yours, red squares are the computer's."></div>
+      <div class="h4-result" id="h4-result" aria-live="polite"></div>
+      <p class="h4-msg" id="h4-msg" aria-live="polite">New game — roll the dice to decide who goes first.</p>
+      <button type="button" class="btn btn-gold h4-new" id="h4-new">New Game</button>
+      <p class="h4-score" id="h4-score"></p>
+    </div>
+  </section>
+
+  <!-- TOURNAMENT -->
+  <section id="tournament" aria-labelledby="tournament-h">
+    <h2 id="tournament-h">March Madness <span class="accent">Chuck-Tac-Toe</span></h2>
+    <div class="rule"></div>
+    <p class="section-sub">The 64-player tournament lands in the new year — and it comes back <strong>every other month</strong>. One bracket, one champion, one massive prize.</p>
+
+    <div class="arena-banner">
+      <p class="ab-kicker">Chuck-Tac-Toe</p>
+      <p class="ab-title"><span class="fire">FIRE</span> MEETS <span class="ice">ICE</span></p>
+      <div class="dragon-duel">
+        <figure class="dragon-card fire">
+          <img src="assets/dragon-fire.jpg" alt="A golden dragon breathing fire beside a glowing neon tic-tac-toe board" />
+          <figcaption class="d-tag">Fire Dragon</figcaption>
+        </figure>
+        <div class="duel-center">
+          <div class="ttt" aria-hidden="true">
+            <div class="ttt-grid">
+              <span class="x">X</span><span class="o">O</span><span class="x">X</span>
+              <span class="o">O</span><span class="x">X</span><span class="o">O</span>
+              <span class="x">X</span><span class="o">O</span><span class="x">X</span>
+            </div>
+          </div>
+        </div>
+        <figure class="dragon-card ice">
+          <img src="assets/dragon-ice.jpg" alt="A white ice dragon with spread wings, glowing blue eyes and sharp claws" />
+          <figcaption class="d-tag">Ice Dragon</figcaption>
+        </figure>
+      </div>
+      <p class="ab-sub">Chuck's own tic-tac-toe, played with dice — three in a row, or first to five pieces on the board. Somebody always wins.</p>
+    </div>
+
+    <div class="tourney-facts">
+      <div class="fact"><div class="num">64</div><div class="cap">Players</div></div>
+      <div class="fact"><div class="num">10K</div><div class="cap">Diamonds to enter</div></div>
+      <div class="fact"><div class="num">400K</div><div class="cap">Diamonds to the winner</div></div>
+      <div class="fact"><div class="num">1</div><div class="cap">Champion takes all</div></div>
+    </div>
+
+    <div class="bracket-main">
+      <img src="assets/bracket-64.png" alt="The full 64-player March Madness Chuck-Tac-Toe bracket, running from the Round of 64 through the Round of 32, Sweet 16, Elite 8 and Final Four to the Champion." />
+      <button class="view-btn" type="button" data-view="assets/bracket-64.png" data-cap="Full 64-player bracket">Tap to view the full bracket big</button>
+    </div>
+
+    <div class="regions">
+      <div class="region">
+        <h3>Region 1 · <span>Snake Eyes</span></h3>
+        <img src="assets/region-1.png" alt="Region 1, Snake Eyes — 16-player bracket with open spots to fill in." loading="lazy" />
+        <button class="view-btn" type="button" data-view="assets/region-1.png" data-cap="Region 1 · Snake Eyes — 16 players">View big</button>
+      </div>
+      <div class="region">
+        <h3>Region 2 · <span>Lucky 7</span></h3>
+        <img src="assets/region-2.png" alt="Region 2, Lucky 7 — 16-player bracket with open spots to fill in." loading="lazy" />
+        <button class="view-btn" type="button" data-view="assets/region-2.png" data-cap="Region 2 · Lucky 7 — 16 players">View big</button>
+      </div>
+      <div class="region">
+        <h3>Region 3 · <span>High Roller</span></h3>
+        <img src="assets/region-3.png" alt="Region 3, High Roller — 16-player bracket with open spots to fill in." loading="lazy" />
+        <button class="view-btn" type="button" data-view="assets/region-3.png" data-cap="Region 3 · High Roller — 16 players">View big</button>
+      </div>
+      <div class="region">
+        <h3>Region 4 · <span>Boxcars</span></h3>
+        <img src="assets/region-4.png" alt="Region 4, Boxcars — 16-player bracket with open spots to fill in." loading="lazy" />
+        <button class="view-btn" type="button" data-view="assets/region-4.png" data-cap="Region 4 · Boxcars — 16 players">View big</button>
+      </div>
+    </div>
+
+    <ul class="how-it-runs">
+      <li><strong>How it runs:</strong> Win 2 out of 3. Win two out of three games in your Chuck-Tac-Toe match and you move on — lose the match and you're out.</li>
+      <li><strong>The road:</strong> Round of 64 → Round of 32 → Sweet 16 → Elite 8 → Final Four → Champion.</li>
+      <li><strong>The regions:</strong> Each 16-player region sends its champion to the Final Four.</li>
+      <li><strong>Want a spot?</strong> Entry is 10K diamonds. Find Chuck live on Tagged to claim your number before the bracket fills.</li>
+    </ul>
+  </section>
+
+  <!-- CONTACT -->
+  <section id="contact" aria-labelledby="contact-h">
+    <h2 id="contact-h">Contact <span class="accent">Chuck</span></h2>
+    <div class="rule"></div>
+    <p class="section-sub">Want to be on the show, sponsor a game, or talk business? Reach Chuck direct — here are the two best ways.</p>
+
+    <div class="contact-grid">
+      <div class="contact-card">
+        <p class="contact-label">Instagram</p>
+        <p class="contact-value"><a href="https://www.instagram.com/chuck_king_of_dice_tagged/" target="_blank" rel="noopener">@chuck_king_of_dice_tagged</a></p>
+        <p>Message Chuck on Instagram to sign up for the show and for everyday contact.</p>
+        <a class="btn btn-gold" href="https://www.instagram.com/chuck_king_of_dice_tagged/" target="_blank" rel="noopener">Open Instagram</a>
+      </div>
+      <div class="contact-card">
+        <p class="contact-label">Email — Gmail</p>
+        <p class="contact-value"><a href="mailto:clgtrill@gmail.com">clgtrill@gmail.com</a></p>
+        <p>Email Chuck for sponsors, business, and show business — tap below and your email app opens ready to write.</p>
+        <a class="btn btn-gold" href="mailto:clgtrill@gmail.com">Email Chuck</a>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <img class="logo-neon" src="assets/logo-neon.jpg" alt="" loading="lazy" />
+  <p class="f-title">KING OF DICE</p>
+  <p>Chuck · Tagged Live · @chuck_king_of_dice_tagged</p>
+  <p>Email: <a href="mailto:clgtrill@gmail.com" style="color:var(--gold-ink);">clgtrill@gmail.com</a> · Instagram: <a href="https://www.instagram.com/chuck_king_of_dice_tagged/" target="_blank" rel="noopener" style="color:var(--gold-ink);">@chuck_king_of_dice_tagged</a></p>
+  <p>Test Your Luck — Tuesdays 7PM EST · What's Next — Weeknights 8PM EST</p>
+</footer>
+
+<dialog id="viewer" aria-label="Bracket viewer">
+  <img id="viewer-img" alt="" />
+  <div class="bar">
+    <span class="cap" id="viewer-cap"></span>
+    <button type="button" id="viewer-close">Close</button>
+  </div>
+</dialog>
+
+<script>
+  (function(){
+    var dlg = document.getElementById('viewer');
+    var img = document.getElementById('viewer-img');
+    var cap = document.getElementById('viewer-cap');
+    document.querySelectorAll('[data-view]').forEach(function(btn){
+      btn.addEventListener('click', function(){
+        img.src = btn.getAttribute('data-view');
+        img.alt = btn.getAttribute('data-cap');
+        cap.textContent = btn.getAttribute('data-cap');
+        if (typeof dlg.showModal === 'function') { dlg.showModal(); }
+      });
+    });
+    document.getElementById('viewer-close').addEventListener('click', function(){ dlg.close(); });
+    dlg.addEventListener('click', function(e){ if (e.target === dlg) dlg.close(); });
+  })();
+</script>
+<script>
+  (function(){
+    var PIPS = {1:[4], 2:[0,8], 3:[0,4,8], 4:[0,2,6,8], 5:[0,2,4,6,8], 6:[0,2,3,5,6,8]};
+    var die1 = document.getElementById('die-1');
+    var die2 = document.getElementById('die-2');
+    var btn = document.getElementById('roll-btn');
+    var msg = document.getElementById('roll-msg');
+    var cells = Array.prototype.slice.call(document.querySelectorAll('.case'));
+    if (!die1 || !die2 || !btn || !msg || !cells.length) return;
+    var reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    var target = null;
+    var tries = 0;
+    var hunting = false;
+    function setDie(die, val){
+      var on = PIPS[val];
+      var pips = die.querySelectorAll('.pip');
+      for (var i = 0; i < pips.length; i++) {
+        if (on.indexOf(i) !== -1) { pips[i].classList.add('on'); } else { pips[i].classList.remove('on'); }
+      }
+    }
+    function face(){ return 1 + Math.floor(Math.random() * 6); }
+    function scramble(){
+      var nums = [];
+      for (var t = 1; t <= 6; t++) {
+        for (var o = 1; o <= 6; o++) nums.push(t * 10 + o);
+      }
+      for (var i = nums.length - 1; i > 0; i--) {
+        var j = Math.floor(Math.random() * (i + 1));
+        var tmp = nums[i]; nums[i] = nums[j]; nums[j] = tmp;
+      }
+      cells.forEach(function(cell, idx){
+        cell.setAttribute('data-num', nums[idx]);
+        cell.classList.remove('open');
+        cell.classList.remove('found');
+        cell.textContent = '?';
+        cell.setAttribute('aria-label', 'Face-down box \u2014 tap to flip it over');
+      });
+    }
+    scramble();
+    cells.forEach(function(cell){
+      cell.addEventListener('click', function(){
+        if (!hunting) {
+          if (target === null) {
+            msg.textContent = 'Roll the dice first \u2014 then hunt for the number they roll.';
+          }
+          return;
+        }
+        if (cell.classList.contains('open') || cell.classList.contains('found')) return;
+        var num = parseInt(cell.getAttribute('data-num'), 10);
+        tries++;
+        cell.textContent = num;
+        if (num === target) {
+          cell.classList.add('found');
+          cell.setAttribute('aria-label', 'The number ' + num + ' \u2014 you found it!');
+          hunting = false;
+          msg.textContent = 'You found it! The number ' + target + ' \u2014 in ' + tries + (tries === 1 ? ' try' : ' tries') + '! Roll again to play another round.';
+        } else {
+          cell.classList.add('open');
+          cell.setAttribute('aria-label', 'The number ' + num + ' \u2014 not the one. Keep looking for the number ' + target + '.');
+          msg.textContent = 'That\u2019s the number ' + num + ' \u2014 not it. Keep hunting for the number ' + target + '!';
+        }
+      });
+    });
+    btn.addEventListener('click', function(){
+      var a = face();
+      var b = face();
+      var rolled = a * 10 + b;
+      function finish(){
+        setDie(die1, a);
+        setDie(die2, b);
+        die1.classList.remove('rolling');
+        die2.classList.remove('rolling');
+        scramble();
+        target = rolled;
+        tries = 0;
+        hunting = true;
+        msg.textContent = 'You rolled ' + a + ' and ' + b + ' \u2014 that\u2019s ' + rolled + '. Find the number ' + rolled + '! Tap the face-down boxes to flip them over.';
+        btn.disabled = false;
+      }
+      if (reduced) { finish(); return; }
+      btn.disabled = true;
+      die1.classList.add('rolling');
+      die2.classList.add('rolling');
+      var ticks = 0;
+      var iv = setInterval(function(){
+        setDie(die1, face());
+        setDie(die2, face());
+        ticks++;
+        if (ticks >= 7) { clearInterval(iv); finish(); }
+      }, 80);
+    });
+  })();
+</script>
+<script>
+  (function(){
+    var PIPS = {1:[4], 2:[0,8], 3:[0,4,8], 4:[0,2,6,8], 5:[0,2,4,6,8], 6:[0,2,3,5,6,8]};
+    var die1 = document.getElementById('ctt-die-1');
+    var die2 = document.getElementById('ctt-die-2');
+    var msg = document.getElementById('ctt-msg');
+    var turnEl = document.getElementById('ctt-turn');
+    var scoreEl = document.getElementById('ctt-score');
+    var actionsEl = document.getElementById('ctt-actions');
+    var restartBtn = document.getElementById('ctt-restart');
+    var cells = Array.prototype.slice.call(document.querySelectorAll('.ctt-cell'));
+    if (!die1 || !die2 || !msg || !turnEl || !actionsEl || !cells.length) return;
+    var reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    var LINES = [[0,1,2],[3,4,5],[6,7,8],[0,3,6],[1,4,7],[2,5,8],[0,4,8],[2,4,6]];
+    var board, phase, busy, rolloff, firstPlayer, marks, current, firstDie, wildTargets, winLine;
+    var turnToken = 0;
+
+    function setDie(die, val){
+      var on = PIPS[val];
+      var pips = die.querySelectorAll('.pip');
+      for (var i = 0; i < pips.length; i++) {
+        if (on.indexOf(i) !== -1) { pips[i].classList.add('on'); } else { pips[i].classList.remove('on'); }
+      }
+    }
+    function face(){ return 1 + Math.floor(Math.random() * 6); }
+    function otherPlayer(p){ return p === 1 ? 2 : 1; }
+    function isCpu(p){ return p === 2; }
+    function pname(p){
+      return p === 1 ? 'You' : 'The computer';
+    }
+    function pposs(p){
+      return p === 1 ? 'Your' : 'The computer\u2019s';
+    }
+    function vrb(p, youForm, otherForm){
+      return p === 1 ? youForm : otherForm;
+    }
+    function upNext(p){
+      if (isCpu(p)) return 'The computer is up \u2014 watch it roll.';
+      return 'Your turn \u2014 roll die 1.';
+    }
+    function schedule(fn){
+      var t = ++turnToken;
+      setTimeout(function(){ if (t === turnToken && !busy) fn(); }, reduced ? 450 : 1200);
+    }
+    function animateDice(pairs, done){
+      if (reduced) { pairs.forEach(function(p){ setDie(p.el, p.val); }); done(); return; }
+      busy = true;
+      pairs.forEach(function(p){ p.el.classList.add('rolling'); });
+      var ticks = 0;
+      var iv = setInterval(function(){
+        pairs.forEach(function(p){ setDie(p.el, face()); });
+        ticks++;
+        if (ticks >= 7) {
+          clearInterval(iv);
+          pairs.forEach(function(p){ setDie(p.el, p.val); p.el.classList.remove('rolling'); });
+          busy = false;
+          done();
+        }
+      }, 80);
+    }
+    function makeBtn(label, fn){
+      var b = document.createElement('button');
+      b.type = 'button';
+      b.className = 'btn btn-gold';
+      b.textContent = label;
+      b.addEventListener('click', function(){ if (!busy) fn(); });
+      return b;
+    }
+    function render(){
+      cells.forEach(function(cell, i){
+        var mark = board[i];
+        cell.querySelector('.ctt-mark').textContent = mark || '';
+        cell.classList.toggle('filled-x', mark === 'X');
+        cell.classList.toggle('filled-o', mark === 'O');
+        var pickable = phase === 'wild' && !isCpu(current) && wildTargets.indexOf(i + 1) !== -1;
+        cell.classList.toggle('pickable', pickable);
+        cell.classList.toggle('win', !!winLine && winLine.indexOf(i) !== -1);
+        cell.disabled = !pickable;
+        var label = 'Space ' + (i + 1);
+        if (mark) { label += ' \u2014 taken by ' + mark; }
+        else if (pickable) { label += ' \u2014 open. Tap to place your ' + marks[current] + ' here.'; }
+        else { label += ' \u2014 open'; }
+        cell.setAttribute('aria-label', label);
+      });
+      var counts = {X:0, O:0};
+      board.forEach(function(m){ if (m) counts[m]++; });
+      if (marks[1]) {
+        scoreEl.textContent = 'Pieces on the board \u2014 X: ' + counts.X + ' \u00b7 O: ' + counts.O + '. First to 5 pieces, or 3 in a row, wins.';
+      } else {
+        scoreEl.textContent = 'First to 5 pieces, or 3 in a row, wins. No cat game \u2014 somebody always wins.';
+      }
+      if (phase === 'rolloff') { turnEl.textContent = 'Step 1 \u2014 the roll-off. Highest roll goes first and picks X or O.'; }
+      else if (phase === 'pick') {
+        turnEl.textContent = isCpu(firstPlayer)
+          ? 'The computer won the roll-off \u2014 it\u2019s picking its mark.'
+          : pname(firstPlayer) + ' won the roll-off \u2014 pick your mark.';
+      }
+      else if (phase === 'turn') { turnEl.textContent = pposs(current) + ' turn \u2014 playing ' + marks[current] + '.' + (isCpu(current) ? ' Watch it roll, decide, and place.' : ''); }
+      else if (phase === 'decide') {
+        turnEl.textContent = isCpu(current)
+          ? 'The computer (' + marks[current] + ') \u2014 deciding: keep it, or roll again and add?'
+          : pname(current) + ' (' + marks[current] + ') \u2014 keep it, or roll again and add?';
+      }
+      else if (phase === 'wild') {
+        turnEl.textContent = isCpu(current)
+          ? 'The computer (' + marks[current] + ') \u2014 WILD! It\u2019s picking a space.'
+          : pname(current) + ' (' + marks[current] + ') \u2014 WILD! Pick a glowing space.';
+      }
+      else if (phase === 'over') { turnEl.textContent = 'Game over.'; }
+      actionsEl.innerHTML = '';
+      if (phase === 'rolloff') {
+        if (rolloff[1] === null) {
+          actionsEl.appendChild(makeBtn('Roll your dice', function(){ doRolloff(1); }));
+        }
+      } else if (phase === 'pick') {
+        if (!isCpu(firstPlayer)) {
+          actionsEl.appendChild(makeBtn('Take X', function(){ pickMark('X'); }));
+          actionsEl.appendChild(makeBtn('Take O', function(){ pickMark('O'); }));
+        }
+      } else if (phase === 'turn') {
+        if (!isCpu(current)) {
+          actionsEl.appendChild(makeBtn('Roll die 1', doTurnRoll));
+        }
+      } else if (phase === 'decide') {
+        if (!isCpu(current)) {
+          actionsEl.appendChild(makeBtn('Keep it \u2014 total ' + firstDie, function(){ resolveTotal(firstDie, keepLead()); }));
+          actionsEl.appendChild(makeBtn('Roll die 2 & add', doRollAgain));
+        }
+      } else if (phase === 'over') {
+        actionsEl.appendChild(makeBtn('Play again \u2014 new roll-off', reset));
+      }
+      die2.classList.toggle('idle', phase === 'turn' || phase === 'decide');
+    }
+    function keepLead(){
+      if (current === 1) return 'You keep the ' + firstDie + '. ';
+      return pname(current) + ' keeps the ' + firstDie + '. ';
+    }
+    function doRolloff(p){
+      var a = face();
+      var b = face();
+      animateDice([{el:die1, val:a}, {el:die2, val:b}], function(){
+        rolloff[p] = a + b;
+        if (p === 1) {
+          msg.textContent = 'You rolled ' + a + ' and ' + b + ' \u2014 total ' + (a + b) + '. The computer is rolling to beat it\u2026';
+          render();
+          schedule(function(){ doRolloff(2); });
+          return;
+        } else if (rolloff[1] === rolloff[2]) {
+          msg.textContent = pname(2) + ' rolled ' + a + ' and ' + b + ' \u2014 total ' + (a + b) + '. That\u2019s a tie! Roll off again.';
+          rolloff = {1:null, 2:null};
+        } else {
+          firstPlayer = rolloff[1] > rolloff[2] ? 1 : 2;
+          phase = 'pick';
+          msg.textContent = pname(2) + ' rolled ' + a + ' and ' + b + ' \u2014 total ' + (a + b) + '. ' + pname(firstPlayer) + ' ' + vrb(firstPlayer, 'win', 'wins') + ' the roll-off and ' + vrb(firstPlayer, 'pick', 'picks') + ' X or O.';
+        }
+        render();
+        if (phase === 'pick' && isCpu(firstPlayer)) schedule(cpuPickMark);
+      });
+    }
+    function pickMark(mark){ startGame(mark); }
+    function cpuPickMark(){
+      if (phase !== 'pick' || !isCpu(firstPlayer)) return;
+      startGame(Math.random() < 0.5 ? 'X' : 'O');
+    }
+    function startGame(mark){
+      marks[firstPlayer] = mark;
+      marks[otherPlayer(firstPlayer)] = mark === 'X' ? 'O' : 'X';
+      current = firstPlayer;
+      phase = 'turn';
+      msg.textContent = pname(firstPlayer) + ' ' + vrb(firstPlayer, 'take', 'takes') + ' ' + mark + ' and ' + vrb(firstPlayer, 'go', 'goes') + ' first. ' + pname(otherPlayer(firstPlayer)) + ' ' + vrb(otherPlayer(firstPlayer), 'play', 'plays') + ' ' + marks[otherPlayer(firstPlayer)] + '. ' + upNext(current);
+      render();
+      if (isCpu(current)) schedule(cpuTurn);
+    }
+    function doTurnRoll(){
+      var a = face();
+      animateDice([{el:die1, val:a}], function(){
+        firstDie = a;
+        phase = 'decide';
+        msg.textContent = pname(current) + ' rolled a ' + a + '.' + (isCpu(current) ? ' It\u2019s deciding \u2014 keep it, or roll die 2 and add?' : ' Keep the ' + a + ', or roll die 2 and add it on?');
+        render();
+        if (isCpu(current)) schedule(cpuDecide);
+      });
+    }
+    function cpuTurn(){
+      if (phase !== 'turn' || !isCpu(current)) return;
+      doTurnRoll();
+    }
+    function cpuDecide(){
+      if (phase !== 'decide' || !isCpu(current)) return;
+      if (!board[firstDie - 1]) {
+        resolveTotal(firstDie, 'The computer keeps the ' + firstDie + '. ');
+      } else {
+        msg.textContent = 'Space ' + firstDie + ' is already taken, so the computer rolls die 2 and adds it on.';
+        doRollAgain();
+      }
+    }
+    function doRollAgain(){
+      var b = face();
+      die2.classList.remove('idle');
+      animateDice([{el:die2, val:b}], function(){
+        var total = firstDie + b;
+        resolveTotal(total, 'Die 2 shows ' + b + ' \u2014 ' + firstDie + ' + ' + b + ' = ' + total + '. ');
+      });
+    }
+    function resolveTotal(total, lead){
+      if (total <= 9) {
+        if (!board[total - 1]) { place(total, lead); return; }
+        var taker = board[total - 1];
+        current = otherPlayer(current);
+        phase = 'turn';
+        msg.textContent = lead + 'Space ' + total + ' is already taken by ' + taker + ' \u2014 no placement, and that turn ends. ' + upNext(current);
+        render();
+        if (isCpu(current)) schedule(cpuTurn);
+        return;
+      }
+      var targets, kind = null;
+      if (total === 10) { targets = [2,4,6,8]; kind = 'EVEN'; }
+      else if (total === 11) { targets = [1,3,5,7,9]; kind = 'ODD'; }
+      else { targets = [1,2,3,4,5,6,7,8,9]; }
+      targets = targets.filter(function(s){ return !board[s - 1]; });
+      if (!targets.length) {
+        var next = otherPlayer(current);
+        msg.textContent = lead + 'Total ' + total + ' is a wild, but no matching space is open \u2014 no placement, and that turn ends. ' + upNext(next);
+        current = next;
+        phase = 'turn';
+        render();
+        if (isCpu(current)) schedule(cpuTurn);
+        return;
+      }
+      wildTargets = targets;
+      phase = 'wild';
+      if (isCpu(current)) {
+        msg.textContent = lead + (total === 12
+          ? 'Total 12 \u2014 WILD! Any open space on the board. The computer is picking one.'
+          : 'Total ' + total + ' \u2014 WILD! Any open ' + kind + ' space. The computer is picking one.');
+      } else if (total === 12) {
+        msg.textContent = lead + 'Total 12 \u2014 WILD! Any open space on the board. Tap the space you want.';
+      } else {
+        msg.textContent = lead + 'Total ' + total + ' \u2014 WILD! Any open ' + kind + ' space. Tap one of the glowing spaces: ' + targets.join(', ') + '.';
+      }
+      render();
+      if (isCpu(current)) schedule(cpuWildPick);
+    }
+    function lineMove(targets, mark){
+      for (var i = 0; i < LINES.length; i++) {
+        var L = LINES[i];
+        var mine = 0, empty = null;
+        for (var j = 0; j < 3; j++) {
+          if (board[L[j]] === mark) mine++;
+          else if (!board[L[j]]) empty = L[j] + 1;
+        }
+        if (mine === 2 && empty !== null && targets.indexOf(empty) !== -1) return empty;
+      }
+      return null;
+    }
+    function cpuWildPick(){
+      if (phase !== 'wild' || !isCpu(current)) return;
+      var pick = lineMove(wildTargets, marks[current]);
+      if (pick === null) pick = lineMove(wildTargets, marks[otherPlayer(current)]);
+      if (pick === null && wildTargets.indexOf(5) !== -1) pick = 5;
+      if (pick === null) pick = wildTargets[Math.floor(Math.random() * wildTargets.length)];
+      place(pick, '');
+    }
+    function place(space, lead){
+      var mark = marks[current];
+      board[space - 1] = mark;
+      wildTargets = [];
+      var line = null;
+      for (var i = 0; i < LINES.length; i++) {
+        var L = LINES[i];
+        if (board[L[0]] === mark && board[L[1]] === mark && board[L[2]] === mark) { line = L; break; }
+      }
+      var count = 0;
+      board.forEach(function(m){ if (m === mark) count++; });
+      if (line) {
+        winLine = line;
+        phase = 'over';
+        msg.textContent = lead + pname(current) + ' ' + vrb(current, 'place', 'places') + ' ' + mark + ' on space ' + space + ' \u2014 3 in a row! ' + pname(current) + ' (' + mark + ') ' + vrb(current, 'WIN', 'WINS') + '!';
+      } else if (count >= 5) {
+        phase = 'over';
+        msg.textContent = lead + pname(current) + ' ' + vrb(current, 'place', 'places') + ' ' + mark + ' on space ' + space + ' \u2014 that\u2019s 5 pieces on the board! ' + pname(current) + ' (' + mark + ') ' + vrb(current, 'WIN', 'WINS') + '!';
+      } else {
+        var placedMsg = lead + pname(current) + ' ' + vrb(current, 'place', 'places') + ' ' + mark + ' on space ' + space + '.';
+        current = otherPlayer(current);
+        phase = 'turn';
+        msg.textContent = placedMsg + ' ' + upNext(current);
+      }
+      render();
+      if (phase === 'turn' && isCpu(current)) schedule(cpuTurn);
+    }
+    cells.forEach(function(cell, i){
+      cell.addEventListener('click', function(){
+        if (busy) return;
+        if (phase === 'wild' && !isCpu(current) && wildTargets.indexOf(i + 1) !== -1) {
+          place(i + 1, '');
+        }
+      });
+    });
+    function reset(){
+      board = [null,null,null,null,null,null,null,null,null];
+      phase = 'rolloff';
+      busy = false;
+      turnToken++;
+      rolloff = {1:null, 2:null};
+      firstPlayer = null;
+      marks = {1:null, 2:null};
+      current = null;
+      firstDie = null;
+      wildTargets = [];
+      winLine = null;
+      die1.classList.remove('rolling');
+      die2.classList.remove('rolling');
+      msg.textContent = 'You against the computer! Roll off first \u2014 highest roll goes first and picks X or O. Tap the button to roll your dice.';
+      render();
+    }
+    if (restartBtn) restartBtn.addEventListener('click', function(){ if (!busy) reset(); });
+    reset();
+  })();
+</script>
+<script>
+  (function(){
+    var SUITS = [
+      {sym:'\u2660', name:'spades', red:false},
+      {sym:'\u2665', name:'hearts', red:true},
+      {sym:'\u2666', name:'diamonds', red:true},
+      {sym:'\u2663', name:'clubs', red:false}
+    ];
+    var RANKS = ['2','3','4','5','6','7','8','9','10','J','Q','K','A'];
+    var RANKNAMES = {J:'Jack', Q:'Queen', K:'King', A:'Ace'};
+    var gridEl = document.getElementById('wn-grid');
+    var turnEl = document.getElementById('wn-turn');
+    var msg = document.getElementById('wn-msg');
+    var scoreEl = document.getElementById('wn-score');
+    var hiBtn = document.getElementById('wn-higher');
+    var loBtn = document.getElementById('wn-lower');
+    var newBtn = document.getElementById('wn-newrun');
+    var jokerEl = document.getElementById('wn-joker-actions');
+    var actionsEl = document.getElementById('wn-actions');
+    var soundBtn = document.getElementById('wn-sound');
+    var fxEl = document.getElementById('wn-fx');
+    var resultEl = document.getElementById('wn-result');
+    var celebEl = document.getElementById('wn-celebration');
+    if (!gridEl || !turnEl || !msg || !scoreEl || !hiBtn || !loBtn || !newBtn || !jokerEl || !actionsEl || !soundBtn || !fxEl || !resultEl || !celebEl) return;
+    var reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+    /* The King of Dice card back — gold crown, two dice and the name on deep navy.
+       This is the brand a card sponsor would share: their logo would sit on this back. */
+    var BACK_HTML = '<span class="wn-back"><svg viewBox="0 0 120 168" aria-hidden="true" focusable="false">' +
+      '<defs><linearGradient id="wn-back-bg" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#1d2f6e"/><stop offset="1" stop-color="#0a1130"/></linearGradient>' +
+      '<linearGradient id="wn-back-gold" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#f5cd5c"/><stop offset="1" stop-color="#c9962e"/></linearGradient></defs>' +
+      '<rect x="2" y="2" width="116" height="164" rx="10" fill="url(#wn-back-bg)" stroke="#c9962e" stroke-width="2.5"/>' +
+      '<rect x="9" y="9" width="102" height="150" rx="7" fill="none" stroke="#f0b93e" stroke-opacity="0.55" stroke-width="1.2"/>' +
+      '<circle cx="60" cy="22" r="2" fill="#f0b93e" opacity="0.85"/><circle cx="22" cy="22" r="1.6" fill="#f0b93e" opacity="0.6"/><circle cx="98" cy="22" r="1.6" fill="#f0b93e" opacity="0.6"/>' +
+      '<circle cx="22" cy="146" r="1.6" fill="#f0b93e" opacity="0.6"/><circle cx="98" cy="146" r="1.6" fill="#f0b93e" opacity="0.6"/>' +
+      '<path d="M33 58 L36 36 L49 47 L60 29 L71 47 L84 36 L87 58 Z" fill="url(#wn-back-gold)" stroke="#8a6414" stroke-width="1"/>' +
+      '<circle cx="36" cy="33" r="3" fill="#f5cd5c"/><circle cx="60" cy="26" r="3.4" fill="#f5cd5c"/><circle cx="84" cy="33" r="3" fill="#f5cd5c"/>' +
+      '<rect x="33" y="58" width="54" height="6" rx="2" fill="url(#wn-back-gold)" stroke="#8a6414" stroke-width="0.8"/>' +
+      '<circle cx="60" cy="50" r="3" fill="#c0272d" stroke="#f5cd5c" stroke-width="0.8"/>' +
+      '<g transform="rotate(-9 44 93)"><rect x="29" y="78" width="30" height="30" rx="6" fill="#f6f2e7" stroke="#c9962e" stroke-width="1.4"/>' +
+      '<circle cx="37" cy="86" r="2.6" fill="#16204a"/><circle cx="51" cy="86" r="2.6" fill="#16204a"/><circle cx="44" cy="93" r="2.6" fill="#16204a"/><circle cx="37" cy="100" r="2.6" fill="#16204a"/><circle cx="51" cy="100" r="2.6" fill="#16204a"/></g>' +
+      '<g transform="rotate(10 76 95)"><rect x="61" y="80" width="30" height="30" rx="6" fill="#c0272d" stroke="#f5cd5c" stroke-width="1.4"/>' +
+      '<circle cx="69" cy="88" r="2.6" fill="#ffffff"/><circle cx="76" cy="95" r="2.6" fill="#ffffff"/><circle cx="83" cy="102" r="2.6" fill="#ffffff"/></g>' +
+      '<text x="60" y="134" text-anchor="middle" font-family="Cinzel, Georgia, serif" font-weight="800" font-size="12.5" letter-spacing="2.5" fill="#f5cd5c">KING OF</text>' +
+      '<text x="60" y="155" text-anchor="middle" font-family="Cinzel, Georgia, serif" font-weight="900" font-size="19" letter-spacing="5" fill="#f0b93e">DICE</text>' +
+      '</svg></span>';
+
+    /* Play order: index 0 is bottom-left, index 11 is top-right.
+       Display order (top row first): tier 4 = 9,10,11 / tier 3 = 6,7,8 / tier 2 = 3,4,5 / tier 1 = 0,1,2 */
+    var TIERS = [
+      {label:'Top Row \u2014 Tier 4', top:true, idx:[9,10,11]},
+      {label:'Tier 3', top:false, idx:[6,7,8]},
+      {label:'Tier 2', top:false, idx:[3,4,5]},
+      {label:'Bottom Row \u2014 Tier 1 \u00b7 Play starts here', top:false, idx:[0,1,2]}
+    ];
+    var cellEls = [];
+    var tierWraps = [];
+    TIERS.forEach(function(tier){
+      var wrap = document.createElement('div');
+      wrap.className = 'wn-tier';
+      tierWraps.push(wrap);
+      var lab = document.createElement('p');
+      lab.className = 'wn-tier-label' + (tier.top ? ' top' : '');
+      lab.textContent = tier.label;
+      wrap.appendChild(lab);
+      var row = document.createElement('div');
+      row.className = 'wn-row';
+      tier.idx.forEach(function(i){
+        var b = document.createElement('button');
+        b.type = 'button';
+        b.className = 'wn-cell down';
+        b.innerHTML = BACK_HTML;
+        b.setAttribute('aria-label', 'Face-down card, position ' + (i + 1) + ' of 12');
+        b.addEventListener('click', function(){ onCellClick(i); });
+        cellEls[i] = b;
+        row.appendChild(b);
+      });
+      wrap.appendChild(row);
+      gridEl.appendChild(wrap);
+    });
+
+    /* The sudden-death row — a fifth row above the top row, hidden until the
+       last card is missed. Each deciding card pulled from the deck is dealt
+       face-down into the next slot of this row, so there is always a place
+       on the board for the replacement card. */
+    var suddenWrap = document.createElement('div');
+    suddenWrap.className = 'wn-tier';
+    suddenWrap.style.display = 'none';
+    var suddenLab = document.createElement('p');
+    suddenLab.className = 'wn-tier-label top';
+    suddenLab.textContent = 'Sudden Death \u2014 the deciding card';
+    suddenWrap.appendChild(suddenLab);
+    var suddenRow = document.createElement('div');
+    suddenRow.className = 'wn-row';
+    suddenWrap.appendChild(suddenRow);
+    gridEl.insertBefore(suddenWrap, gridEl.firstChild);
+
+    var pile, grid, revealed, currentIdx, currentCard, nextIdx;
+    var active, jokers, jokersSpent, phase, sudden, busy, lastReveal, token;
+    var suddenCard = null, suddenCell = null;
+    var dealtCount = 12, dealAnimIdx = -1, soundOn = true;
+    /* Auto-scroll bookkeeping: the active row is brought into view whenever
+       the turn or the row changes — but only once the player has actually
+       started playing, so the page never jumps on load */
+    var lastScrollKey = null, userDrove = false;
+
+    /* ---------- Sound — synthesized live in the browser, no audio files ---------- */
+    var audioCtx = null, noiseBuf = null, fxTimer = null;
+    function ac(){
+      if (!soundOn) return null;
+      try {
+        if (!audioCtx) {
+          var AC = window.AudioContext || window.webkitAudioContext;
+          if (!AC) return null;
+          audioCtx = new AC();
+        }
+        if (audioCtx.state === 'suspended') audioCtx.resume();
+        return audioCtx;
+      } catch (e) { return null; }
+    }
+    function tone(freq, delay, dur, type, vol, endFreq){
+      var ctx = ac(); if (!ctx) return;
+      try {
+        var t = ctx.currentTime + (delay || 0);
+        var o = ctx.createOscillator();
+        var g = ctx.createGain();
+        o.type = type || 'sine';
+        o.frequency.setValueAtTime(freq, t);
+        if (endFreq) o.frequency.exponentialRampToValueAtTime(endFreq, t + dur);
+        g.gain.setValueAtTime(0.0001, t);
+        g.gain.exponentialRampToValueAtTime(vol || 0.18, t + 0.02);
+        g.gain.exponentialRampToValueAtTime(0.0001, t + dur);
+        o.connect(g); g.connect(ctx.destination);
+        o.start(t); o.stop(t + dur + 0.05);
+      } catch (e) {}
+    }
+    function noiseHit(delay, dur, from, to, vol){
+      var ctx = ac(); if (!ctx) return;
+      try {
+        if (!noiseBuf) {
+          noiseBuf = ctx.createBuffer(1, Math.floor(ctx.sampleRate * 0.5), ctx.sampleRate);
+          var d = noiseBuf.getChannelData(0);
+          for (var i = 0; i < d.length; i++) d[i] = Math.random() * 2 - 1;
+        }
+        var t = ctx.currentTime + (delay || 0);
+        var src = ctx.createBufferSource(); src.buffer = noiseBuf; src.loop = true;
+        var f = ctx.createBiquadFilter(); f.type = 'bandpass'; f.Q.value = 1.1;
+        f.frequency.setValueAtTime(from, t);
+        f.frequency.exponentialRampToValueAtTime(Math.max(to, 40), t + dur);
+        var g = ctx.createGain();
+        g.gain.setValueAtTime(0.0001, t);
+        g.gain.exponentialRampToValueAtTime(vol || 0.2, t + 0.015);
+        g.gain.exponentialRampToValueAtTime(0.0001, t + dur);
+        src.connect(f); f.connect(g); g.connect(ctx.destination);
+        src.start(t); src.stop(t + dur + 0.05);
+      } catch (e) {}
+    }
+    function sfxFlip(){ noiseHit(0, 0.13, 500, 2400, 0.22); }
+    function sfxDeal(){ noiseHit(0, 0.07, 800, 1700, 0.10); }
+    function sfxShuffle(){
+      for (var i = 0; i < 8; i++) noiseHit(i * 0.07, 0.06, 900 + Math.random() * 700, 500, 0.14);
+      noiseHit(0.62, 0.2, 600, 2100, 0.16);
+    }
+    function sfxChime(){
+      tone(659.25, 0, 0.35, 'sine', 0.20);
+      tone(987.77, 0.09, 0.5, 'sine', 0.20);
+      tone(1318.51, 0.18, 0.55, 'triangle', 0.10);
+    }
+    function sfxBuzz(){
+      tone(150, 0, 0.5, 'sawtooth', 0.15, 105);
+      tone(99, 0, 0.5, 'square', 0.09, 78);
+    }
+    function sfxJoker(){
+      var seq = [1046.5, 1318.51, 1567.98, 2093];
+      for (var i = 0; i < seq.length; i++) tone(seq[i], i * 0.07, 0.3, 'triangle', 0.15);
+    }
+    function sfxFanfare(){
+      var seq = [[523.25, 0], [523.25, 0.14], [523.25, 0.28], [659.25, 0.42], [783.99, 0.62], [1046.5, 0.82]];
+      for (var i = 0; i < seq.length; i++) {
+        tone(seq[i][0], seq[i][1], 0.5, 'triangle', 0.20);
+        tone(seq[i][0] / 2, seq[i][1], 0.5, 'sine', 0.09);
+      }
+      tone(1318.51, 1.06, 0.9, 'triangle', 0.20);
+      tone(1567.98, 1.06, 0.9, 'sine', 0.10);
+    }
+    /* ---------- Big check / X feedback ---------- */
+    function showFx(good){
+      fxEl.innerHTML = '<span class="wn-fx-mark ' + (good ? 'good' : 'bad') + '">' + (good ? '✓' : '✕') + '</span>';
+      fxEl.classList.add('show');
+      if (fxTimer) clearTimeout(fxTimer);
+      fxTimer = setTimeout(hideFx, 3000);
+    }
+    function hideFx(){
+      fxEl.classList.remove('show');
+      fxEl.innerHTML = '';
+      if (fxTimer) { clearTimeout(fxTimer); fxTimer = null; }
+    }
+    /* The same result as a plain banner in the flow of the page, right under the
+       row being played — it stays up until the next guess, so the last result
+       is always on screen to see at a glance */
+    function setResult(good){
+      resultEl.innerHTML = '<span class="wn-result-mark">' + (good ? '✓' : '✕') + '</span>' + (good ? 'CORRECT!' : 'WRONG');
+      resultEl.className = 'wn-result show ' + (good ? 'good' : 'bad');
+    }
+    function clearResult(){
+      resultEl.className = 'wn-result';
+      resultEl.innerHTML = '';
+    }
+    /* ---------- Win celebration — real confetti pieces and firework bursts
+       built as elements on the page, visible for several seconds ---------- */
+    var celebTimer = null, celebBurstTimers = [];
+    function stopCelebration(){
+      if (celebTimer) { clearTimeout(celebTimer); celebTimer = null; }
+      for (var i = 0; i < celebBurstTimers.length; i++) clearTimeout(celebBurstTimers[i]);
+      celebBurstTimers = [];
+      celebEl.classList.remove('show');
+      celebEl.innerHTML = '';
+    }
+    function fireConfetti(){
+      stopCelebration();
+      var colors = ['#f0b93e', '#f5cd5c', '#22d3ee', '#f472b6', '#ffffff', '#34d399', '#fb923c'];
+      var i;
+      for (i = 0; i < 160; i++) {
+        var piece = document.createElement('span');
+        piece.className = 'wn-confetti-piece';
+        piece.style.left = (Math.random() * 100) + '%';
+        piece.style.width = (7 + Math.random() * 8) + 'px';
+        piece.style.height = (10 + Math.random() * 10) + 'px';
+        piece.style.background = colors[i % colors.length];
+        piece.style.animationDuration = (3.8 + Math.random() * 2.6) + 's';
+        piece.style.animationDelay = (Math.random() * 1.4) + 's';
+        celebEl.appendChild(piece);
+      }
+      function burst(xPct, yPct){
+        if (!celebEl.classList.contains('show')) return;
+        for (var j = 0; j < 16; j++) {
+          var spark = document.createElement('span');
+          spark.className = 'wn-spark';
+          var ang = (j / 16) * 6.283 + Math.random() * 0.3;
+          var dist = 70 + Math.random() * 90;
+          spark.style.left = xPct + '%';
+          spark.style.top = yPct + '%';
+          spark.style.background = colors[j % colors.length];
+          spark.style.setProperty('--dx', Math.round(Math.cos(ang) * dist) + 'px');
+          spark.style.setProperty('--dy', Math.round(Math.sin(ang) * dist) + 'px');
+          celebEl.appendChild(spark);
+        }
+      }
+      celebEl.classList.add('show');
+      burst(24, 26); burst(72, 20); burst(50, 38);
+      celebBurstTimers.push(setTimeout(function(){ burst(32, 22); burst(66, 32); }, 1000));
+      celebBurstTimers.push(setTimeout(function(){ burst(50, 24); burst(20, 36); burst(80, 28); }, 2100));
+      celebBurstTimers.push(setTimeout(function(){ burst(40, 30); burst(62, 18); }, 3200));
+      celebTimer = setTimeout(stopCelebration, 6800);
+    }
+
+    function buildDeck(){
+      var d = [];
+      for (var s = 0; s < 4; s++) {
+        for (var r = 0; r < 13; r++) {
+          d.push({rank: r + 2, label: RANKS[r], suit: SUITS[s], joker:false});
+        }
+      }
+      d.push({joker:true});
+      d.push({joker:true});
+      for (var i = d.length - 1; i > 0; i--) {
+        var j = Math.floor(Math.random() * (i + 1));
+        var tmp = d[i]; d[i] = d[j]; d[j] = tmp;
+      }
+      return d;
+    }
+    function cardName(c){
+      if (c.joker) return 'Joker';
+      return (RANKNAMES[c.label] || c.label) + ' of ' + c.suit.name;
+    }
+    function faceHTML(c){
+      if (c.joker) return '<span class="wn-face">JOKER<small>\u2605 wild \u2605</small></span>';
+      return '<span class="wn-face">' + c.label + '<small>' + c.suit.sym + ' ' + c.suit.name + '</small></span>';
+    }
+    function drawFromPile(){
+      if (!pile.length) pile = buildDeck();
+      return pile.pop();
+    }
+    function pname(p){ return p === 1 ? 'You' : 'The computer'; }
+    function pverb(p, youForm, otherForm){ return p === 1 ? youForm : otherForm; }
+    function inTopRowPhase(){ return nextIdx >= 9 && nextIdx <= 11; }
+
+    /* Pull the next deciding card off the deck and deal it face-down into
+       the sudden-death row. Called when sudden death begins and again every
+       time a deciding card is missed or a joker turns up — the game cannot
+       end until somebody guesses a deciding card correctly. */
+    function dealSuddenCard(){
+      suddenWrap.style.display = '';
+      suddenCard = drawFromPile();
+      var b = document.createElement('button');
+      b.type = 'button';
+      b.className = 'wn-cell down next';
+      b.innerHTML = BACK_HTML;
+      b.disabled = true;
+      b.setAttribute('aria-label', 'Sudden death \u2014 the deciding card, face down in the sudden-death row. It turns over on the next guess.');
+      suddenRow.appendChild(b);
+      suddenCell = b;
+    }
+
+    /* Bring the row being played — with the message, the result banner and
+       the Higher / Lower buttons sitting right under it — into view whenever
+       the turn changes or the row changes, so the player never has to scroll
+       up and down hunting for the buttons */
+    function maybeScroll(wrap, key){
+      var k = key + '|' + active + '|' + phase;
+      if (k === lastScrollKey) return;
+      lastScrollKey = k;
+      if (!userDrove) return;
+      try { wrap.scrollIntoView({behavior: reduced ? 'auto' : 'smooth', block: 'center'}); }
+      catch (e) { wrap.scrollIntoView(); }
+    }
+
+    function render(){
+      for (var i = 0; i < 12; i++) {
+        var cell = cellEls[i];
+        var c = grid[i];
+        cell.classList.remove('reveal', 'swap');
+        if (phase === 'deal' && i >= dealtCount) {
+          cell.className = 'wn-cell undealt';
+          cell.innerHTML = '';
+          cell.setAttribute('aria-label', 'Card not dealt yet — position ' + (i + 1) + ' of 12');
+          cell.disabled = true;
+          continue;
+        }
+        if (revealed[i]) {
+          cell.className = 'wn-cell up' + (c.joker ? ' joker' : (c.suit.red ? ' red' : ''));
+          cell.innerHTML = faceHTML(c);
+          cell.setAttribute('aria-label', 'Position ' + (i + 1) + ' of 12 \u2014 ' + cardName(c) + (i === currentIdx ? ' (the card in play)' : ''));
+        } else {
+          var targetable = canTargetCell(i);
+          cell.className = 'wn-cell down' + (targetable ? ' joker-target' : '');
+          cell.innerHTML = BACK_HTML;
+          cell.setAttribute('aria-label', 'Position ' + (i + 1) + ' of 12 \u2014 face-down card' + (targetable ? '. Tap to spend your joker and swap this top-row card for the next card off the deck.' : ''));
+        }
+        if (i === dealAnimIdx) cell.classList.add('deal-in');
+        if (revealed[i] && i === currentIdx && phase !== 'over') cell.classList.add('current');
+        if (!revealed[i] && i === nextIdx && phase === 'guess' && !sudden) cell.classList.add('next');
+        if (i === lastReveal && revealed[i]) cell.classList.add('reveal');
+        cell.disabled = !canTargetCell(i);
+      }
+      /* Turn line */
+      if (phase === 'over') {
+        turnEl.innerHTML = 'Game over';
+      } else if (phase === 'deal') {
+        turnEl.innerHTML = 'Dealing the cards onto the board&hellip;';
+      } else if (sudden) {
+        turnEl.innerHTML = (active === 1 ? 'Your turn' : 'The computer\u2019s turn') +
+          '<span class="wn-q">The board is done \u2014 this deck card decides it. What\u2019s next? Is the next card higher or is it lower?</span>';
+      } else {
+        turnEl.innerHTML = (active === 1 ? 'Your turn' : 'The computer\u2019s turn') +
+          ' \u2014 card ' + Math.min(nextIdx + 1, 12) + ' of 12' +
+          '<span class="wn-q">What\u2019s next? Is the next card higher or is it lower?</span>';
+      }
+      /* Score line */
+      var done = 0;
+      revealed.forEach(function(r){ if (r) done++; });
+      scoreEl.innerHTML = 'Cards turned: <strong>' + done + ' of 12</strong> &middot; Cards left in the deck: <strong>' + pile.length +
+        '</strong> &middot; Your jokers: <strong>' + jokers[1] + '</strong> &middot; Computer\u2019s jokers: <strong>' + jokers[2] + '</strong>';
+      /* Guess buttons */
+      var canGuess = phase === 'guess' && active === 1 && !busy;
+      hiBtn.disabled = !canGuess;
+      loBtn.disabled = !canGuess;
+      renderJokerActions();
+      /* Keep the message, the result banner and the Higher / Lower buttons
+         right under the row being played, so they travel up the board with
+         the game on BOTH turns — and scroll that row into view whenever the
+         turn or the row changes, so they are never a scroll away */
+      var anchorWrap = tierWraps[0];
+      var anchorKey = 'top';
+      if (sudden) {
+        anchorWrap = suddenWrap;
+        anchorKey = 'sudden';
+      } else if (phase === 'deal') {
+        anchorWrap = tierWraps[3];
+        anchorKey = 'deal';
+      } else if (phase !== 'over') {
+        for (var tw = 0; tw < TIERS.length; tw++) {
+          if (TIERS[tw].idx.indexOf(nextIdx) !== -1) { anchorWrap = tierWraps[tw]; anchorKey = 't' + tw; break; }
+        }
+      }
+      gridEl.insertBefore(msg, anchorWrap.nextSibling);
+      gridEl.insertBefore(resultEl, msg.nextSibling);
+      gridEl.insertBefore(actionsEl, resultEl.nextSibling);
+      gridEl.insertBefore(jokerEl, actionsEl.nextSibling);
+      maybeScroll(anchorWrap, anchorKey);
+    }
+    function canTargetCell(i){
+      return phase === 'guess' && !busy && active === 1 && jokers[1] > 0 &&
+        inTopRowPhase() && i >= 9 && !revealed[i];
+    }
+    function renderJokerActions(){
+      jokerEl.innerHTML = '';
+      if (phase !== 'guess' || active !== 1 || busy) return;
+      if (!inTopRowPhase()) return;
+      if (jokers[1] <= 0) {
+        var note = document.createElement('p');
+        note.className = 'wn-joker-note';
+        note.textContent = jokersSpent[1] > 0
+          ? 'You are in the top row \u2014 you spent your joker, so you have none left to use here.'
+          : 'You are in the top row \u2014 jokers can be spent here, but you have not pulled one yet.';
+        jokerEl.appendChild(note);
+        return;
+      }
+      var note2 = document.createElement('p');
+      note2.className = 'wn-joker-note';
+      note2.textContent = 'You have ' + jokers[1] + (jokers[1] === 1 ? ' joker' : ' jokers') + '. In the top row you can spend one to swap a card for the next card off the deck \u2014 tap a face-down top-row card to swap it (yours, or one of the computer\u2019s upcoming cards, to make it harder for the computer), or swap the card in play:';
+      jokerEl.appendChild(note2);
+      if (currentIdx >= 9) {
+        var b = document.createElement('button');
+        b.type = 'button';
+        b.className = 'btn btn-gold';
+        b.textContent = 'Use a Joker \u2014 swap the card in play (' + cardName(currentCard) + ')';
+        b.addEventListener('click', function(){ useJokerOnCurrent(1); });
+        jokerEl.appendChild(b);
+      }
+    }
+    function schedule(fn, ms){
+      var t = token;
+      setTimeout(function(){ if (t === token) fn(); }, reduced ? Math.min(ms, 400) : ms);
+    }
+
+    function newGame(){
+      token = (token || 0) + 1;
+      var myToken = token;
+      var deck = buildDeck();
+      grid = deck.slice(0, 12);
+      pile = deck.slice(12);
+      revealed = [false,false,false,false,false,false,false,false,false,false,false,false];
+      jokers = {1:0, 2:0};
+      jokersSpent = {1:0, 2:0};
+      active = 1;
+      phase = 'deal';
+      sudden = false;
+      busy = true;
+      lastReveal = -1;
+      dealtCount = 0;
+      dealAnimIdx = -1;
+      hideFx();
+      clearResult();
+      stopCelebration();
+      suddenCard = null;
+      suddenCell = null;
+      suddenRow.innerHTML = '';
+      suddenWrap.style.display = 'none';
+      msg.textContent = 'Shuffling the deck — hear those cards riffle — and dealing 12 cards onto the board, one by one\u2026';
+      render();
+      sfxShuffle();
+      if (reduced) { dealtCount = 12; finishDeal(); return; }
+      var iv = setInterval(function(){
+        if (myToken !== token) { clearInterval(iv); return; }
+        dealAnimIdx = dealtCount;
+        dealtCount++;
+        sfxDeal();
+        render();
+        if (dealtCount >= 12) {
+          clearInterval(iv);
+          setTimeout(function(){ if (myToken === token) finishDeal(); }, 420);
+        }
+      }, 135);
+    }
+    function finishDeal(){
+      dealAnimIdx = -1;
+      phase = 'guess';
+      busy = false;
+      /* Turn over the first card (bottom-left) to start. Jokers banked by you, since you go first. */
+      var lead = 'New game! The deck is shuffled \u2014 52 cards plus 2 jokers \u2014 and 12 cards are down, 3 across by 4 rows. You go first. ';
+      nextIdx = 0;
+      while (nextIdx < 12) {
+        var c = grid[nextIdx];
+        revealed[nextIdx] = true;
+        lastReveal = nextIdx;
+        if (c.joker) {
+          jokers[1]++;
+          lead += 'The first card up is a JOKER \u2014 you bank it! ';
+          nextIdx++;
+          continue;
+        }
+        currentIdx = nextIdx;
+        currentCard = c;
+        nextIdx++;
+        break;
+      }
+      sfxFlip();
+      msg.textContent = lead + 'First card up: the ' + cardName(currentCard) + '. What\u2019s next? Is the next card higher or is it lower?';
+      render();
+    }
+
+    function guess(higher){
+      if (phase !== 'guess' || busy) return;
+      busy = true;
+      clearResult();
+      hideFx();
+      render();
+      var me = active;
+      if (me === 2) {
+        msg.textContent = 'The computer calls ' + (higher ? 'HIGHER' : 'LOWER') + ' \u2014 now watch the next card turn over\u2026';
+      }
+      /* Step 1: the call. Step 2 (revealStep): the card turns over with a flip sound.
+         Step 3 (finishGuess): the result lands with a chime or a buzzer and a big
+         check or X. The clear pauses between steps are deliberate, so every move —
+         yours and the computer's — is easy to see and hear. */
+      schedule(function(){ revealStep(higher, me); }, me === 2 ? 1150 : 150);
+    }
+    function revealStep(higher, me){
+      if (phase !== 'guess') return;
+      var wasSudden = sudden;
+      var card, gridPos = -1;
+      if (!wasSudden) {
+        gridPos = nextIdx;
+        card = grid[gridPos];
+        revealed[gridPos] = true;
+        lastReveal = gridPos;
+      } else {
+        /* Sudden death: turn over the deciding card waiting face-down in
+           the sudden-death row */
+        card = suddenCard;
+        if (suddenCell) {
+          suddenCell.className = 'wn-cell up reveal current' + (card.joker ? ' joker' : (card.suit.red ? ' red' : ''));
+          suddenCell.innerHTML = faceHTML(card);
+          suddenCell.setAttribute('aria-label', 'Sudden death \u2014 the deciding card \u2014 ' + cardName(card));
+        }
+        lastReveal = -1;
+      }
+      if (card.joker) { sfxJoker(); } else { sfxFlip(); }
+      render();
+      /* The result lands in this same moment: the message text, the sound and
+         the big check or X all update together with the card flip — the result
+         never trails the flip by a second or two, and the previous turn's
+         message never lingers over a freshly turned card */
+      finishGuess(higher, me, card, gridPos, wasSudden);
+    }
+    function finishGuess(higher, me, card, gridPos, wasSudden){
+      var isLastGrid = !wasSudden && gridPos === 11;
+      var guessWord = higher ? 'higher' : 'lower';
+      var lead = pname(me) + ' ' + pverb(me, 'call', 'calls') + ' ' + guessWord + ' \u2014 and the card is the ' + cardName(card) + '. ';
+
+      if (card.joker) {
+        jokers[me]++;
+        if (!wasSudden) nextIdx++;
+        busy = false;
+        if (isLastGrid) {
+          sudden = true;
+          dealSuddenCard();
+          msg.textContent = lead + 'A JOKER on the last card! ' + pname(me) + ' ' + pverb(me, 'bank', 'banks') + ' it \u2014 but a joker can\u2019t win the game, so a card is pulled from the deck into the sudden-death row and ' + pverb(me, 'you have', 'it has') + ' to get that one. ' + pname(me) + ' ' + pverb(me, 'guess', 'guesses') + ' again.';
+        } else if (wasSudden) {
+          dealSuddenCard();
+          msg.textContent = lead + 'A JOKER! ' + pname(me) + ' ' + pverb(me, 'bank', 'banks') + ' it, and ' + pverb(me, 'draw', 'draws') + ' again for the deciding card.';
+        } else {
+          msg.textContent = lead + 'A JOKER! ' + pname(me) + ' ' + pverb(me, 'bank', 'banks') + ' it to use in the top row. The ' + cardName(currentCard) + ' stays in play \u2014 ' + pname(me) + ' ' + pverb(me, 'guess', 'guesses') + ' again. What\u2019s next?';
+        }
+        render();
+        if (me === 2) schedule(cpuMove, 1600);
+        return;
+      }
+
+      var correct;
+      var why;
+      if (card.rank === 14) {
+        correct = true;
+        why = 'An Ace! Aces go both ways \u2014 call ' + guessWord + ' and the Ace counts your way. That is always a correct guess. ';
+      } else if (card.rank === currentCard.rank) {
+        correct = false;
+        why = 'Same rank as the ' + cardName(currentCard) + ' \u2014 it is not higher and it is not lower, so the turn is lost. ';
+      } else {
+        var isHigher = card.rank > currentCard.rank;
+        correct = isHigher === higher;
+        why = correct ? 'It is ' + (isHigher ? 'higher' : 'lower') + ' \u2014 correct! ' : 'It is ' + (isHigher ? 'higher' : 'lower') + ' \u2014 wrong call. ';
+      }
+
+      var prevCard = currentCard;
+      currentCard = card;
+      if (!wasSudden) { currentIdx = gridPos; nextIdx++; }
+
+      if (correct) {
+        showFx(true);
+        setResult(true);
+        if (isLastGrid || wasSudden) {
+          phase = 'over';
+          busy = false;
+          sfxFanfare(); fireConfetti();
+          msg.textContent = lead + why + pname(me) + ' ' + pverb(me, 'turn', 'turns') + ' over the last card correctly \u2014 ' + pname(me) + ' ' + pverb(me, 'WIN', 'WINS') + ' WHAT\u2019S NEXT!';
+          render();
+          return;
+        }
+        sfxChime();
+        busy = false;
+        msg.textContent = lead + why + pname(me) + ' ' + pverb(me, 'keep', 'keeps') + ' going from the ' + cardName(card) + '. What\u2019s next? Is the next card higher or is it lower?';
+        render();
+        if (me === 2) schedule(cpuMove, 1600);
+        return;
+      }
+
+      /* Wrong or tied: turn passes */
+      sfxBuzz();
+      showFx(false);
+      setResult(false);
+      active = me === 1 ? 2 : 1;
+      busy = false;
+      if (isLastGrid) {
+        sudden = true;
+        dealSuddenCard();
+        msg.textContent = lead + why + 'That was the LAST card \u2014 and nobody has won yet, so another card is pulled from the deck into the sudden-death row. ' + pname(active) + ' ' + pverb(active, 'have', 'has') + ' to get that one. The ' + cardName(card) + ' is in play.';
+      } else if (wasSudden) {
+        dealSuddenCard();
+        msg.textContent = lead + why + 'Still no winner \u2014 another card comes off the deck into the sudden-death row. ' + pname(active) + ' ' + pverb(active, 'have', 'has') + ' to get it. The ' + cardName(card) + ' is in play.';
+      } else {
+        msg.textContent = lead + why + (me === 1
+          ? 'Your turn ends and play passes to the computer. '
+          : 'The computer\u2019s turn ends and play passes to you. ') + 'The ' + cardName(card) + ' is in play. What\u2019s next?';
+      }
+      render();
+      if (active === 2) schedule(cpuMove, 1800);
+    }
+
+    function cpuMove(){
+      if (phase !== 'guess' || active !== 2 || busy) return;
+      if (inTopRowPhase() && jokers[2] > 0) {
+        /* Spend a joker to change its own difficult card in play (7, 8 or 9) */
+        if (currentIdx >= 9 && currentCard.rank >= 7 && currentCard.rank <= 9) {
+          useJokerOnCurrent(2);
+          schedule(cpuGuessOnly, 1300);
+          return;
+        }
+        /* Or spend it on a face-down top-row card you still have to face,
+           swapping it for the next card off the deck to make it harder for you */
+        var targets = [];
+        for (var i = 9; i < 12; i++) { if (!revealed[i]) targets.push(i); }
+        if (targets.length) {
+          useJokerOnCell(2, targets[targets.length - 1]);
+          schedule(cpuGuessOnly, 1600);
+          return;
+        }
+      }
+      cpuGuessOnly();
+    }
+    function cpuGuessOnly(){
+      if (phase !== 'guess' || active !== 2 || busy) return;
+      var r = currentCard.rank;
+      var higher;
+      if (r <= 6) higher = true;
+      else if (r >= 10) higher = false;
+      else if (r === 7) higher = Math.random() < 0.6;
+      else if (r === 9) higher = Math.random() < 0.4;
+      else higher = Math.random() < 0.5;
+      guess(higher);
+    }
+
+    function useJokerOnCurrent(player){
+      if (phase !== 'guess' || jokers[player] <= 0 || currentIdx < 9) return;
+      jokers[player]--;
+      jokersSpent[player]++;
+      sfxJoker();
+      var old = currentCard;
+      var c = drawFromPile();
+      while (c.joker) {
+        jokers[player]++;
+        msg.textContent = pname(player) + ' ' + pverb(player, 'spend', 'spends') + ' a joker \u2014 and the next card up is another JOKER, so ' + pverb(player, 'you bank', 'it banks') + ' that one and ' + pverb(player, 'draw', 'draws') + ' again\u2026';
+        c = drawFromPile();
+      }
+      sfxFlip();
+      grid[currentIdx] = c;
+      currentCard = c;
+      lastReveal = currentIdx;
+      msg.textContent = pname(player) + ' ' + pverb(player, 'use', 'uses') + ' a JOKER in the top row! The difficult ' + cardName(old) + ' is gone, swapped for the next card off the deck \u2014 the ' + cardName(c) + '. ' +
+        (player === 1 ? 'Now \u2014 what\u2019s next? Is the next card higher or is it lower?' : 'The computer plays on from the ' + cardName(c) + '.');
+      render();
+    }
+
+    function useJokerOnCell(player, i){
+      if (phase !== 'guess' || jokers[player] <= 0 || i < 9 || revealed[i]) return;
+      jokers[player]--;
+      jokersSpent[player]++;
+      sfxJoker();
+      sfxFlip();
+      grid[i] = drawFromPile();
+      msg.textContent = 'The computer uses a JOKER in the top row! It changes a card you are about to face \u2014 swapped for the next card off the deck, to make it harder for you. Nobody knows what the new card is until it turns over. The computer plays on from the ' + cardName(currentCard) + '.';
+      render();
+      cellEls[i].classList.add('swap');
+    }
+
+    function onCellClick(i){
+      if (!canTargetCell(i)) return;
+      jokers[1]--;
+      jokersSpent[1]++;
+      sfxJoker();
+      sfxFlip();
+      grid[i] = drawFromPile();
+      msg.textContent = 'You used a JOKER! That top-row card is swapped for the next card off the deck \u2014 random, whatever it is, and it could even be the same rank. Nobody knows what it is until it turns over.';
+      render();
+      cellEls[i].classList.add('swap');
+    }
+
+    hiBtn.addEventListener('click', function(){ if (active === 1) guess(true); });
+    loBtn.addEventListener('click', function(){ if (active === 1) guess(false); });
+    newBtn.addEventListener('click', function(){ newGame(); });
+
+    /* Sound on/off */
+    var ICON_ON = '<svg width="22" height="22" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M3 9.5v5h3.5L12 19V5L6.5 9.5H3z" fill="currentColor"/><path d="M15 9.2a4 4 0 0 1 0 5.6M17.4 6.8a7.4 7.4 0 0 1 0 10.4" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>';
+    var ICON_OFF = '<svg width="22" height="22" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M3 9.5v5h3.5L12 19V5L6.5 9.5H3z" fill="currentColor"/><path d="M15.5 9.5l5 5m0-5l-5 5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>';
+    function paintSoundBtn(){
+      soundBtn.innerHTML = (soundOn ? ICON_ON : ICON_OFF) + '<span>Sound: ' + (soundOn ? 'On' : 'Off') + '</span>';
+      soundBtn.setAttribute('aria-pressed', soundOn ? 'false' : 'true');
+      soundBtn.setAttribute('aria-label', soundOn ? 'Game sound is on — tap to mute the sound' : 'Game sound is off — tap to turn the sound on');
+    }
+    soundBtn.addEventListener('click', function(){
+      soundOn = !soundOn;
+      paintSoundBtn();
+      if (soundOn) { ac(); sfxFlip(); }
+    });
+    /* Any tap inside the game unlocks the browser audio, so later sounds can play */
+    gridEl.addEventListener('click', function(){ ac(); });
+    actionsEl.addEventListener('click', function(){ ac(); });
+    /* Once the player is actually playing, the board keeps the row at play in
+       view on its own — see maybeScroll. Before the first tap it never scrolls,
+       so the page stays put when it first loads. */
+    var gameBox = document.querySelector('.wn-game');
+    if (gameBox) {
+      gameBox.addEventListener('pointerdown', function(){ userDrove = true; }, true);
+      gameBox.addEventListener('click', function(){ userDrove = true; }, true);
+    }
+    newGame();
+  })();
+</script>
+<script>
+  (function(){
+    var COLS = 7, ROWS = 6;
+    var boardEl = document.getElementById('h4-board');
+    var dropsEl = document.getElementById('h4-drops');
+    var turnEl = document.getElementById('h4-turn');
+    var msgEl = document.getElementById('h4-msg');
+    var resultEl = document.getElementById('h4-result');
+    var scoreEl = document.getElementById('h4-score');
+    var newBtn = document.getElementById('h4-new');
+    var rollBtn = document.getElementById('h4-roll-btn');
+    var rollResultEl = document.getElementById('h4-roll-result');
+    var totalYouEl = document.getElementById('h4-total-you');
+    var totalCpuEl = document.getElementById('h4-total-cpu');
+    if (!boardEl || !dropsEl || !turnEl || !msgEl || !resultEl || !scoreEl || !newBtn) return;
+    if (!rollBtn || !rollResultEl || !totalYouEl || !totalCpuEl) return;
+    var reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+    var grid, over, busy, lastPiece;
+    var tally = { you: 0, cpu: 0, draws: 0 };
+
+    /* ----- Roll-off: two dice a side, highest total plays first ----- */
+    var PIPS = {1:[4], 2:[0,8], 3:[0,4,8], 4:[0,2,6,8], 5:[0,2,4,6,8], 6:[0,2,3,5,6,8]};
+    var rollDiceEls = [
+      document.getElementById('h4-die-y1'), document.getElementById('h4-die-y2'),
+      document.getElementById('h4-die-c1'), document.getElementById('h4-die-c2')
+    ];
+    rollDiceEls.forEach(function(die){
+      if (!die) return;
+      for (var i = 0; i < 9; i++) {
+        var pip = document.createElement('span');
+        pip.className = 'pip';
+        die.appendChild(pip);
+      }
+    });
+    function setH4Die(die, val){
+      if (!die) return;
+      var on = PIPS[val] || [];
+      var pips = die.querySelectorAll('.pip');
+      for (var i = 0; i < pips.length; i++) {
+        if (on.indexOf(i) !== -1) { pips[i].classList.add('on'); } else { pips[i].classList.remove('on'); }
+      }
+      die.classList.remove('idle');
+    }
+    function rollOne(){ return 1 + Math.floor(Math.random() * 6); }
+    var awaitingRoll = true, rollingOff = false, rollTimer = null, rollSpin = null;
+
+    /* Build the 6 x 7 board of square slots */
+    var cellEls = [];
+    for (var r = 0; r < ROWS; r++) {
+      cellEls.push([]);
+      for (var c = 0; c < COLS; c++) {
+        var cell = document.createElement('div');
+        cell.className = 'h4-cell';
+        var piece = document.createElement('span');
+        piece.className = 'h4-piece';
+        cell.appendChild(piece);
+        boardEl.appendChild(cell);
+        cellEls[r].push(cell);
+      }
+    }
+    /* One Drop button per column */
+    var dropBtns = [];
+    for (var dc = 0; dc < COLS; dc++) {
+      (function(col){
+        var b = document.createElement('button');
+        b.type = 'button';
+        b.className = 'h4-drop';
+        b.textContent = '\u25BC';
+        b.setAttribute('aria-label', 'Drop your gold square in column ' + (col + 1));
+        b.addEventListener('click', function(){ playerMove(col); });
+        dropsEl.appendChild(b);
+        dropBtns.push(b);
+      })(dc);
+    }
+
+    function dropRow(g, col){
+      for (var r = ROWS - 1; r >= 0; r--) { if (!g[r][col]) return r; }
+      return -1;
+    }
+    function findWin(g, p){
+      var dirs = [[0,1],[1,0],[1,1],[1,-1]];
+      for (var r = 0; r < ROWS; r++) {
+        for (var c = 0; c < COLS; c++) {
+          if (g[r][c] !== p) continue;
+          for (var d = 0; d < 4; d++) {
+            var dr = dirs[d][0], dc = dirs[d][1], cells = [[r, c]], ok = true;
+            for (var k = 1; k < 4; k++) {
+              var rr = r + dr * k, cc = c + dc * k;
+              if (rr < 0 || rr >= ROWS || cc < 0 || cc >= COLS || g[rr][cc] !== p) { ok = false; break; }
+              cells.push([rr, cc]);
+            }
+            if (ok) return cells;
+          }
+        }
+      }
+      return null;
+    }
+    function boardFull(g){
+      for (var c = 0; c < COLS; c++) { if (!g[0][c]) return false; }
+      return true;
+    }
+    /* How strong a line through (r,c) is for player p — used to score computer moves */
+    function linePotential(g, r, c, p){
+      var dirs = [[0,1],[1,0],[1,1],[1,-1]], total = 0;
+      for (var d = 0; d < 4; d++) {
+        var dr = dirs[d][0], dc = dirs[d][1], count = 1;
+        for (var s = -1; s <= 1; s += 2) {
+          for (var k = 1; k < 4; k++) {
+            var rr = r + dr * k * s, cc = c + dc * k * s;
+            if (rr < 0 || rr >= ROWS || cc < 0 || cc >= COLS) break;
+            if (g[rr][cc] === p) { count++; }
+            else { break; }
+          }
+        }
+        if (count >= 3) { total += 3; } else if (count === 2) { total += 1; }
+      }
+      return total;
+    }
+    function cpuChoose(){
+      var col, r;
+      /* 1 — take a win when there is one */
+      for (col = 0; col < COLS; col++) {
+        r = dropRow(grid, col); if (r < 0) continue;
+        grid[r][col] = 2;
+        var wins = !!findWin(grid, 2);
+        grid[r][col] = 0;
+        if (wins) return col;
+      }
+      /* 2 — block the player's four in a row */
+      for (col = 0; col < COLS; col++) {
+        r = dropRow(grid, col); if (r < 0) continue;
+        grid[r][col] = 1;
+        var threat = !!findWin(grid, 1);
+        grid[r][col] = 0;
+        if (threat) return col;
+      }
+      /* 3 — otherwise play a sensible column: build its own lines, lean to the
+         center, and never hand the player a free win on the square above */
+      var order = [3, 2, 4, 1, 5, 0, 6];
+      var best = -1, bestScore = -Infinity;
+      for (var i = 0; i < order.length; i++) {
+        col = order[i];
+        r = dropRow(grid, col); if (r < 0) continue;
+        var score = 10 - Math.abs(3 - col) * 2;
+        grid[r][col] = 2;
+        score += linePotential(grid, r, col, 2) * 3;
+        score += linePotential(grid, r, col, 1);
+        if (r > 0) {
+          grid[r - 1][col] = 1;
+          if (findWin(grid, 1)) score -= 100;
+          grid[r - 1][col] = 0;
+        }
+        grid[r][col] = 0;
+        score += Math.random() * 1.5;
+        if (score > bestScore) { bestScore = score; best = col; }
+      }
+      return best;
+    }
+    function renderScore(){
+      scoreEl.innerHTML = 'Games won — <strong>You: ' + tally.you + '</strong> · <strong>Computer: ' + tally.cpu + '</strong> · Draws: ' + tally.draws;
+    }
+    function updateDrops(){
+      dropBtns.forEach(function(b, col){
+        b.disabled = over || busy || awaitingRoll || rollingOff || dropRow(grid, col) < 0;
+      });
+    }
+    function renderCell(r, c){
+      var cell = cellEls[r][c];
+      var v = grid[r][c];
+      cell.classList.toggle('p1', v === 1);
+      cell.classList.toggle('p2', v === 2);
+      var label = 'Row ' + (r + 1) + ', column ' + (c + 1) + ' — ';
+      label += v === 1 ? 'your gold square' : v === 2 ? "the computer's red square" : 'empty';
+      cell.setAttribute('aria-label', label);
+    }
+    function place(col, p){
+      var r = dropRow(grid, col);
+      if (r < 0) return -1;
+      grid[r][col] = p;
+      if (lastPiece) { lastPiece.classList.remove('fall'); }
+      renderCell(r, col);
+      var piece = cellEls[r][col].querySelector('.h4-piece');
+      piece.style.setProperty('--fall', (-(r + 1) * 118) + '%');
+      piece.classList.add('fall');
+      lastPiece = piece;
+      return r;
+    }
+    function finish(winner, cells){
+      over = true;
+      if (cells) {
+        cells.forEach(function(rc){ cellEls[rc[0]][rc[1]].classList.add('win'); });
+      }
+      resultEl.className = 'h4-result show ' + (winner === 1 ? 'good' : winner === 2 ? 'bad' : 'draw');
+      if (winner === 1) {
+        tally.you++;
+        resultEl.textContent = 'YOU WIN! Four gold squares in a row!';
+        turnEl.textContent = 'Game over — you win!';
+        msgEl.textContent = 'You lined up four in a row. Tap Play Again to run it back.';
+      } else if (winner === 2) {
+        tally.cpu++;
+        resultEl.textContent = 'THE COMPUTER WINS — four red squares in a row.';
+        turnEl.textContent = 'Game over — the computer wins.';
+        msgEl.textContent = 'The computer got its four first this time. Tap Play Again and get your revenge.';
+      } else {
+        tally.draws++;
+        resultEl.textContent = "IT'S A DRAW — the board is full and nobody got four in a row.";
+        turnEl.textContent = 'Game over — a draw.';
+        msgEl.textContent = 'Every square is filled and nobody lined up four. Tap Play Again to go again.';
+      }
+      newBtn.textContent = 'Play Again';
+      renderScore();
+      updateDrops();
+    }
+    function endTurn(p){
+      var w = findWin(grid, p);
+      if (w) { finish(p, w); return true; }
+      if (boardFull(grid)) { finish(0, null); return true; }
+      return false;
+    }
+    function playerMove(col){
+      if (over || busy) return;
+      if (awaitingRoll || rollingOff) {
+        msgEl.textContent = 'Roll-off first — tap Roll the Dice to decide who goes first.';
+        return;
+      }
+      if (dropRow(grid, col) < 0) {
+        msgEl.textContent = 'Column ' + (col + 1) + ' is full — pick another column.';
+        return;
+      }
+      place(col, 1);
+      if (endTurn(1)) return;
+      busy = true;
+      turnEl.textContent = 'The computer is thinking…';
+      msgEl.textContent = 'You dropped in column ' + (col + 1) + '. The computer is taking its turn…';
+      updateDrops();
+      setTimeout(cpuMove, reduced ? 350 : 650);
+    }
+    function cpuMove(){
+      var col = cpuChoose();
+      if (col >= 0) place(col, 2);
+      busy = false;
+      if (endTurn(2)) return;
+      turnEl.textContent = 'Your turn — pick a column.';
+      msgEl.textContent = 'The computer dropped in column ' + (col + 1) + '. Your move!';
+      updateDrops();
+    }
+    function doRollOff(){
+      if (!awaitingRoll || rollingOff || over) return;
+      rollingOff = true;
+      rollBtn.disabled = true;
+      rollBtn.textContent = 'Rolling…';
+      rollResultEl.className = 'h4-roll-result';
+      rollResultEl.textContent = 'Rolling…';
+      totalYouEl.textContent = 'Rolling your dice…';
+      totalCpuEl.textContent = 'Rolling the computer\u2019s dice…';
+      updateDrops();
+      var finals = [rollOne(), rollOne(), rollOne(), rollOne()];
+      rollDiceEls.forEach(function(die){ if (die) die.classList.add('rolling'); });
+      if (!reduced) {
+        rollSpin = setInterval(function(){
+          rollDiceEls.forEach(function(die){ setH4Die(die, rollOne()); });
+        }, 90);
+      }
+      rollTimer = setTimeout(function(){
+        if (rollSpin) { clearInterval(rollSpin); rollSpin = null; }
+        rollTimer = null;
+        rollDiceEls.forEach(function(die, i){
+          if (die) { die.classList.remove('rolling'); setH4Die(die, finals[i]); }
+        });
+        var youTotal = finals[0] + finals[1];
+        var cpuTotal = finals[2] + finals[3];
+        totalYouEl.textContent = 'You rolled ' + finals[0] + ' + ' + finals[1] + ' = ' + youTotal;
+        totalCpuEl.textContent = 'Computer rolled ' + finals[2] + ' + ' + finals[3] + ' = ' + cpuTotal;
+        rollingOff = false;
+        if (youTotal === cpuTotal) {
+          rollResultEl.textContent = 'It\u2019s a tie — ' + youTotal + ' to ' + cpuTotal + '! Roll again.';
+          turnEl.textContent = 'Tie in the roll-off — roll again to decide who goes first.';
+          msgEl.textContent = 'Dead even at ' + youTotal + '. Tap Roll Again — the board stays locked until somebody wins the roll.';
+          rollBtn.textContent = 'Roll Again — Tie!';
+          rollBtn.disabled = false;
+          updateDrops();
+          return;
+        }
+        awaitingRoll = false;
+        rollBtn.style.display = 'none';
+        if (youTotal > cpuTotal) {
+          rollResultEl.className = 'h4-roll-result good';
+          rollResultEl.textContent = 'You rolled higher — you go first!';
+          turnEl.textContent = 'Your turn — you won the roll-off! Pick a column.';
+          msgEl.textContent = 'You rolled ' + youTotal + ' to the computer\u2019s ' + cpuTotal + ' — you go first. Drop a gold square!';
+          updateDrops();
+        } else {
+          rollResultEl.className = 'h4-roll-result bad';
+          rollResultEl.textContent = 'The computer rolled higher — computer goes first.';
+          turnEl.textContent = 'The computer won the roll-off — it goes first…';
+          msgEl.textContent = 'The computer rolled ' + cpuTotal + ' to your ' + youTotal + ' — it makes the first drop.';
+          busy = true;
+          updateDrops();
+          setTimeout(cpuMove, reduced ? 500 : 900);
+        }
+      }, reduced ? 60 : 750);
+    }
+    function newGame(){
+      if (rollTimer) { clearTimeout(rollTimer); rollTimer = null; }
+      if (rollSpin) { clearInterval(rollSpin); rollSpin = null; }
+      grid = [];
+      for (var r = 0; r < ROWS; r++) { grid.push([0,0,0,0,0,0,0]); }
+      over = false;
+      busy = false;
+      lastPiece = null;
+      awaitingRoll = true;
+      rollingOff = false;
+      for (var rr = 0; rr < ROWS; rr++) {
+        for (var cc = 0; cc < COLS; cc++) {
+          cellEls[rr][cc].classList.remove('win');
+          renderCell(rr, cc);
+        }
+      }
+      resultEl.className = 'h4-result';
+      resultEl.textContent = '';
+      rollDiceEls.forEach(function(die, i){
+        if (!die) return;
+        die.classList.remove('rolling');
+        die.classList.add('idle');
+        setH4Die(die, i % 2 === 0 ? 1 : 6);
+        die.classList.add('idle');
+      });
+      totalYouEl.textContent = 'Your two dice are ready.';
+      totalCpuEl.textContent = 'The computer\u2019s two dice are ready.';
+      rollResultEl.className = 'h4-roll-result';
+      rollResultEl.textContent = 'Highest roll goes first — tap Roll the Dice!';
+      rollBtn.style.display = '';
+      rollBtn.disabled = false;
+      rollBtn.textContent = 'Roll the Dice';
+      turnEl.textContent = 'Roll-off first — tap Roll the Dice to see who goes first.';
+      msgEl.textContent = 'New game — roll the dice to decide who goes first.';
+      newBtn.textContent = 'New Game';
+      renderScore();
+      updateDrops();
+    }
+    rollBtn.addEventListener('click', doRollOff);
+    newBtn.addEventListener('click', newGame);
+    newGame();
+  })();
+</script>
+</body>
+</html>
