@@ -635,6 +635,10 @@
   }
   .wn-jokers{display:flex; gap:12px; justify-content:center; flex-wrap:wrap; margin-top:14px}
   .wn-jokers:empty{margin-top:0}
+  .wn-jokers.float-joker{
+    position:absolute; z-index:40; margin:0; transform:translateX(-50%);
+    width:min(92%, 520px);
+  }
   .wn-joker-note{flex-basis:100%; text-align:center; margin:0; color:var(--ink-soft); font-size:17px}
   .wn-score{text-align:center; color:var(--ink-soft); font-size:18px; margin:14px 0 0}
   .wn-score strong{color:var(--gold-ink)}
@@ -660,6 +664,23 @@
   .wn-fx.show .wn-fx-mark{animation:wn-fx-pop .45s ease}
   @keyframes wn-fx-pop{0%{transform:scale(.35)}60%{transform:scale(1.12)}100%{transform:scale(1)}}
   @media (prefers-reduced-motion: reduce){ .wn-fx.show .wn-fx-mark{animation:none} }
+  .wn-joker-pop{
+    position:fixed; inset:0; z-index:80; display:none;
+    align-items:center; justify-content:center; padding:20px;
+    background:rgba(4,6,20,.72);
+  }
+  .wn-joker-pop.show{display:flex}
+  .wn-joker-card{
+    max-width:520px; width:100%; text-align:center;
+    background:linear-gradient(160deg, #3b1470, #170a38);
+    border:3px solid var(--gold-bright); border-radius:18px;
+    padding:28px 24px; color:var(--ink);
+    box-shadow:0 24px 60px rgba(0,0,0,.6);
+  }
+  .wn-joker-card .wn-joker-big{font-family:"Cinzel",serif; font-weight:900; font-size:clamp(34px,8vw,52px); color:var(--gold-soft); margin:0 0 10px}
+  .wn-joker-card p{font-size:19px; line-height:1.45; margin:0 0 16px}
+  .wn-joker-pop.show .wn-joker-card{animation:wn-fx-pop .45s ease}
+  @media (prefers-reduced-motion: reduce){ .wn-joker-pop.show .wn-joker-card{animation:none} }
   .wn-result{
     display:none; align-items:center; justify-content:center; gap:14px;
     margin:14px auto 0; max-width:660px; padding:12px 20px; border-radius:12px;
@@ -1166,6 +1187,7 @@
       <p class="wn-score" id="wn-score"></p>
       <button type="button" class="btn btn-ghost wn-newrun" id="wn-newrun">Shuffle &amp; deal a new game</button>
       <div class="wn-fx" id="wn-fx" aria-hidden="true"></div>
+      <div class="wn-joker-pop" id="wn-joker-pop"></div>
       <div id="wn-celebration" aria-hidden="true"></div>
     </div>
     <p class="wn-sponsor-note">Look at the back of every card on that board — <strong>crown, dice and the King of Dice name in gold</strong>. That card-back space is exactly where a <strong>card sponsor&rsquo;s logo</strong> would go — on the back of every card, in every game of What&rsquo;s Next.</p>
@@ -1782,6 +1804,7 @@
     var gameEl = (actionsEl && actionsEl.closest) ? (actionsEl.closest('.wn-game') || gridEl.parentNode) : gridEl.parentNode;
     var soundBtn = document.getElementById('wn-sound');
     var fxEl = document.getElementById('wn-fx');
+    var jokerPopEl = document.getElementById('wn-joker-pop');
     var resultEl = document.getElementById('wn-result');
     var celebEl = document.getElementById('wn-celebration');
     if (!gridEl || !turnEl || !msg || !scoreEl || !hiBtn || !loBtn || !newBtn || !jokerEl || !actionsEl || !soundBtn || !fxEl || !resultEl || !celebEl) return;
@@ -1958,6 +1981,35 @@
       fxEl.innerHTML = '';
       if (fxTimer) { clearTimeout(fxTimer); fxTimer = null; }
     }
+    /* ---------- Joker announcement ----------
+       When a player pulls a joker, a big announcement screen pops up so
+       nobody misses it: the joker is banked, and it can be spent in the
+       top row to change a card. Tap "Got it!" or wait and it closes. */
+    var jokerPopTimer = null;
+    function announceJoker(me){
+      if (!jokerPopEl) return;
+      var mine = me === 1;
+      jokerPopEl.innerHTML =
+        '<div class="wn-joker-card">' +
+          '<p class="wn-joker-big">★ JOKER! ★</p>' +
+          '<p>' + (mine
+            ? 'You pulled a JOKER — it is banked! When you reach the TOP ROW, you can spend it to change a card: swap any top-row card for the next card off the deck — your own card, to ditch a hard one, or the computer\u2019s card, to make its next card harder.'
+            : 'The computer pulled a JOKER — it is banked! When the computer reaches the TOP ROW, it can spend it to change a card there — including one of yours.') +
+          '</p>' +
+          '<button type="button" class="btn btn-gold" id="wn-joker-ok">Got it!</button>' +
+        '</div>';
+      jokerPopEl.classList.add('show');
+      var ok = document.getElementById('wn-joker-ok');
+      if (ok) ok.addEventListener('click', hideJokerPop);
+      if (jokerPopTimer) clearTimeout(jokerPopTimer);
+      jokerPopTimer = setTimeout(hideJokerPop, 6000);
+    }
+    function hideJokerPop(){
+      if (jokerPopTimer) { clearTimeout(jokerPopTimer); jokerPopTimer = null; }
+      if (!jokerPopEl) return;
+      jokerPopEl.classList.remove('show');
+      jokerPopEl.innerHTML = '';
+    }
     /* The same result as a plain banner in the flow of the page, right under the
        row being played — it stays up until the next guess, so the last result
        is always on screen to see at a glance */
@@ -2086,11 +2138,18 @@
        in its normal spot in the flow. */
     var floatAnchor = null;
     var floatBandWrap = null;
-    function setFloatBand(wrap){
-      if (floatBandWrap === wrap) return;
-      if (floatBandWrap) floatBandWrap.style.marginBottom = '';
+    function setFloatBand(wrap, px){
+      if (floatBandWrap !== wrap && floatBandWrap) floatBandWrap.style.marginBottom = '';
       floatBandWrap = wrap;
-      if (floatBandWrap) floatBandWrap.style.marginBottom = '88px';
+      if (floatBandWrap) floatBandWrap.style.marginBottom = (px || 88) + 'px';
+    }
+    function unfloatJoker(){
+      jokerEl.classList.remove('float-joker');
+      jokerEl.style.left = '';
+      jokerEl.style.top = '';
+      if (jokerEl.parentNode !== gridEl){
+        gridEl.insertBefore(jokerEl, resultEl.nextSibling);
+      }
     }
     function placeActions(){
       var anchor = null;
@@ -2103,6 +2162,7 @@
         actionsEl.classList.remove('float');
         actionsEl.style.left = '';
         actionsEl.style.top = '';
+        unfloatJoker();
         if (actionsEl.parentNode !== gridEl){
           gridEl.insertBefore(actionsEl, jokerEl);
         }
@@ -2116,7 +2176,6 @@
           if (TIERS[tw2].idx.indexOf(currentIdx) !== -1) { bandWrap = tierWraps[tw2]; break; }
         }
       }
-      setFloatBand(bandWrap);
       if (actionsEl.parentNode !== gameEl) gameEl.appendChild(actionsEl);
       actionsEl.classList.add('float');
       var gr = gameEl.getBoundingClientRect();
@@ -2127,7 +2186,26 @@
       var maxLeft = Math.max(minLeft, gr.width - w / 2 - 4);
       left = Math.min(Math.max(left, minLeft), maxLeft);
       actionsEl.style.left = left + 'px';
-      actionsEl.style.top = (ar.bottom - gr.top + 10) + 'px';
+      var pillTop = ar.bottom - gr.top + 10;
+      actionsEl.style.top = pillTop + 'px';
+      /* The joker controls ride directly BELOW the Higher / Lower pill,
+         never above it, and the space band grows to fit both */
+      var jokerH = 0;
+      if (jokerEl.childNodes.length){
+        if (jokerEl.parentNode !== gameEl) gameEl.appendChild(jokerEl);
+        jokerEl.classList.add('float-joker');
+        var jw = jokerEl.offsetWidth;
+        var jLeft = ar.left - gr.left + ar.width / 2;
+        var jMin = jw / 2 + 4;
+        var jMax = Math.max(jMin, gr.width - jw / 2 - 4);
+        jLeft = Math.min(Math.max(jLeft, jMin), jMax);
+        jokerEl.style.left = jLeft + 'px';
+        jokerEl.style.top = (pillTop + actionsEl.offsetHeight + 8) + 'px';
+        jokerH = jokerEl.offsetHeight + 8;
+      } else {
+        unfloatJoker();
+      }
+      setFloatBand(bandWrap, actionsEl.offsetHeight + jokerH + 24);
     }
     window.addEventListener('resize', function(){ if (floatAnchor) placeActions(); });
 
@@ -2286,12 +2364,14 @@
       /* Turn over the first card (bottom-left) to start. Jokers banked by you, since you go first. */
       var lead = 'New game! The deck is shuffled \u2014 52 cards plus 2 jokers \u2014 and 12 cards are down, 3 across by 4 rows. You go first. ';
       nextIdx = 0;
+      var dealJoker = false;
       while (nextIdx < 12) {
         var c = grid[nextIdx];
         revealed[nextIdx] = true;
         lastReveal = nextIdx;
         if (c.joker) {
           jokers[1]++;
+          dealJoker = true;
           lead += 'The first card up is a JOKER \u2014 you bank it! ';
           nextIdx++;
           continue;
@@ -2304,6 +2384,7 @@
       sfxFlip();
       msg.textContent = lead + 'First card up: the ' + cardName(currentCard) + '. What\u2019s next? Is the next card higher or is it lower?';
       render();
+      if (dealJoker) announceJoker(1);
     }
 
     function guess(higher){
@@ -2370,6 +2451,7 @@
           msg.textContent = lead + 'A JOKER! ' + pname(me) + ' ' + pverb(me, 'bank', 'banks') + ' it to use in the top row. The ' + cardName(currentCard) + ' stays in play \u2014 ' + pname(me) + ' ' + pverb(me, 'guess', 'guesses') + ' again. What\u2019s next?';
         }
         render();
+        announceJoker(me);
         if (me === 2) schedule(cpuMove, 1600);
         return;
       }
@@ -2407,6 +2489,7 @@
         busy = false;
         msg.textContent = lead + why + pname(me) + ' ' + pverb(me, 'keep', 'keeps') + ' going from the ' + cardName(card) + '. What\u2019s next? Is the next card higher or is it lower?';
         render();
+        announceJoker(me);
         if (me === 2) schedule(cpuMove, 1600);
         return;
       }
@@ -2473,8 +2556,10 @@
       sfxJoker();
       var old = currentCard;
       var c = drawFromPile();
+      var bankedSwap = false;
       while (c.joker) {
         jokers[player]++;
+        bankedSwap = true;
         msg.textContent = pname(player) + ' ' + pverb(player, 'spend', 'spends') + ' a joker \u2014 and the next card up is another JOKER, so ' + pverb(player, 'you bank', 'it banks') + ' that one and ' + pverb(player, 'draw', 'draws') + ' again\u2026';
         c = drawFromPile();
       }
@@ -2485,6 +2570,7 @@
       msg.textContent = pname(player) + ' ' + pverb(player, 'use', 'uses') + ' a JOKER in the top row! The difficult ' + cardName(old) + ' is gone, swapped for the next card off the deck \u2014 the ' + cardName(c) + '. ' +
         (player === 1 ? 'Now \u2014 what\u2019s next? Is the next card higher or is it lower?' : 'The computer plays on from the ' + cardName(c) + '.');
       render();
+      if (bankedSwap) announceJoker(player);
     }
 
     function useJokerOnCell(player, i){
