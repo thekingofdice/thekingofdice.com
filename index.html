@@ -627,6 +627,12 @@
   .wn-msg{margin:18px 0 0; font-size:21px; font-weight:800; color:var(--gold-ink); min-height:1.5em; text-align:center}
   .wn-actions{display:flex; gap:14px; justify-content:center; flex-wrap:wrap; margin-top:16px; min-height:52px}
   .wn-actions .btn[disabled]{opacity:.55; cursor:default}
+  .wn-actions.float{
+    position:absolute; z-index:40; margin:0; min-height:0; flex-wrap:nowrap;
+    transform:translateX(-50%);
+    background:var(--surface-2); border:2px solid var(--gold-bright); border-radius:999px;
+    padding:8px; box-shadow:0 14px 30px rgba(0,0,0,.55);
+  }
   .wn-jokers{display:flex; gap:12px; justify-content:center; flex-wrap:wrap; margin-top:14px}
   .wn-jokers:empty{margin-top:0}
   .wn-joker-note{flex-basis:100%; text-align:center; margin:0; color:var(--ink-soft); font-size:17px}
@@ -1773,6 +1779,7 @@
     var newBtn = document.getElementById('wn-newrun');
     var jokerEl = document.getElementById('wn-joker-actions');
     var actionsEl = document.getElementById('wn-actions');
+    var gameEl = (actionsEl && actionsEl.closest) ? (actionsEl.closest('.wn-game') || gridEl.parentNode) : gridEl.parentNode;
     var soundBtn = document.getElementById('wn-sound');
     var fxEl = document.getElementById('wn-fx');
     var resultEl = document.getElementById('wn-result');
@@ -2071,6 +2078,41 @@
       catch (e) { wrap.scrollIntoView(); }
     }
 
+    /* The Higher / Lower bar floats directly under the card in play and
+       travels up the board with it — bottom row to top row, then under the
+       sudden-death card — so the buttons are always right where the eye is.
+       Outside the guessing phase it sits back in its normal spot in the flow. */
+    var floatAnchor = null;
+    function placeActions(){
+      var anchor = null;
+      if (phase === 'guess'){
+        anchor = sudden ? suddenCell : cellEls[currentIdx];
+      }
+      if (!anchor || !gameEl){
+        floatAnchor = null;
+        actionsEl.classList.remove('float');
+        actionsEl.style.left = '';
+        actionsEl.style.top = '';
+        if (actionsEl.parentNode !== gridEl){
+          gridEl.insertBefore(actionsEl, jokerEl);
+        }
+        return;
+      }
+      floatAnchor = anchor;
+      if (actionsEl.parentNode !== gameEl) gameEl.appendChild(actionsEl);
+      actionsEl.classList.add('float');
+      var gr = gameEl.getBoundingClientRect();
+      var ar = anchor.getBoundingClientRect();
+      var w = actionsEl.offsetWidth;
+      var left = ar.left - gr.left + ar.width / 2;
+      var minLeft = w / 2 + 4;
+      var maxLeft = Math.max(minLeft, gr.width - w / 2 - 4);
+      left = Math.min(Math.max(left, minLeft), maxLeft);
+      actionsEl.style.left = left + 'px';
+      actionsEl.style.top = (ar.bottom - gr.top + 10) + 'px';
+    }
+    window.addEventListener('resize', function(){ if (floatAnchor) placeActions(); });
+
     function render(){
       for (var i = 0; i < 12; i++) {
         var cell = cellEls[i];
@@ -2141,8 +2183,8 @@
       }
       gridEl.insertBefore(msg, anchorWrap.nextSibling);
       gridEl.insertBefore(resultEl, msg.nextSibling);
-      gridEl.insertBefore(actionsEl, resultEl.nextSibling);
-      gridEl.insertBefore(jokerEl, actionsEl.nextSibling);
+      gridEl.insertBefore(jokerEl, resultEl.nextSibling);
+      placeActions();
       maybeScroll(anchorWrap, anchorKey);
     }
     function canTargetCell(i){
