@@ -1171,7 +1171,7 @@
 
     <div class="wn-game">
       <h3>Play What's Next Right Here</h3>
-      <p class="wn-intro">The computer shuffles <strong>one full deck — 52 cards plus 2 jokers</strong> — and lays out <strong>12 cards face-down, 3 across by 4 rows</strong>. You play against the computer, and <strong>you always go first</strong>. Play runs <strong>bottom row first, left to right, then up</strong> through the tiers to the top row. Each turn, Chuck asks: <strong>&ldquo;What's next? Is the next card higher or is it lower?&rdquo;</strong> Guess right and you keep going. Guess wrong and your turn ends and play passes to the other player. Turn up the <strong>same rank</strong> and you lose your turn too — it is not higher or lower. <strong>Aces go both ways:</strong> call lower and an Ace counts as a 1, call higher and it counts as an Ace — so an Ace is always a correct guess. <strong>Only the last card decides the winner:</strong> turn it over with a correct call and you win — miss it, and another card is pulled from the deck to settle it. The replacement lands in a <strong>sudden-death row</strong> above the top row, and new deciding cards keep coming until somebody turns one over with a correct call — <strong>the game never ends on a wrong guess</strong>. Pull a <strong>joker</strong> and you bank it. Jokers can <strong>only be used in the top row</strong> — spend one to swap a card in the top row for the next card off the deck, which is random and could even be the same rank. And that card can be <strong>yours or your opponent's</strong>. Use a joker on <strong>your own card</strong> to get rid of a difficult card like a 7, 8 or 9. Or use it on <strong>your opponent's card</strong>: if your opponent has an easy card coming up in the top row, spend a joker to swap it for the next card off the deck and make it harder for them. It cuts both ways — if the <strong>computer</strong> has a joker, it can change <strong>your</strong> card in the top row the same way.</p>
+      <p class="wn-intro">The computer shuffles <strong>one full deck — 52 cards plus 2 jokers</strong> — and lays out <strong>12 cards face-down, 3 across by 4 rows</strong>. You play against the computer, and <strong>you always go first</strong>. Play runs <strong>bottom row first, left to right, then up</strong> through the tiers to the top row. Each turn, Chuck asks: <strong>&ldquo;What's next? Is the next card higher or is it lower?&rdquo;</strong> Guess right and you keep going. Guess wrong and your turn ends and play passes to the other player. Turn up the <strong>same rank</strong> and you lose your turn too — it is not higher or lower. <strong>Aces go both ways:</strong> call lower and an Ace counts as a 1, call higher and it counts as an Ace — so an Ace is always a correct guess. <strong>Only the last card decides the winner:</strong> turn it over with a correct call and you win — miss it, and another card is pulled from the deck to settle it. The replacement lands in a <strong>sudden-death row</strong> above the top row, and new deciding cards keep coming until somebody turns one over with a correct call — <strong>the game never ends on a wrong guess</strong>. Pull a <strong>joker</strong> and you bank it. A banked joker can be <strong>spent anytime, on any row</strong> — spend one to swap any face-down card, the card in play, or even the sudden-death deciding card for the next card off the deck, which is random and could even be the same rank. And that card can be <strong>yours or your opponent's</strong>. Use a joker on <strong>your own card</strong> to get rid of a difficult card like a 7, 8 or 9. Or use it on <strong>your opponent's card</strong>: if your opponent has an easy card coming up, spend a joker to swap it for the next card off the deck and make it harder for them. It cuts both ways — if the <strong>computer</strong> has a joker, it can change <strong>your</strong> card the same way.</p>
       <div class="wn-sound-row">
         <button type="button" class="btn btn-ghost wn-sound-btn" id="wn-sound" aria-pressed="false" aria-label="Game sound is on — tap to mute the sound"><svg width="22" height="22" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M3 9.5v5h3.5L12 19V5L6.5 9.5H3z" fill="currentColor"/><path d="M15 9.2a4 4 0 0 1 0 5.6M17.4 6.8a7.4 7.4 0 0 1 0 10.4" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg><span>Sound: On</span></button>
       </div>
@@ -1983,8 +1983,8 @@
     }
     /* ---------- Joker announcement ----------
        When a player pulls a joker, a big announcement screen pops up so
-       nobody misses it: the joker is banked, and it can be spent in the
-       top row to change a card. Tap "Got it!" or wait and it closes. */
+       nobody misses it: the joker is banked, and it can be spent anytime,
+       on any row, to change a card. Tap "Got it!" or wait and it closes. */
     var jokerPopTimer = null;
     function announceJoker(me){
       if (!jokerPopEl) return;
@@ -1993,8 +1993,8 @@
         '<div class="wn-joker-card">' +
           '<p class="wn-joker-big">★ JOKER! ★</p>' +
           '<p>' + (mine
-            ? 'You pulled a JOKER — it is banked! When you reach the TOP ROW, you can spend it to change a card: swap any top-row card for the next card off the deck — your own card, to ditch a hard one, or the computer\u2019s card, to make its next card harder.'
-            : 'The computer pulled a JOKER — it is banked! When the computer reaches the TOP ROW, it can spend it to change a card there — including one of yours.') +
+            ? 'You pulled a JOKER — it is banked! You can spend it ANYTIME, on any row, to change a card: swap any face-down card, the card in play, or even the sudden-death deciding card for the next card off the deck. Use it on your own card to ditch a hard one, or on the computer\u2019s card to make its next card harder.'
+            : 'The computer pulled a JOKER — it is banked! It can spend it ANYTIME, on any row, to change a card — including one of yours.') +
           '</p>' +
           '<button type="button" class="btn btn-gold" id="wn-joker-ok">Got it!</button>' +
         '</div>';
@@ -2229,7 +2229,7 @@
           var targetable = canTargetCell(i);
           cell.className = 'wn-cell down' + (targetable ? ' joker-target' : '');
           cell.innerHTML = BACK_HTML;
-          cell.setAttribute('aria-label', 'Position ' + (i + 1) + ' of 12 \u2014 face-down card' + (targetable ? '. Tap to spend your joker and swap this top-row card for the next card off the deck.' : ''));
+          cell.setAttribute('aria-label', 'Position ' + (i + 1) + ' of 12 \u2014 face-down card' + (targetable ? '. Tap to spend your joker and swap this card for the next card off the deck.' : ''));
         }
         if (i === dealAnimIdx) cell.classList.add('deal-in');
         if (revealed[i] && i === currentIdx && phase !== 'over') cell.classList.add('current');
@@ -2285,33 +2285,29 @@
     }
     function canTargetCell(i){
       return phase === 'guess' && !busy && active === 1 && jokers[1] > 0 &&
-        inTopRowPhase() && i >= 9 && !revealed[i];
+        !sudden && !revealed[i];
     }
     function renderJokerActions(){
       jokerEl.innerHTML = '';
       if (phase !== 'guess' || active !== 1 || busy) return;
-      if (!inTopRowPhase()) return;
-      if (jokers[1] <= 0) {
-        var note = document.createElement('p');
-        note.className = 'wn-joker-note';
-        note.textContent = jokersSpent[1] > 0
-          ? 'You are in the top row \u2014 you spent your joker, so you have none left to use here.'
-          : 'You are in the top row \u2014 jokers can be spent here, but you have not pulled one yet.';
-        jokerEl.appendChild(note);
-        return;
-      }
+      if (jokers[1] <= 0) return;
       var note2 = document.createElement('p');
       note2.className = 'wn-joker-note';
-      note2.textContent = 'You have ' + jokers[1] + (jokers[1] === 1 ? ' joker' : ' jokers') + '. In the top row you can spend one to swap a card for the next card off the deck \u2014 tap a face-down top-row card to swap it (yours, or one of the computer\u2019s upcoming cards, to make it harder for the computer), or swap the card in play:';
+      note2.textContent = sudden
+        ? 'You have ' + jokers[1] + (jokers[1] === 1 ? ' joker' : ' jokers') + '. A joker can be spent ANYTIME — spend one now to swap the deciding card for the next card off the deck:'
+        : 'You have ' + jokers[1] + (jokers[1] === 1 ? ' joker' : ' jokers') + '. A joker can be spent ANYTIME, on any row — tap any face-down card to swap it for the next card off the deck (your own upcoming card, or one of the computer\u2019s, to make it harder for the computer), or swap the card in play:';
       jokerEl.appendChild(note2);
-      if (currentIdx >= 9) {
-        var b = document.createElement('button');
-        b.type = 'button';
-        b.className = 'btn btn-gold';
-        b.textContent = 'Use a Joker \u2014 swap the card in play (' + cardName(currentCard) + ')';
+      var b = document.createElement('button');
+      b.type = 'button';
+      b.className = 'btn btn-gold';
+      if (sudden) {
+        b.textContent = 'Use a Joker — swap the deciding card';
+        b.addEventListener('click', function(){ useJokerOnSudden(1); });
+      } else {
+        b.textContent = 'Use a Joker — swap the card in play (' + cardName(currentCard) + ')';
         b.addEventListener('click', function(){ useJokerOnCurrent(1); });
-        jokerEl.appendChild(b);
       }
+      jokerEl.appendChild(b);
     }
     function schedule(fn, ms){
       var t = token;
@@ -2448,7 +2444,7 @@
           dealSuddenCard();
           msg.textContent = lead + 'A JOKER! ' + pname(me) + ' ' + pverb(me, 'bank', 'banks') + ' it, and ' + pverb(me, 'draw', 'draws') + ' again for the deciding card.';
         } else {
-          msg.textContent = lead + 'A JOKER! ' + pname(me) + ' ' + pverb(me, 'bank', 'banks') + ' it to use in the top row. The ' + cardName(currentCard) + ' stays in play \u2014 ' + pname(me) + ' ' + pverb(me, 'guess', 'guesses') + ' again. What\u2019s next?';
+          msg.textContent = lead + 'A JOKER! ' + pname(me) + ' ' + pverb(me, 'bank', 'banks') + ' it \u2014 a joker can be spent anytime, on any row, to change a card. The ' + cardName(currentCard) + ' stays in play \u2014 ' + pname(me) + ' ' + pverb(me, 'guess', 'guesses') + ' again. What\u2019s next?';
         }
         render();
         announceJoker(me);
@@ -2517,21 +2513,30 @@
 
     function cpuMove(){
       if (phase !== 'guess' || active !== 2 || busy) return;
-      if (inTopRowPhase() && jokers[2] > 0) {
-        /* Spend a joker to change its own difficult card in play (7, 8 or 9) */
-        if (currentIdx >= 9 && currentCard.rank >= 7 && currentCard.rank <= 9) {
-          useJokerOnCurrent(2);
-          schedule(cpuGuessOnly, 1300);
-          return;
-        }
-        /* Or spend it on a face-down top-row card you still have to face,
-           swapping it for the next card off the deck to make it harder for you */
-        var targets = [];
-        for (var i = 9; i < 12; i++) { if (!revealed[i]) targets.push(i); }
-        if (targets.length) {
-          useJokerOnCell(2, targets[targets.length - 1]);
-          schedule(cpuGuessOnly, 1600);
-          return;
+      if (jokers[2] > 0) {
+        if (sudden) {
+          /* Spend a joker to change the deciding card when the card in play is hard to call */
+          if (currentCard.rank >= 7 && currentCard.rank <= 9) {
+            useJokerOnSudden(2);
+            schedule(cpuGuessOnly, 1300);
+            return;
+          }
+        } else {
+          /* Spend a joker to change its own difficult card in play (7, 8 or 9) */
+          if (currentCard.rank >= 7 && currentCard.rank <= 9) {
+            useJokerOnCurrent(2);
+            schedule(cpuGuessOnly, 1300);
+            return;
+          }
+          /* Or spend it on a face-down card you still have to face,
+             swapping it for the next card off the deck to make it harder for you */
+          var targets = [];
+          for (var i = 0; i < 12; i++) { if (!revealed[i]) targets.push(i); }
+          if (targets.length) {
+            useJokerOnCell(2, targets[targets.length - 1]);
+            schedule(cpuGuessOnly, 1600);
+            return;
+          }
         }
       }
       cpuGuessOnly();
@@ -2549,7 +2554,7 @@
     }
 
     function useJokerOnCurrent(player){
-      if (phase !== 'guess' || jokers[player] <= 0 || currentIdx < 9) return;
+      if (phase !== 'guess' || jokers[player] <= 0 || sudden) return;
       jokers[player]--;
       jokersSpent[player]++;
       sfxJoker();
@@ -2566,20 +2571,20 @@
       grid[currentIdx] = c;
       currentCard = c;
       lastReveal = currentIdx;
-      msg.textContent = pname(player) + ' ' + pverb(player, 'use', 'uses') + ' a JOKER in the top row! The difficult ' + cardName(old) + ' is gone, swapped for the next card off the deck \u2014 the ' + cardName(c) + '. ' +
+      msg.textContent = pname(player) + ' ' + pverb(player, 'use', 'uses') + ' a JOKER! The ' + cardName(old) + ' is gone, swapped for the next card off the deck \u2014 the ' + cardName(c) + '. ' +
         (player === 1 ? 'Now \u2014 what\u2019s next? Is the next card higher or is it lower?' : 'The computer plays on from the ' + cardName(c) + '.');
       render();
       if (bankedSwap) announceJoker(player);
     }
 
     function useJokerOnCell(player, i){
-      if (phase !== 'guess' || jokers[player] <= 0 || i < 9 || revealed[i]) return;
+      if (phase !== 'guess' || jokers[player] <= 0 || revealed[i]) return;
       jokers[player]--;
       jokersSpent[player]++;
       sfxJoker();
       sfxFlip();
       grid[i] = drawFromPile();
-      msg.textContent = 'The computer uses a JOKER in the top row! It changes a card you are about to face \u2014 swapped for the next card off the deck, to make it harder for you. Nobody knows what the new card is until it turns over. The computer plays on from the ' + cardName(currentCard) + '.';
+      msg.textContent = 'The computer uses a JOKER! It changes a card you are about to face \u2014 swapped for the next card off the deck, to make it harder for you. Nobody knows what the new card is until it turns over. The computer plays on from the ' + cardName(currentCard) + '.';
       render();
       cellEls[i].classList.add('swap');
     }
@@ -2591,9 +2596,30 @@
       sfxJoker();
       sfxFlip();
       grid[i] = drawFromPile();
-      msg.textContent = 'You used a JOKER! That top-row card is swapped for the next card off the deck \u2014 random, whatever it is, and it could even be the same rank. Nobody knows what it is until it turns over.';
+      msg.textContent = 'You used a JOKER! That card is swapped for the next card off the deck \u2014 random, whatever it is, and it could even be the same rank. Nobody knows what it is until it turns over.';
       render();
       cellEls[i].classList.add('swap');
+    }
+
+    function useJokerOnSudden(player){
+      if (phase !== 'guess' || !sudden || jokers[player] <= 0) return;
+      jokers[player]--;
+      jokersSpent[player]++;
+      sfxJoker();
+      var c = drawFromPile();
+      var bankedSwap = false;
+      while (c.joker) {
+        jokers[player]++;
+        bankedSwap = true;
+        c = drawFromPile();
+      }
+      sfxFlip();
+      suddenCard = c;
+      msg.textContent = pname(player) + ' ' + pverb(player, 'use', 'uses') + ' a JOKER! The deciding card is swapped for the next card off the deck \u2014 nobody knows what it is until it turns over. ' +
+        (player === 1 ? 'Now \u2014 what\u2019s next? Is the deciding card higher or is it lower?' : 'The computer plays on from the ' + cardName(currentCard) + '.');
+      render();
+      if (suddenCell) suddenCell.classList.add('swap');
+      if (bankedSwap) announceJoker(player);
     }
 
     hiBtn.addEventListener('click', function(){ if (active === 1) guess(true); });
