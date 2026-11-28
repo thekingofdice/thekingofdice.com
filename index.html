@@ -2489,7 +2489,6 @@
         busy = false;
         msg.textContent = lead + why + pname(me) + ' ' + pverb(me, 'keep', 'keeps') + ' going from the ' + cardName(card) + '. What\u2019s next? Is the next card higher or is it lower?';
         render();
-        announceJoker(me);
         if (me === 2) schedule(cpuMove, 1600);
         return;
       }
