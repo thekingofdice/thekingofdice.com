@@ -2081,8 +2081,17 @@
     /* The Higher / Lower bar floats directly under the card in play and
        travels up the board with it — bottom row to top row, then under the
        sudden-death card — so the buttons are always right where the eye is.
-       Outside the guessing phase it sits back in its normal spot in the flow. */
+       A space band opens under that card's row so the floating bar never
+       covers the words, and outside the guessing phase the bar sits back
+       in its normal spot in the flow. */
     var floatAnchor = null;
+    var floatBandWrap = null;
+    function setFloatBand(wrap){
+      if (floatBandWrap === wrap) return;
+      if (floatBandWrap) floatBandWrap.style.marginBottom = '';
+      floatBandWrap = wrap;
+      if (floatBandWrap) floatBandWrap.style.marginBottom = '88px';
+    }
     function placeActions(){
       var anchor = null;
       if (phase === 'guess'){
@@ -2090,6 +2099,7 @@
       }
       if (!anchor || !gameEl){
         floatAnchor = null;
+        setFloatBand(null);
         actionsEl.classList.remove('float');
         actionsEl.style.left = '';
         actionsEl.style.top = '';
@@ -2099,6 +2109,14 @@
         return;
       }
       floatAnchor = anchor;
+      var bandWrap = suddenWrap;
+      if (!sudden){
+        bandWrap = tierWraps[0];
+        for (var tw2 = 0; tw2 < TIERS.length; tw2++) {
+          if (TIERS[tw2].idx.indexOf(currentIdx) !== -1) { bandWrap = tierWraps[tw2]; break; }
+        }
+      }
+      setFloatBand(bandWrap);
       if (actionsEl.parentNode !== gameEl) gameEl.appendChild(actionsEl);
       actionsEl.classList.add('float');
       var gr = gameEl.getBoundingClientRect();
@@ -2164,10 +2182,10 @@
       hiBtn.disabled = !canGuess;
       loBtn.disabled = !canGuess;
       renderJokerActions();
-      /* Keep the message, the result banner and the Higher / Lower buttons
-         right under the row being played, so they travel up the board with
-         the game on BOTH turns — and scroll that row into view whenever the
-         turn or the row changes, so they are never a scroll away */
+      /* Keep the words — the message and the result banner — right under
+         the card in play (the card you decide from), and scroll THAT row
+         into view, so the screen stays with the card being decided and
+         never jumps ahead to the next card on the next row */
       var anchorWrap = tierWraps[0];
       var anchorKey = 'top';
       if (sudden) {
@@ -2178,7 +2196,7 @@
         anchorKey = 'deal';
       } else if (phase !== 'over') {
         for (var tw = 0; tw < TIERS.length; tw++) {
-          if (TIERS[tw].idx.indexOf(nextIdx) !== -1) { anchorWrap = tierWraps[tw]; anchorKey = 't' + tw; break; }
+          if (TIERS[tw].idx.indexOf(currentIdx) !== -1) { anchorWrap = tierWraps[tw]; anchorKey = 't' + tw; break; }
         }
       }
       gridEl.insertBefore(msg, anchorWrap.nextSibling);
