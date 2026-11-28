@@ -532,7 +532,7 @@
     color:var(--ink); font-family:inherit; cursor:default;
     display:flex; align-items:center; justify-content:center;
   }
-  .ctt-cell .ctt-num{position:absolute; top:8px; left:12px; font-size:16px; font-weight:800; color:var(--ink-soft)}
+  .ctt-cell .ctt-num{position:absolute; top:6px; left:10px; font-size:25px; font-weight:900; color:var(--gold-bright)}
   .ctt-cell .ctt-mark{font-family:"Cinzel",serif; font-size:clamp(46px,10vw,68px); line-height:1}
   .ctt-cell.filled-x .ctt-mark{color:var(--gold-soft)}
   .ctt-cell.filled-o .ctt-mark{color:var(--neon-bright)}
@@ -1067,8 +1067,8 @@
         <ol class="rules-list">
           <li><span><strong>Roll off to start.</strong> Highest roll goes first and picks X or O.</span></li>
           <li><span><strong>The board is 3 by 3,</strong> with the spaces numbered 1 to 9.</span></li>
-          <li><span><strong>On your turn, roll the dice up to 2 times.</strong> Roll once, then decide: keep it, or roll again and add them together.</span></li>
-          <li><span><strong>Your total is your space.</strong> 2 to 9 lands on that number — and 10, 11 and 12 are the wilds, posted right beside these rules.</span></li>
+          <li><span><strong>On your turn, roll the first die.</strong> Keep that number — or roll the second die and add it to your first roll.</span></li>
+          <li><span><strong>Your total is your space.</strong> A total of 1 to 9 lands on that numbered space — and 10, 11 and 12 are the wilds, posted right beside these rules.</span></li>
           <li><span><strong>Win two ways:</strong> get 3 in a row, or be the first to 5 pieces on the board. No cat game — somebody always wins.</span></li>
           <li><span><strong>Taken is taken.</strong> If the number you rolled is already taken, your turn ends with no placement.</span></li>
         </ol>
@@ -1094,7 +1094,7 @@
 
     <div class="ctt-game">
       <h3>Play Chuck-Tac-Toe Right Here</h3>
-      <p class="ctt-intro">Play against the computer, right here. It rolls the dice, decides whether to keep its roll or roll again and add, and places its own pieces — a real game, start to finish. Roll off to see who goes first, the winner picks X or O, then take turns until somebody gets 3 in a row or 5 pieces on the board.</p>
+      <p class="ctt-intro">Play against the computer, right here. It rolls one die, decides whether to keep it or roll the second die and add, and places its own pieces — a real game, start to finish. Roll off to see who goes first, the winner picks X or O, then take turns until somebody gets 3 in a row or 5 pieces on the board.</p>
       <div class="ctt-play">
         <div class="ctt-board" role="group" aria-label="Chuck-Tac-Toe board — a 3 by 3 grid with spaces numbered 1 to 9">
           <button type="button" class="ctt-cell" aria-label="Space 1 — open"><span class="ctt-num">1</span><span class="ctt-mark"></span></button>
